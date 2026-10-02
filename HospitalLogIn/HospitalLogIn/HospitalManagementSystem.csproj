@@ -59,6 +59,12 @@
       <DependentUpon>Attendant  Nurse Dashboard.cs</DependentUpon>
     </Compile>
     <Compile Include="AuthService.cs" />
+    <Compile Include="Billing Staff Dashboard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Billing Staff Dashboard.Designer.cs">
+      <DependentUpon>Billing Staff Dashboard.cs</DependentUpon>
+    </Compile>
     <Compile Include="LogIn.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -72,6 +78,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Attendant  Nurse Dashboard.resx">
       <DependentUpon>Attendant  Nurse Dashboard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Billing Staff Dashboard.resx">
+      <DependentUpon>Billing Staff Dashboard.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LogIn.resx">
       <DependentUpon>LogIn.cs</DependentUpon>
