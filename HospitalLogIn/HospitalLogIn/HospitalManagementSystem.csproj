@@ -52,6 +52,12 @@
     <Compile Include="Admin Dashboard.Designer.cs">
       <DependentUpon>Admin Dashboard.cs</DependentUpon>
     </Compile>
+    <Compile Include="Attendant  Nurse Dashboard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Attendant  Nurse Dashboard.Designer.cs">
+      <DependentUpon>Attendant  Nurse Dashboard.cs</DependentUpon>
+    </Compile>
     <Compile Include="AuthService.cs" />
     <Compile Include="LogIn.cs">
       <SubType>Form</SubType>
@@ -63,6 +69,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Admin Dashboard.resx">
       <DependentUpon>Admin Dashboard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Attendant  Nurse Dashboard.resx">
+      <DependentUpon>Attendant  Nurse Dashboard.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LogIn.resx">
       <DependentUpon>LogIn.cs</DependentUpon>
