@@ -15,11 +15,31 @@ namespace HospitalLogIn
         public Admin_Dashboard()
         {
             InitializeComponent();
+            SetupDashboard();
         }
 
-        private void label3_Click(object sender, EventArgs e)
+              private void SetupDashboard()
         {
 
+
+            this.Text = "Admin Dashboard";
+            this.StartPosition = FormStartPosition.CenterScreen;
+            this.WindowState = FormWindowState.Maximized;
+
+            // Dashboard title
+            Label title = new Label();
+
+            title.Text = "ADMIN DASHBOARD";
+            title.Font = new Font(
+                "Segoe UI",
+                28,
+                FontStyle.Bold
+            );
+
+            title.AutoSize = true;
+            title.Location = new Point(50, 40);
+
+            this.Controls.Add(title);
         }
 
         private void Admin_Dashboard_Load(object sender, EventArgs e)

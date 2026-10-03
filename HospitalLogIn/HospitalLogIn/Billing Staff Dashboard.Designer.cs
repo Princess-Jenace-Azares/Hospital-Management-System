@@ -183,7 +183,7 @@
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(200, 21);
             this.comboBox2.TabIndex = 8;
-            this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
+      
             // 
             // dateTimePicker1
             // 
@@ -285,6 +285,7 @@
             this.Controls.Add(this.label1);
             this.Name = "Billing_Staff_Dashboard";
             this.Text = "Billing_Staff_Dashboard";
+      
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);

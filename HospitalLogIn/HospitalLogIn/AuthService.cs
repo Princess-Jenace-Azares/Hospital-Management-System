@@ -10,13 +10,11 @@ namespace HospitalBillingSystem
             {
                 return username == "admin" && password == "admin123";
             }
-
-            if (role == "Billing Staff")
+            else if (role == "Billing Staff")
             {
                 return username == "billing" && password == "billing123";
             }
-
-            if (role == "Attendant")
+            else if (role == "Attendant")
             {
                 return username == "attendant" && password == "attendant123";
             }

@@ -122,7 +122,7 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(734, 157);
             this.panel2.TabIndex = 3;
-            this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
+          
             // 
             // label4
             // 
@@ -317,6 +317,7 @@
             this.Controls.Add(this.label1);
             this.Name = "Attendant__Nurse_Dashboard";
             this.Text = "Attendant__Nurse_Dashboard";
+     
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);

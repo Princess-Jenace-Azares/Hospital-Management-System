@@ -15,26 +15,28 @@ namespace HospitalLogIn
         public Attendant__Nurse_Dashboard()
         {
             InitializeComponent();
+            SetupDashboard();
         }
 
-        private void label4_Click(object sender, EventArgs e)
+        private void SetupDashboard()
         {
+            this.Text = "Attendant / Nurse Dashboard";
+            this.StartPosition = FormStartPosition.CenterScreen;
+            this.WindowState = FormWindowState.Maximized;
 
-        }
+            Label title = new Label();
 
-        private void label7_Click(object sender, EventArgs e)
-        {
+            title.Text = "ATTENDANT / NURSE DASHBOARD";
+            title.Font = new Font(
+                "Segoe UI",
+                28,
+                FontStyle.Bold
+            );
 
-        }
+            title.AutoSize = true;
+            title.Location = new Point(50, 40);
 
-        private void label10_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void panel2_Paint(object sender, PaintEventArgs e)
-        {
-
+            this.Controls.Add(title);
         }
     }
 }
