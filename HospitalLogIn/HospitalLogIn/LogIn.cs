@@ -1,12 +1,5 @@
 ﻿using HospitalBillingSystem;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace HospitalLogIn
@@ -14,6 +7,7 @@ namespace HospitalLogIn
     public partial class LogIn : Form
     {
         private AuthService authService;
+        private bool dashboardOpened = false;
 
         public LogIn()
         {
@@ -21,25 +15,19 @@ namespace HospitalLogIn
 
             authService = new AuthService();
 
-            // Hide password characters
             txtPassword.PasswordChar = '●';
-
-            // Select Admin by default
             rbAdmin.Checked = true;
-
-            // Connect the button event
-            btnLogin.Click += btnLogin_Click;
-
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
+            if (dashboardOpened)
+                return;
+
             string username = txtUsername.Text.Trim();
             string password = txtPassword.Text;
-
             string selectedRole = "";
 
-            // Get selected role
             if (rbAdmin.Checked)
             {
                 selectedRole = "Admin";
@@ -53,7 +41,6 @@ namespace HospitalLogIn
                 selectedRole = "Attendant";
             }
 
-            // Check username
             if (string.IsNullOrWhiteSpace(username))
             {
                 MessageBox.Show(
@@ -67,7 +54,6 @@ namespace HospitalLogIn
                 return;
             }
 
-            // Check password
             if (string.IsNullOrWhiteSpace(password))
             {
                 MessageBox.Show(
@@ -81,7 +67,6 @@ namespace HospitalLogIn
                 return;
             }
 
-            // Check login credentials
             bool loginSuccessful = authService.Login(
                 username,
                 password,
@@ -90,6 +75,8 @@ namespace HospitalLogIn
 
             if (loginSuccessful)
             {
+                dashboardOpened = true;
+
                 MessageBox.Show(
                     "Login successful!",
                     "Welcome",
@@ -140,11 +127,27 @@ namespace HospitalLogIn
 
                 dashboard.Show();
             }
+            else
+            {
+                dashboardOpened = false;
+
+                MessageBox.Show(
+                    "Dashboard could not be opened.",
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
+            }
         }
 
         private void Dashboard_FormClosed(object sender, FormClosedEventArgs e)
         {
             this.Close();
         }
+
+        private void LogIn_Load(object sender, EventArgs e)
+        {
+        }
     }
 }
+                    

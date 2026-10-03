@@ -316,7 +316,7 @@
             this.Controls.Add(this.label1);
             this.Name = "Attendant__Nurse_Dashboard";
             this.Text = "Attendant__Nurse_Dashboard";
-            this.Load += new System.EventHandler(this.Attendant__Nurse_Dashboard_Load);
+           
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
