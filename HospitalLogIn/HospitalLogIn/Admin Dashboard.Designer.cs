@@ -30,17 +30,17 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.btnRefreshPatients = new System.Windows.Forms.Button();
+            this.btnDeletePatient = new System.Windows.Forms.Button();
+            this.btnUpdatePatient = new System.Windows.Forms.Button();
+            this.btnAddPatient = new System.Windows.Forms.Button();
+            this.dtpAdmissionDate = new System.Windows.Forms.DateTimePicker();
+            this.cmbStatus = new System.Windows.Forms.ComboBox();
+            this.cmbRoom = new System.Windows.Forms.ComboBox();
+            this.cmbGender = new System.Windows.Forms.ComboBox();
+            this.txtAge = new System.Windows.Forms.TextBox();
+            this.txtPatientName = new System.Windows.Forms.TextBox();
+            this.txtPatientID = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
@@ -53,11 +53,11 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.label11 = new System.Windows.Forms.Label();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dgvPatients = new System.Windows.Forms.DataGridView();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPatients)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -73,17 +73,17 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.button4);
-            this.panel1.Controls.Add(this.button3);
-            this.panel1.Controls.Add(this.button2);
-            this.panel1.Controls.Add(this.button1);
-            this.panel1.Controls.Add(this.dateTimePicker1);
-            this.panel1.Controls.Add(this.comboBox3);
-            this.panel1.Controls.Add(this.comboBox2);
-            this.panel1.Controls.Add(this.comboBox1);
-            this.panel1.Controls.Add(this.textBox3);
-            this.panel1.Controls.Add(this.textBox2);
-            this.panel1.Controls.Add(this.textBox1);
+            this.panel1.Controls.Add(this.btnRefreshPatients);
+            this.panel1.Controls.Add(this.btnDeletePatient);
+            this.panel1.Controls.Add(this.btnUpdatePatient);
+            this.panel1.Controls.Add(this.btnAddPatient);
+            this.panel1.Controls.Add(this.dtpAdmissionDate);
+            this.panel1.Controls.Add(this.cmbStatus);
+            this.panel1.Controls.Add(this.cmbRoom);
+            this.panel1.Controls.Add(this.cmbGender);
+            this.panel1.Controls.Add(this.txtAge);
+            this.panel1.Controls.Add(this.txtPatientName);
+            this.panel1.Controls.Add(this.txtPatientID);
             this.panel1.Controls.Add(this.label10);
             this.panel1.Controls.Add(this.label9);
             this.panel1.Controls.Add(this.label8);
@@ -96,103 +96,108 @@
             this.panel1.Size = new System.Drawing.Size(825, 183);
             this.panel1.TabIndex = 9;
             // 
-            // button4
+            // btnRefreshPatients
             // 
-            this.button4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.button4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button4.Location = new System.Drawing.Point(517, 134);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(100, 46);
-            this.button4.TabIndex = 17;
-            this.button4.Text = "Refresh";
-            this.button4.UseVisualStyleBackColor = false;
+            this.btnRefreshPatients.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.btnRefreshPatients.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRefreshPatients.Location = new System.Drawing.Point(517, 134);
+            this.btnRefreshPatients.Name = "btnRefreshPatients";
+            this.btnRefreshPatients.Size = new System.Drawing.Size(100, 46);
+            this.btnRefreshPatients.TabIndex = 17;
+            this.btnRefreshPatients.Text = "Refresh";
+            this.btnRefreshPatients.UseVisualStyleBackColor = false;
+            this.btnRefreshPatients.Click += new System.EventHandler(this.btnRefreshPatients_Click);
             // 
-            // button3
+            // btnDeletePatient
             // 
-            this.button3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.Location = new System.Drawing.Point(379, 134);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(103, 46);
-            this.button3.TabIndex = 16;
-            this.button3.Text = "Delete";
-            this.button3.UseVisualStyleBackColor = false;
+            this.btnDeletePatient.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.btnDeletePatient.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDeletePatient.Location = new System.Drawing.Point(379, 134);
+            this.btnDeletePatient.Name = "btnDeletePatient";
+            this.btnDeletePatient.Size = new System.Drawing.Size(103, 46);
+            this.btnDeletePatient.TabIndex = 16;
+            this.btnDeletePatient.Text = "Delete";
+            this.btnDeletePatient.UseVisualStyleBackColor = false;
+            this.btnDeletePatient.Click += new System.EventHandler(this.btnDeletePatient_Click);
             // 
-            // button2
+            // btnUpdatePatient
             // 
-            this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.ForeColor = System.Drawing.Color.Black;
-            this.button2.Location = new System.Drawing.Point(240, 134);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(95, 46);
-            this.button2.TabIndex = 15;
-            this.button2.Text = "Update";
-            this.button2.UseVisualStyleBackColor = false;
+            this.btnUpdatePatient.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.btnUpdatePatient.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnUpdatePatient.ForeColor = System.Drawing.Color.Black;
+            this.btnUpdatePatient.Location = new System.Drawing.Point(240, 134);
+            this.btnUpdatePatient.Name = "btnUpdatePatient";
+            this.btnUpdatePatient.Size = new System.Drawing.Size(95, 46);
+            this.btnUpdatePatient.TabIndex = 15;
+            this.btnUpdatePatient.Text = "Update";
+            this.btnUpdatePatient.UseVisualStyleBackColor = false;
+            this.btnUpdatePatient.Click += new System.EventHandler(this.btnUpdatePatient_Click);
             // 
-            // button1
+            // btnAddPatient
             // 
-            this.button1.BackColor = System.Drawing.Color.Green;
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(104, 134);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(105, 46);
-            this.button1.TabIndex = 14;
-            this.button1.Text = "Add Patient";
-            this.button1.UseVisualStyleBackColor = false;
+            this.btnAddPatient.BackColor = System.Drawing.Color.Green;
+            this.btnAddPatient.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAddPatient.ForeColor = System.Drawing.Color.White;
+            this.btnAddPatient.Location = new System.Drawing.Point(104, 134);
+            this.btnAddPatient.Name = "btnAddPatient";
+            this.btnAddPatient.Size = new System.Drawing.Size(105, 46);
+            this.btnAddPatient.TabIndex = 14;
+            this.btnAddPatient.Text = "Add Patient";
+            this.btnAddPatient.UseVisualStyleBackColor = false;
+            this.btnAddPatient.Click += new System.EventHandler(this.btnAddPatient_Click);
             // 
-            // dateTimePicker1
+            // dtpAdmissionDate
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(622, 28);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(200, 20);
-            this.dateTimePicker1.TabIndex = 13;
+            this.dtpAdmissionDate.Location = new System.Drawing.Point(622, 28);
+            this.dtpAdmissionDate.Name = "dtpAdmissionDate";
+            this.dtpAdmissionDate.Size = new System.Drawing.Size(200, 20);
+            this.dtpAdmissionDate.TabIndex = 13;
             // 
-            // comboBox3
+            // cmbStatus
             // 
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(379, 107);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(141, 21);
-            this.comboBox3.TabIndex = 12;
+            this.cmbStatus.FormattingEnabled = true;
+            this.cmbStatus.Location = new System.Drawing.Point(379, 107);
+            this.cmbStatus.Name = "cmbStatus";
+            this.cmbStatus.Size = new System.Drawing.Size(141, 21);
+            this.cmbStatus.TabIndex = 12;
             // 
-            // comboBox2
+            // cmbRoom
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(379, 66);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(141, 21);
-            this.comboBox2.TabIndex = 11;
+            this.cmbRoom.FormattingEnabled = true;
+            this.cmbRoom.Location = new System.Drawing.Point(379, 66);
+            this.cmbRoom.Name = "cmbRoom";
+            this.cmbRoom.Size = new System.Drawing.Size(141, 21);
+            this.cmbRoom.TabIndex = 11;
             // 
-            // comboBox1
+            // cmbGender
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(379, 25);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(141, 21);
-            this.comboBox1.TabIndex = 10;
+            this.cmbGender.FormattingEnabled = true;
+            this.cmbGender.Location = new System.Drawing.Point(379, 25);
+            this.cmbGender.Name = "cmbGender";
+            this.cmbGender.Size = new System.Drawing.Size(141, 21);
+            this.cmbGender.TabIndex = 10;
             // 
-            // textBox3
+            // txtAge
             // 
-            this.textBox3.Location = new System.Drawing.Point(104, 108);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(203, 20);
-            this.textBox3.TabIndex = 9;
+            this.txtAge.Location = new System.Drawing.Point(104, 108);
+            this.txtAge.Name = "txtAge";
+            this.txtAge.Size = new System.Drawing.Size(203, 20);
+            this.txtAge.TabIndex = 9;
             // 
-            // textBox2
+            // txtPatientName
             // 
-            this.textBox2.Location = new System.Drawing.Point(104, 67);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(203, 20);
-            this.textBox2.TabIndex = 8;
+            this.txtPatientName.Location = new System.Drawing.Point(104, 67);
+            this.txtPatientName.Name = "txtPatientName";
+            this.txtPatientName.Size = new System.Drawing.Size(203, 20);
+            this.txtPatientName.TabIndex = 8;
             // 
-            // textBox1
+            // txtPatientID
             // 
-            this.textBox1.Location = new System.Drawing.Point(104, 28);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(203, 20);
-            this.textBox1.TabIndex = 7;
+            this.txtPatientID.Location = new System.Drawing.Point(104, 28);
+            this.txtPatientID.Name = "txtPatientID";
+            this.txtPatientID.Size = new System.Drawing.Size(203, 20);
+            this.txtPatientID.TabIndex = 7;
+            this.txtPatientID.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // label10
             // 
@@ -307,20 +312,21 @@
             this.label11.TabIndex = 0;
             this.label11.Text = "Patient Records";
             // 
-            // dataGridView1
+            // dgvPatients
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(21, 273);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(816, 188);
-            this.dataGridView1.TabIndex = 12;
+            this.dgvPatients.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvPatients.Location = new System.Drawing.Point(21, 273);
+            this.dgvPatients.Name = "dgvPatients";
+            this.dgvPatients.Size = new System.Drawing.Size(816, 188);
+            this.dgvPatients.TabIndex = 12;
+            this.dgvPatients.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPatients_CellContentClick);
             // 
             // Admin_Dashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(843, 464);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dgvPatients);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
@@ -334,7 +340,7 @@
             this.panel2.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPatients)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -349,24 +355,24 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ComboBox comboBox3;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.ComboBox cmbStatus;
+        private System.Windows.Forms.ComboBox cmbRoom;
+        private System.Windows.Forms.ComboBox cmbGender;
+        private System.Windows.Forms.TextBox txtAge;
+        private System.Windows.Forms.TextBox txtPatientName;
+        private System.Windows.Forms.TextBox txtPatientID;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.Button btnRefreshPatients;
+        private System.Windows.Forms.Button btnDeletePatient;
+        private System.Windows.Forms.Button btnUpdatePatient;
+        private System.Windows.Forms.Button btnAddPatient;
+        private System.Windows.Forms.DateTimePicker dtpAdmissionDate;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dgvPatients;
     }
 }
