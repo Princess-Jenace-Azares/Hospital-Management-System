@@ -32,29 +32,29 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
+            this.btnRefreshBills = new System.Windows.Forms.Button();
+            this.btnDeleteBill = new System.Windows.Forms.Button();
+            this.btnUpdateBill = new System.Windows.Forms.Button();
+            this.btnAddBill = new System.Windows.Forms.Button();
+            this.dtpPaymentDate = new System.Windows.Forms.DateTimePicker();
+            this.cmbPaymentStatus = new System.Windows.Forms.ComboBox();
+            this.cmbBillingPatient = new System.Windows.Forms.ComboBox();
+            this.txtAmount = new System.Windows.Forms.TextBox();
+            this.txtBillID = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.label8 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dgvBilling = new System.Windows.Forms.DataGridView();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvBilling)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -90,15 +90,15 @@
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.button4);
-            this.panel2.Controls.Add(this.button3);
-            this.panel2.Controls.Add(this.button2);
-            this.panel2.Controls.Add(this.button1);
-            this.panel2.Controls.Add(this.dateTimePicker1);
-            this.panel2.Controls.Add(this.comboBox2);
-            this.panel2.Controls.Add(this.comboBox1);
-            this.panel2.Controls.Add(this.textBox2);
-            this.panel2.Controls.Add(this.textBox1);
+            this.panel2.Controls.Add(this.btnRefreshBills);
+            this.panel2.Controls.Add(this.btnDeleteBill);
+            this.panel2.Controls.Add(this.btnUpdateBill);
+            this.panel2.Controls.Add(this.btnAddBill);
+            this.panel2.Controls.Add(this.dtpPaymentDate);
+            this.panel2.Controls.Add(this.cmbPaymentStatus);
+            this.panel2.Controls.Add(this.cmbBillingPatient);
+            this.panel2.Controls.Add(this.txtAmount);
+            this.panel2.Controls.Add(this.txtBillID);
             this.panel2.Controls.Add(this.label7);
             this.panel2.Controls.Add(this.label6);
             this.panel2.Controls.Add(this.label5);
@@ -109,41 +109,87 @@
             this.panel2.Size = new System.Drawing.Size(789, 165);
             this.panel2.TabIndex = 2;
             // 
-            // label3
+            // btnRefreshBills
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(29, 13);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(37, 13);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "Bill ID:";
+            this.btnRefreshBills.BackColor = System.Drawing.Color.Silver;
+            this.btnRefreshBills.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRefreshBills.Location = new System.Drawing.Point(548, 111);
+            this.btnRefreshBills.Name = "btnRefreshBills";
+            this.btnRefreshBills.Size = new System.Drawing.Size(126, 42);
+            this.btnRefreshBills.TabIndex = 13;
+            this.btnRefreshBills.Text = "Refresh";
+            this.btnRefreshBills.UseVisualStyleBackColor = false;
             // 
-            // label4
+            // btnDeleteBill
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(356, 47);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(77, 13);
-            this.label4.TabIndex = 1;
-            this.label4.Text = "Payment Date:";
+            this.btnDeleteBill.BackColor = System.Drawing.Color.Silver;
+            this.btnDeleteBill.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDeleteBill.Location = new System.Drawing.Point(380, 111);
+            this.btnDeleteBill.Name = "btnDeleteBill";
+            this.btnDeleteBill.Size = new System.Drawing.Size(126, 42);
+            this.btnDeleteBill.TabIndex = 12;
+            this.btnDeleteBill.Text = "Delete";
+            this.btnDeleteBill.UseVisualStyleBackColor = false;
             // 
-            // label5
+            // btnUpdateBill
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(29, 85);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(46, 13);
-            this.label5.TabIndex = 2;
-            this.label5.Text = "Amount:";
+            this.btnUpdateBill.BackColor = System.Drawing.Color.Silver;
+            this.btnUpdateBill.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnUpdateBill.Location = new System.Drawing.Point(217, 111);
+            this.btnUpdateBill.Name = "btnUpdateBill";
+            this.btnUpdateBill.Size = new System.Drawing.Size(126, 42);
+            this.btnUpdateBill.TabIndex = 11;
+            this.btnUpdateBill.Text = "Update ";
+            this.btnUpdateBill.UseVisualStyleBackColor = false;
             // 
-            // label6
+            // btnAddBill
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(29, 47);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(74, 13);
-            this.label6.TabIndex = 3;
-            this.label6.Text = "Patient Name:";
+            this.btnAddBill.BackColor = System.Drawing.Color.Green;
+            this.btnAddBill.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAddBill.ForeColor = System.Drawing.Color.White;
+            this.btnAddBill.Location = new System.Drawing.Point(52, 111);
+            this.btnAddBill.Name = "btnAddBill";
+            this.btnAddBill.Size = new System.Drawing.Size(127, 42);
+            this.btnAddBill.TabIndex = 10;
+            this.btnAddBill.Text = "Add Bill";
+            this.btnAddBill.UseVisualStyleBackColor = false;
+            // 
+            // dtpPaymentDate
+            // 
+            this.dtpPaymentDate.Location = new System.Drawing.Point(446, 44);
+            this.dtpPaymentDate.Name = "dtpPaymentDate";
+            this.dtpPaymentDate.Size = new System.Drawing.Size(200, 20);
+            this.dtpPaymentDate.TabIndex = 9;
+            // 
+            // cmbPaymentStatus
+            // 
+            this.cmbPaymentStatus.FormattingEnabled = true;
+            this.cmbPaymentStatus.Location = new System.Drawing.Point(446, 10);
+            this.cmbPaymentStatus.Name = "cmbPaymentStatus";
+            this.cmbPaymentStatus.Size = new System.Drawing.Size(200, 21);
+            this.cmbPaymentStatus.TabIndex = 8;
+            // 
+            // cmbBillingPatient
+            // 
+            this.cmbBillingPatient.FormattingEnabled = true;
+            this.cmbBillingPatient.Location = new System.Drawing.Point(117, 47);
+            this.cmbBillingPatient.Name = "cmbBillingPatient";
+            this.cmbBillingPatient.Size = new System.Drawing.Size(189, 21);
+            this.cmbBillingPatient.TabIndex = 7;
+            // 
+            // txtAmount
+            // 
+            this.txtAmount.Location = new System.Drawing.Point(117, 85);
+            this.txtAmount.Name = "txtAmount";
+            this.txtAmount.Size = new System.Drawing.Size(189, 20);
+            this.txtAmount.TabIndex = 6;
+            // 
+            // txtBillID
+            // 
+            this.txtBillID.Location = new System.Drawing.Point(117, 10);
+            this.txtBillID.Name = "txtBillID";
+            this.txtBillID.Size = new System.Drawing.Size(189, 20);
+            this.txtBillID.TabIndex = 5;
             // 
             // label7
             // 
@@ -154,88 +200,41 @@
             this.label7.TabIndex = 4;
             this.label7.Text = "Payment Status:";
             // 
-            // textBox1
+            // label6
             // 
-            this.textBox1.Location = new System.Drawing.Point(117, 10);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(189, 20);
-            this.textBox1.TabIndex = 5;
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(29, 47);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(74, 13);
+            this.label6.TabIndex = 3;
+            this.label6.Text = "Patient Name:";
             // 
-            // textBox2
+            // label5
             // 
-            this.textBox2.Location = new System.Drawing.Point(117, 85);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(189, 20);
-            this.textBox2.TabIndex = 6;
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(29, 85);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(46, 13);
+            this.label5.TabIndex = 2;
+            this.label5.Text = "Amount:";
             // 
-            // comboBox1
+            // label4
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(117, 47);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(189, 21);
-            this.comboBox1.TabIndex = 7;
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(356, 47);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(77, 13);
+            this.label4.TabIndex = 1;
+            this.label4.Text = "Payment Date:";
             // 
-            // comboBox2
+            // label3
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(446, 10);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(200, 21);
-            this.comboBox2.TabIndex = 8;
-      
-            // 
-            // dateTimePicker1
-            // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(446, 44);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(200, 20);
-            this.dateTimePicker1.TabIndex = 9;
-            // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.Color.Green;
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(52, 111);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(127, 42);
-            this.button1.TabIndex = 10;
-            this.button1.Text = "Add Bill";
-            this.button1.UseVisualStyleBackColor = false;
-            // 
-            // button2
-            // 
-            this.button2.BackColor = System.Drawing.Color.Silver;
-            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(217, 111);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(126, 42);
-            this.button2.TabIndex = 11;
-            this.button2.Text = "Update ";
-            this.button2.UseVisualStyleBackColor = false;
-            // 
-            // button3
-            // 
-            this.button3.BackColor = System.Drawing.Color.Silver;
-            this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.Location = new System.Drawing.Point(380, 111);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(126, 42);
-            this.button3.TabIndex = 12;
-            this.button3.Text = "Delete";
-            this.button3.UseVisualStyleBackColor = false;
-            // 
-            // button4
-            // 
-            this.button4.BackColor = System.Drawing.Color.Silver;
-            this.button4.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button4.Location = new System.Drawing.Point(548, 111);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(126, 42);
-            this.button4.TabIndex = 13;
-            this.button4.Text = "Refresh";
-            this.button4.UseVisualStyleBackColor = false;
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(29, 13);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(37, 13);
+            this.label3.TabIndex = 0;
+            this.label3.Text = "Bill ID:";
             // 
             // panel3
             // 
@@ -259,19 +258,19 @@
             // 
             // panel4
             // 
-            this.panel4.Controls.Add(this.dataGridView1);
+            this.panel4.Controls.Add(this.dgvBilling);
             this.panel4.Location = new System.Drawing.Point(34, 261);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(789, 204);
             this.panel4.TabIndex = 3;
             // 
-            // dataGridView1
+            // dgvBilling
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(6, 12);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(780, 189);
-            this.dataGridView1.TabIndex = 0;
+            this.dgvBilling.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvBilling.Location = new System.Drawing.Point(6, 12);
+            this.dgvBilling.Name = "dgvBilling";
+            this.dgvBilling.Size = new System.Drawing.Size(780, 189);
+            this.dgvBilling.TabIndex = 0;
             // 
             // Billing_Staff_Dashboard
             // 
@@ -285,7 +284,7 @@
             this.Controls.Add(this.label1);
             this.Name = "Billing_Staff_Dashboard";
             this.Text = "Billing_Staff_Dashboard";
-      
+        
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
@@ -293,7 +292,7 @@
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.panel4.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvBilling)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -310,18 +309,18 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button btnRefreshBills;
+        private System.Windows.Forms.Button btnDeleteBill;
+        private System.Windows.Forms.Button btnUpdateBill;
+        private System.Windows.Forms.Button btnAddBill;
+        private System.Windows.Forms.DateTimePicker dtpPaymentDate;
+        private System.Windows.Forms.ComboBox cmbPaymentStatus;
+        private System.Windows.Forms.ComboBox cmbBillingPatient;
+        private System.Windows.Forms.TextBox txtAmount;
+        private System.Windows.Forms.TextBox txtBillID;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dgvBilling;
     }
 }
