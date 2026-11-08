@@ -28,9 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.rbAdmin = new System.Windows.Forms.RadioButton();
-            this.rbBillingStaff = new System.Windows.Forms.RadioButton();
-            this.rbAttendant = new System.Windows.Forms.RadioButton();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LogIn));
+            this.rdoAdmin = new System.Windows.Forms.RadioButton();
+            this.rdoBillingStaff = new System.Windows.Forms.RadioButton();
+            this.rdoCashier = new System.Windows.Forms.RadioButton();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -40,49 +41,51 @@
             this.btnLogin = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
-            // rbAdmin
+            // rdoAdmin
             // 
-            this.rbAdmin.AutoSize = true;
-            this.rbAdmin.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbAdmin.ForeColor = System.Drawing.Color.Green;
-            this.rbAdmin.Location = new System.Drawing.Point(361, 108);
-            this.rbAdmin.Name = "rbAdmin";
-            this.rbAdmin.Size = new System.Drawing.Size(68, 20);
-            this.rbAdmin.TabIndex = 0;
-            this.rbAdmin.TabStop = true;
-            this.rbAdmin.Text = "Admin";
-            this.rbAdmin.UseVisualStyleBackColor = true;
+            this.rdoAdmin.AutoSize = true;
+            this.rdoAdmin.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdoAdmin.ForeColor = System.Drawing.Color.Green;
+            this.rdoAdmin.Location = new System.Drawing.Point(361, 108);
+            this.rdoAdmin.Name = "rdoAdmin";
+            this.rdoAdmin.Size = new System.Drawing.Size(68, 20);
+            this.rdoAdmin.TabIndex = 0;
+            this.rdoAdmin.TabStop = true;
+            this.rdoAdmin.Text = "Admin";
+            this.rdoAdmin.UseVisualStyleBackColor = true;
             // 
-            // rbBillingStaff
+            // rdoBillingStaff
             // 
-            this.rbBillingStaff.AutoSize = true;
-            this.rbBillingStaff.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbBillingStaff.ForeColor = System.Drawing.Color.Green;
-            this.rbBillingStaff.Location = new System.Drawing.Point(523, 108);
-            this.rbBillingStaff.Name = "rbBillingStaff";
-            this.rbBillingStaff.Size = new System.Drawing.Size(103, 20);
-            this.rbBillingStaff.TabIndex = 1;
-            this.rbBillingStaff.TabStop = true;
-            this.rbBillingStaff.Text = "Billing Staff";
-            this.rbBillingStaff.UseVisualStyleBackColor = true;
+            this.rdoBillingStaff.AutoSize = true;
+            this.rdoBillingStaff.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdoBillingStaff.ForeColor = System.Drawing.Color.Green;
+            this.rdoBillingStaff.Location = new System.Drawing.Point(523, 108);
+            this.rdoBillingStaff.Name = "rdoBillingStaff";
+            this.rdoBillingStaff.Size = new System.Drawing.Size(103, 20);
+            this.rdoBillingStaff.TabIndex = 1;
+            this.rdoBillingStaff.TabStop = true;
+            this.rdoBillingStaff.Text = "Billing Staff";
+            this.rdoBillingStaff.UseVisualStyleBackColor = true;
             // 
-            // rbAttendant
+            // rdoCashier
             // 
-            this.rbAttendant.AutoSize = true;
-            this.rbAttendant.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbAttendant.ForeColor = System.Drawing.Color.Green;
-            this.rbAttendant.Location = new System.Drawing.Point(686, 108);
-            this.rbAttendant.Name = "rbAttendant";
-            this.rbAttendant.Size = new System.Drawing.Size(144, 20);
-            this.rbAttendant.TabIndex = 2;
-            this.rbAttendant.TabStop = true;
-            this.rbAttendant.Text = "Attendant / Nurse";
-            this.rbAttendant.UseVisualStyleBackColor = true;
+            this.rdoCashier.AutoSize = true;
+            this.rdoCashier.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdoCashier.ForeColor = System.Drawing.Color.Green;
+            this.rdoCashier.Location = new System.Drawing.Point(686, 108);
+            this.rdoCashier.Name = "rdoCashier";
+            this.rdoCashier.Size = new System.Drawing.Size(78, 20);
+            this.rdoCashier.TabIndex = 2;
+            this.rdoCashier.TabStop = true;
+            this.rdoCashier.Text = "Cashier";
+            this.rdoCashier.UseVisualStyleBackColor = true;
             // 
             // label1
             // 
@@ -163,6 +166,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Controls.Add(this.label7);
             this.panel1.Controls.Add(this.label6);
             this.panel1.ForeColor = System.Drawing.Color.Green;
@@ -171,12 +175,21 @@
             this.panel1.Size = new System.Drawing.Size(333, 446);
             this.panel1.TabIndex = 11;
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(41, 122);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(224, 216);
+            this.pictureBox1.TabIndex = 2;
+            this.pictureBox1.TabStop = false;
+            // 
             // label7
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.Color.Silver;
-            this.label7.Location = new System.Drawing.Point(65, 221);
+            this.label7.Location = new System.Drawing.Point(65, 91);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(183, 16);
             this.label7.TabIndex = 1;
@@ -187,7 +200,7 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft YaHei UI", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.White;
-            this.label6.Location = new System.Drawing.Point(71, 157);
+            this.label6.Location = new System.Drawing.Point(71, 37);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(177, 50);
             this.label6.TabIndex = 0;
@@ -197,6 +210,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.ClientSize = new System.Drawing.Size(840, 439);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.label5);
@@ -207,13 +221,15 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.rbAttendant);
-            this.Controls.Add(this.rbBillingStaff);
-            this.Controls.Add(this.rbAdmin);
+            this.Controls.Add(this.rdoCashier);
+            this.Controls.Add(this.rdoBillingStaff);
+            this.Controls.Add(this.rdoAdmin);
             this.Name = "LogIn";
             this.Text = "Login";
+            this.Load += new System.EventHandler(this.LogIn_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -221,9 +237,9 @@
 
         #endregion
 
-        private System.Windows.Forms.RadioButton rbAdmin;
-        private System.Windows.Forms.RadioButton rbBillingStaff;
-        private System.Windows.Forms.RadioButton rbAttendant;
+        private System.Windows.Forms.RadioButton rdoAdmin;
+        private System.Windows.Forms.RadioButton rdoBillingStaff;
+        private System.Windows.Forms.RadioButton rdoCashier;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
@@ -235,6 +251,7 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 

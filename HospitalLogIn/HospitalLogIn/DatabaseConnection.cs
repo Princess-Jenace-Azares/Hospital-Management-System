@@ -1,15 +1,14 @@
 ﻿using System.Data.SqlClient;
 
-namespace HospitalBillingSystem
+namespace HospitalLogIn
 {
     public class DatabaseConnection
     {
-        private readonly string connectionString =
-            @"Server=.\SQLEXPRESS;Database=HospitalBillingDB;Trusted_Connection=True;TrustServerCertificate=True;";
-
-        public SqlConnection GetConnection()
+        public static SqlConnection GetConnection()
         {
-            return new SqlConnection(connectionString);
+            return new SqlConnection(
+                @"Data Source=JINIZ\SQLEXPRESS;Initial Catalog=HospitalManagementDB;Integrated Security=True"
+            );
         }
     }
 }
