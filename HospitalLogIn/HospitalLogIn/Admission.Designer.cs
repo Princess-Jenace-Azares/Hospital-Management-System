@@ -102,9 +102,10 @@
             this.panel2.Controls.Add(this.label4);
             this.panel2.Location = new System.Drawing.Point(-2, 39);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(841, 94);
+            this.panel2.Size = new System.Drawing.Size(712, 94);
             this.panel2.TabIndex = 3;
-     
+            this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
+            // 
             // btnRefresh
             // 
             this.btnRefresh.BackColor = System.Drawing.Color.Silver;
@@ -274,7 +275,6 @@
             this.Controls.Add(this.label2);
             this.Name = "Attendant__Nurse_Dashboard";
             this.Text = "Attendant__Nurse_Dashboard";
-        
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);

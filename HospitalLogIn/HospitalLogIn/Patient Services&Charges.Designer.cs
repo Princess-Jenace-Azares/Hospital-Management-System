@@ -70,7 +70,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(707, 101);
             this.panel1.TabIndex = 10;
-       
             // 
             // panel3
             // 
@@ -188,7 +187,6 @@
             this.dgvServices.Name = "dgvServices";
             this.dgvServices.Size = new System.Drawing.Size(707, 206);
             this.dgvServices.TabIndex = 11;
-           
             // 
             // panel2
             // 
@@ -242,7 +240,7 @@
             this.Controls.Add(this.dgvServices);
             this.Name = "Patient_Services_Charges";
             this.Text = "Patient_Services_Charges";
-           
+            this.Load += new System.EventHandler(this.Patient_Services_Charges_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel3.ResumeLayout(false);

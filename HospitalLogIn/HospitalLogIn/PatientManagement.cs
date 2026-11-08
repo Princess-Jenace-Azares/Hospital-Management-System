@@ -215,6 +215,10 @@ namespace HospitalLogIn
             cmbStatus.SelectedIndex = -1;
         }
 
+        private void Admin_Dashboard_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 
 }

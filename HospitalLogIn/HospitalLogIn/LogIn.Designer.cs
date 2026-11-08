@@ -226,7 +226,7 @@
             this.Controls.Add(this.rdoAdmin);
             this.Name = "LogIn";
             this.Text = "Login";
-    
+            this.Load += new System.EventHandler(this.LogIn_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
