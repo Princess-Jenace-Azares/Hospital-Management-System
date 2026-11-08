@@ -261,7 +261,7 @@
             this.dgvPatients.Name = "dgvPatients";
             this.dgvPatients.Size = new System.Drawing.Size(707, 206);
             this.dgvPatients.TabIndex = 12;
-            this.dgvPatients.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPatients_CellContentClick);
+            
             // 
             // Admin_Dashboard
             // 
@@ -275,7 +275,7 @@
             this.Controls.Add(this.panel1);
             this.Name = "Admin_Dashboard";
             this.Text = "Patient Management";
-            this.Load += new System.EventHandler(this.Admin_Dashboard_Load);
+           
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);

@@ -277,9 +277,5 @@ namespace HospitalLogIn
             cmbPaymentMethod.SelectedIndex = -1;
         }
 
-        private void Payment_Form_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }

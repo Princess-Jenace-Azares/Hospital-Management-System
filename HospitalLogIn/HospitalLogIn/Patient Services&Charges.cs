@@ -195,14 +195,5 @@ namespace HospitalLogIn
             txtTotalAmount.Clear();
         }
 
-        private void Patient_Services_Charges_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dgvServices_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
     }
 }

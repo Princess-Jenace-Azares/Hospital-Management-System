@@ -255,14 +255,5 @@ namespace HospitalLogIn
             dtpAdmissionDate.Value = DateTime.Now;
         }
 
-        private void Attendant__Nurse_Dashboard_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void panel2_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
     }
 }

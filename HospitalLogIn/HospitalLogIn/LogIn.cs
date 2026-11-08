@@ -7,7 +7,7 @@ namespace HospitalLogIn
 {
     public partial class LogIn : Form
     {
-     
+
 
         public LogIn()
         {
@@ -68,9 +68,6 @@ namespace HospitalLogIn
             }
         }
 
-        private void LogIn_Load(object sender, EventArgs e)
-        {
 
-        }
     }
 }

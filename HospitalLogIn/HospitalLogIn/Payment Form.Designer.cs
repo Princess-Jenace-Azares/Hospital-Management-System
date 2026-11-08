@@ -66,6 +66,7 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(704, 114);
             this.panel1.TabIndex = 11;
+           
             // 
             // cmbPaymentMethod
             // 
@@ -224,7 +225,7 @@
             this.Controls.Add(this.panel2);
             this.Name = "Payment_Form";
             this.Text = "Payment_";
-            this.Load += new System.EventHandler(this.Payment_Form_Load);
+          
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
