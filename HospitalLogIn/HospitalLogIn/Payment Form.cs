@@ -277,5 +277,6 @@ namespace HospitalLogIn
             cmbPaymentMethod.SelectedIndex = -1;
         }
 
+
     }
 }
