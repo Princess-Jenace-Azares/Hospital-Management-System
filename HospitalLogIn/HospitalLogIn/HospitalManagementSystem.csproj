@@ -68,7 +68,9 @@
     <Compile Include="Patient Services&amp;Charges.Designer.cs">
       <DependentUpon>Patient Services&amp;Charges.cs</DependentUpon>
     </Compile>
-    <Compile Include="PatientManagement.cs" />
+    <Compile Include="PatientManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PatientManagement.Designer.cs">
       <DependentUpon>PatientManagement.cs</DependentUpon>
     </Compile>
