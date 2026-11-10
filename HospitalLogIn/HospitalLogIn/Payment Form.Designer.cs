@@ -301,7 +301,7 @@
             this.dgvPayments.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPayments.Location = new System.Drawing.Point(3, 190);
             this.dgvPayments.Name = "dgvPayments";
-            this.dgvPayments.Size = new System.Drawing.Size(755, 190);
+            this.dgvPayments.Size = new System.Drawing.Size(758, 190);
             this.dgvPayments.TabIndex = 23;
             // 
             // cmbBillNo
@@ -317,7 +317,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.ClientSize = new System.Drawing.Size(758, 379);
+            this.ClientSize = new System.Drawing.Size(764, 381);
             this.Controls.Add(this.dgvPayments);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel3);

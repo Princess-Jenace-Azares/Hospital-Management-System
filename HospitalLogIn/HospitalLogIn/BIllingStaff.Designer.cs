@@ -76,7 +76,7 @@
             this.panel1.Controls.Add(this.label4);
             this.panel1.Location = new System.Drawing.Point(0, 39);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(791, 100);
+            this.panel1.Size = new System.Drawing.Size(764, 100);
             this.panel1.TabIndex = 10;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
@@ -231,7 +231,7 @@
             this.panel2.ForeColor = System.Drawing.Color.Green;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(791, 33);
+            this.panel2.Size = new System.Drawing.Size(764, 33);
             this.panel2.TabIndex = 20;
             // 
             // label3
@@ -252,7 +252,7 @@
             this.panel3.ForeColor = System.Drawing.Color.Green;
             this.panel3.Location = new System.Drawing.Point(0, 139);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(791, 33);
+            this.panel3.Size = new System.Drawing.Size(764, 33);
             this.panel3.TabIndex = 21;
             // 
             // label1
@@ -269,9 +269,9 @@
             // dgvBilling
             // 
             this.dgvBilling.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvBilling.Location = new System.Drawing.Point(3, 170);
+            this.dgvBilling.Location = new System.Drawing.Point(0, 170);
             this.dgvBilling.Name = "dgvBilling";
-            this.dgvBilling.Size = new System.Drawing.Size(785, 209);
+            this.dgvBilling.Size = new System.Drawing.Size(764, 209);
             this.dgvBilling.TabIndex = 22;
             // 
             // BIllingStaff
@@ -279,7 +279,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.ClientSize = new System.Drawing.Size(788, 381);
+            this.ClientSize = new System.Drawing.Size(764, 381);
             this.Controls.Add(this.dgvBilling);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel3);

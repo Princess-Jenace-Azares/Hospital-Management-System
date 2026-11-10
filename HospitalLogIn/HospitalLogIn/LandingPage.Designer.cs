@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lblLogOut = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.lblReports = new System.Windows.Forms.Label();
@@ -39,7 +40,6 @@
             this.lblAdmission = new System.Windows.Forms.Label();
             this.lblPatientManagement = new System.Windows.Forms.Label();
             this.panelContent = new System.Windows.Forms.Panel();
-            this.lblLogOut = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -53,6 +53,17 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(900, 51);
             this.panel1.TabIndex = 0;
+            // 
+            // lblLogOut
+            // 
+            this.lblLogOut.AutoSize = true;
+            this.lblLogOut.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLogOut.ForeColor = System.Drawing.Color.White;
+            this.lblLogOut.Location = new System.Drawing.Point(759, 16);
+            this.lblLogOut.Name = "lblLogOut";
+            this.lblLogOut.Size = new System.Drawing.Size(53, 15);
+            this.lblLogOut.TabIndex = 2;
+            this.lblLogOut.Text = "LogOut";
             // 
             // label1
             // 
@@ -77,7 +88,7 @@
             this.panel2.Controls.Add(this.lblPatientManagement);
             this.panel2.Location = new System.Drawing.Point(0, 48);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(885, 43);
+            this.panel2.Size = new System.Drawing.Size(900, 43);
             this.panel2.TabIndex = 1;
             this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
             // 
@@ -155,19 +166,8 @@
             // 
             this.panelContent.Location = new System.Drawing.Point(0, 97);
             this.panelContent.Name = "panelContent";
-            this.panelContent.Size = new System.Drawing.Size(722, 420);
+            this.panelContent.Size = new System.Drawing.Size(780, 420);
             this.panelContent.TabIndex = 2;
-            // 
-            // lblLogOut
-            // 
-            this.lblLogOut.AutoSize = true;
-            this.lblLogOut.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLogOut.ForeColor = System.Drawing.Color.White;
-            this.lblLogOut.Location = new System.Drawing.Point(759, 16);
-            this.lblLogOut.Name = "lblLogOut";
-            this.lblLogOut.Size = new System.Drawing.Size(53, 15);
-            this.lblLogOut.TabIndex = 2;
-            this.lblLogOut.Text = "LogOut";
             // 
             // LandingPage
             // 

@@ -61,7 +61,7 @@
             this.panel2.ForeColor = System.Drawing.Color.Green;
             this.panel2.Location = new System.Drawing.Point(-4, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(752, 33);
+            this.panel2.Size = new System.Drawing.Size(767, 33);
             this.panel2.TabIndex = 21;
             // 
             // label3
@@ -93,7 +93,7 @@
             this.panel1.Controls.Add(this.label4);
             this.panel1.Location = new System.Drawing.Point(2, 39);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(746, 100);
+            this.panel1.Size = new System.Drawing.Size(761, 100);
             this.panel1.TabIndex = 11;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
@@ -106,10 +106,10 @@
             // 
             // txtTotalBill
             // 
-            this.txtTotalBill.Location = new System.Drawing.Point(308, 35);
+            this.txtTotalBill.Location = new System.Drawing.Point(312, 35);
             this.txtTotalBill.Name = "txtTotalBill";
             this.txtTotalBill.ReadOnly = true;
-            this.txtTotalBill.Size = new System.Drawing.Size(174, 20);
+            this.txtTotalBill.Size = new System.Drawing.Size(153, 20);
             this.txtTotalBill.TabIndex = 23;
             // 
             // txtPatientName
@@ -123,7 +123,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(488, 40);
+            this.label2.Location = new System.Drawing.Point(479, 40);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(84, 13);
             this.label2.TabIndex = 20;
@@ -162,10 +162,10 @@
             // 
             // txtBalance
             // 
-            this.txtBalance.Location = new System.Drawing.Point(526, 7);
+            this.txtBalance.Location = new System.Drawing.Point(569, 8);
             this.txtBalance.Name = "txtBalance";
             this.txtBalance.ReadOnly = true;
-            this.txtBalance.Size = new System.Drawing.Size(168, 20);
+            this.txtBalance.Size = new System.Drawing.Size(177, 20);
             this.txtBalance.TabIndex = 9;
             // 
             // txtPatientID
@@ -178,7 +178,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(222, 11);
+            this.label10.Location = new System.Drawing.Point(231, 11);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(71, 13);
             this.label10.TabIndex = 6;
@@ -196,7 +196,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(471, 10);
+            this.label6.Location = new System.Drawing.Point(514, 11);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(49, 13);
             this.label6.TabIndex = 2;
@@ -227,7 +227,7 @@
             this.panel3.ForeColor = System.Drawing.Color.Green;
             this.panel3.Location = new System.Drawing.Point(2, 145);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(752, 33);
+            this.panel3.Size = new System.Drawing.Size(761, 33);
             this.panel3.TabIndex = 22;
             // 
             // label1
@@ -246,7 +246,7 @@
             this.dgvDischargedPatients.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDischargedPatients.Location = new System.Drawing.Point(2, 176);
             this.dgvDischargedPatients.Name = "dgvDischargedPatients";
-            this.dgvDischargedPatients.Size = new System.Drawing.Size(746, 196);
+            this.dgvDischargedPatients.Size = new System.Drawing.Size(761, 204);
             this.dgvDischargedPatients.TabIndex = 23;
             this.dgvDischargedPatients.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDischargedPatients_CellContentClick);
             // 
@@ -255,7 +255,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.ClientSize = new System.Drawing.Size(746, 371);
+            this.ClientSize = new System.Drawing.Size(764, 381);
             this.Controls.Add(this.dgvDischargedPatients);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel1);

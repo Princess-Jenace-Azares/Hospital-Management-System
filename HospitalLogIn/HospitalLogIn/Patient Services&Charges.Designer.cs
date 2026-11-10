@@ -29,6 +29,11 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label8 = new System.Windows.Forms.Label();
+            this.txtPatientID = new System.Windows.Forms.TextBox();
+            this.txtPatientName = new System.Windows.Forms.TextBox();
+            this.cmbAdmissionID = new System.Windows.Forms.ComboBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.btnAddService = new System.Windows.Forms.Button();
@@ -45,11 +50,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.cmbAdmissionID = new System.Windows.Forms.ComboBox();
-            this.txtPatientName = new System.Windows.Forms.TextBox();
-            this.txtPatientID = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvServices)).BeginInit();
@@ -76,9 +76,51 @@
             this.panel1.Controls.Add(this.label4);
             this.panel1.Location = new System.Drawing.Point(1, 37);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(707, 101);
+            this.panel1.Size = new System.Drawing.Size(761, 101);
             this.panel1.TabIndex = 10;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(520, 43);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(74, 13);
+            this.label8.TabIndex = 21;
+            this.label8.Text = "Patient Name:";
+            // 
+            // txtPatientID
+            // 
+            this.txtPatientID.Location = new System.Drawing.Point(80, 7);
+            this.txtPatientID.Name = "txtPatientID";
+            this.txtPatientID.ReadOnly = true;
+            this.txtPatientID.Size = new System.Drawing.Size(147, 20);
+            this.txtPatientID.TabIndex = 20;
+            // 
+            // txtPatientName
+            // 
+            this.txtPatientName.Location = new System.Drawing.Point(596, 40);
+            this.txtPatientName.Name = "txtPatientName";
+            this.txtPatientName.ReadOnly = true;
+            this.txtPatientName.Size = new System.Drawing.Size(155, 20);
+            this.txtPatientName.TabIndex = 19;
+            // 
+            // cmbAdmissionID
+            // 
+            this.cmbAdmissionID.FormattingEnabled = true;
+            this.cmbAdmissionID.Location = new System.Drawing.Point(597, 6);
+            this.cmbAdmissionID.Name = "cmbAdmissionID";
+            this.cmbAdmissionID.Size = new System.Drawing.Size(154, 21);
+            this.cmbAdmissionID.TabIndex = 18;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(520, 10);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(71, 13);
+            this.label7.TabIndex = 17;
+            this.label7.Text = "Admission ID:";
             // 
             // panel3
             // 
@@ -126,29 +168,29 @@
             // cmbService
             // 
             this.cmbService.FormattingEnabled = true;
-            this.cmbService.Location = new System.Drawing.Point(80, 43);
+            this.cmbService.Location = new System.Drawing.Point(80, 39);
             this.cmbService.Name = "cmbService";
-            this.cmbService.Size = new System.Drawing.Size(126, 21);
+            this.cmbService.Size = new System.Drawing.Size(147, 21);
             this.cmbService.TabIndex = 12;
             // 
             // txtQuantity
             // 
-            this.txtQuantity.Location = new System.Drawing.Point(287, 40);
+            this.txtQuantity.Location = new System.Drawing.Point(324, 40);
             this.txtQuantity.Name = "txtQuantity";
-            this.txtQuantity.Size = new System.Drawing.Size(151, 20);
+            this.txtQuantity.Size = new System.Drawing.Size(177, 20);
             this.txtQuantity.TabIndex = 9;
             // 
             // txtTotalAmount
             // 
-            this.txtTotalAmount.Location = new System.Drawing.Point(287, 7);
+            this.txtTotalAmount.Location = new System.Drawing.Point(324, 6);
             this.txtTotalAmount.Name = "txtTotalAmount";
-            this.txtTotalAmount.Size = new System.Drawing.Size(151, 20);
+            this.txtTotalAmount.Size = new System.Drawing.Size(177, 20);
             this.txtTotalAmount.TabIndex = 8;
             // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(208, 10);
+            this.label10.Location = new System.Drawing.Point(245, 9);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(73, 13);
             this.label10.TabIndex = 6;
@@ -157,7 +199,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(233, 43);
+            this.label6.Location = new System.Drawing.Point(269, 43);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(49, 13);
             this.label6.TabIndex = 2;
@@ -186,7 +228,7 @@
             this.dgvServices.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvServices.Location = new System.Drawing.Point(1, 176);
             this.dgvServices.Name = "dgvServices";
-            this.dgvServices.Size = new System.Drawing.Size(707, 206);
+            this.dgvServices.Size = new System.Drawing.Size(761, 206);
             this.dgvServices.TabIndex = 11;
             // 
             // panel2
@@ -196,7 +238,7 @@
             this.panel2.ForeColor = System.Drawing.Color.White;
             this.panel2.Location = new System.Drawing.Point(-7, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(715, 31);
+            this.panel2.Size = new System.Drawing.Size(769, 31);
             this.panel2.TabIndex = 12;
             // 
             // label3
@@ -216,7 +258,7 @@
             this.panel4.ForeColor = System.Drawing.Color.White;
             this.panel4.Location = new System.Drawing.Point(1, 144);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(707, 34);
+            this.panel4.Size = new System.Drawing.Size(761, 34);
             this.panel4.TabIndex = 13;
             // 
             // label2
@@ -229,54 +271,12 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "Service Records";
             // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(444, 10);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(71, 13);
-            this.label7.TabIndex = 17;
-            this.label7.Text = "Admission ID:";
-            // 
-            // cmbAdmissionID
-            // 
-            this.cmbAdmissionID.FormattingEnabled = true;
-            this.cmbAdmissionID.Location = new System.Drawing.Point(521, 7);
-            this.cmbAdmissionID.Name = "cmbAdmissionID";
-            this.cmbAdmissionID.Size = new System.Drawing.Size(126, 21);
-            this.cmbAdmissionID.TabIndex = 18;
-            // 
-            // txtPatientName
-            // 
-            this.txtPatientName.Location = new System.Drawing.Point(524, 40);
-            this.txtPatientName.Name = "txtPatientName";
-            this.txtPatientName.ReadOnly = true;
-            this.txtPatientName.Size = new System.Drawing.Size(127, 20);
-            this.txtPatientName.TabIndex = 19;
-            // 
-            // txtPatientID
-            // 
-            this.txtPatientID.Location = new System.Drawing.Point(75, 10);
-            this.txtPatientID.Name = "txtPatientID";
-            this.txtPatientID.ReadOnly = true;
-            this.txtPatientID.Size = new System.Drawing.Size(127, 20);
-            this.txtPatientID.TabIndex = 20;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(444, 43);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(74, 13);
-            this.label8.TabIndex = 21;
-            this.label8.Text = "Patient Name:";
-            // 
             // Patient_Services_Charges
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.ClientSize = new System.Drawing.Size(706, 381);
+            this.ClientSize = new System.Drawing.Size(764, 381);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel2);

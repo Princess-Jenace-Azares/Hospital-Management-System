@@ -56,7 +56,7 @@
             this.panel2.ForeColor = System.Drawing.Color.Green;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(695, 33);
+            this.panel2.Size = new System.Drawing.Size(764, 33);
             this.panel2.TabIndex = 23;
             // 
             // label3
@@ -83,14 +83,14 @@
             this.panel1.Controls.Add(this.label4);
             this.panel1.Location = new System.Drawing.Point(0, 39);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(695, 108);
+            this.panel1.Size = new System.Drawing.Size(764, 108);
             this.panel1.TabIndex = 10;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(284, 36);
+            this.label2.Location = new System.Drawing.Point(240, 40);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(55, 13);
             this.label2.TabIndex = 21;
@@ -98,7 +98,7 @@
             // 
             // dtpEndDate
             // 
-            this.dtpEndDate.Location = new System.Drawing.Point(345, 34);
+            this.dtpEndDate.Location = new System.Drawing.Point(301, 34);
             this.dtpEndDate.Name = "dtpEndDate";
             this.dtpEndDate.Size = new System.Drawing.Size(200, 20);
             this.dtpEndDate.TabIndex = 20;
@@ -106,7 +106,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(281, 7);
+            this.label1.Location = new System.Drawing.Point(467, 13);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(58, 13);
             this.label1.TabIndex = 19;
@@ -114,7 +114,7 @@
             // 
             // dtpStartDate
             // 
-            this.dtpStartDate.Location = new System.Drawing.Point(345, 3);
+            this.dtpStartDate.Location = new System.Drawing.Point(537, 7);
             this.dtpStartDate.Name = "dtpStartDate";
             this.dtpStartDate.Size = new System.Drawing.Size(200, 20);
             this.dtpStartDate.TabIndex = 18;
@@ -147,13 +147,13 @@
             this.cmbReportType.FormattingEnabled = true;
             this.cmbReportType.Location = new System.Drawing.Point(89, 6);
             this.cmbReportType.Name = "cmbReportType";
-            this.cmbReportType.Size = new System.Drawing.Size(141, 21);
+            this.cmbReportType.Size = new System.Drawing.Size(181, 21);
             this.cmbReportType.TabIndex = 10;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(14, 7);
+            this.label4.Location = new System.Drawing.Point(14, 14);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(69, 13);
             this.label4.TabIndex = 0;
@@ -166,7 +166,7 @@
             this.panel3.ForeColor = System.Drawing.Color.Green;
             this.panel3.Location = new System.Drawing.Point(0, 153);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(695, 33);
+            this.panel3.Size = new System.Drawing.Size(764, 33);
             this.panel3.TabIndex = 24;
             // 
             // label5
@@ -185,7 +185,7 @@
             this.dgvReports.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvReports.Location = new System.Drawing.Point(0, 184);
             this.dgvReports.Name = "dgvReports";
-            this.dgvReports.Size = new System.Drawing.Size(695, 187);
+            this.dgvReports.Size = new System.Drawing.Size(764, 198);
             this.dgvReports.TabIndex = 25;
             // 
             // btnRefresh
@@ -204,7 +204,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.ClientSize = new System.Drawing.Size(693, 366);
+            this.ClientSize = new System.Drawing.Size(764, 381);
             this.Controls.Add(this.dgvReports);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel1);

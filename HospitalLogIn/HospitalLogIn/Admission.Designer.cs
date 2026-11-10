@@ -73,7 +73,7 @@
             this.panel1.ForeColor = System.Drawing.Color.White;
             this.panel1.Location = new System.Drawing.Point(-2, 1);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(712, 32);
+            this.panel1.Size = new System.Drawing.Size(765, 32);
             this.panel1.TabIndex = 2;
             // 
             // label3
@@ -106,21 +106,21 @@
             this.panel2.Controls.Add(this.label4);
             this.panel2.Location = new System.Drawing.Point(-2, 39);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(712, 94);
+            this.panel2.Size = new System.Drawing.Size(765, 94);
             this.panel2.TabIndex = 3;
             this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
             // 
             // txtAdmissionID
             // 
-            this.txtAdmissionID.Location = new System.Drawing.Point(519, 33);
+            this.txtAdmissionID.Location = new System.Drawing.Point(614, 29);
             this.txtAdmissionID.Name = "txtAdmissionID";
-            this.txtAdmissionID.Size = new System.Drawing.Size(114, 20);
+            this.txtAdmissionID.Size = new System.Drawing.Size(140, 20);
             this.txtAdmissionID.TabIndex = 18;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(436, 36);
+            this.label1.Location = new System.Drawing.Point(531, 32);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(77, 13);
             this.label1.TabIndex = 17;
@@ -174,14 +174,14 @@
             // cmbStatus
             // 
             this.cmbStatus.FormattingEnabled = true;
-            this.cmbStatus.Location = new System.Drawing.Point(528, 6);
+            this.cmbStatus.Location = new System.Drawing.Point(614, 3);
             this.cmbStatus.Name = "cmbStatus";
             this.cmbStatus.Size = new System.Drawing.Size(140, 21);
             this.cmbStatus.TabIndex = 12;
             // 
             // dtpAdmissionDate
             // 
-            this.dtpAdmissionDate.Location = new System.Drawing.Point(286, 6);
+            this.dtpAdmissionDate.Location = new System.Drawing.Point(353, 4);
             this.dtpAdmissionDate.Name = "dtpAdmissionDate";
             this.dtpAdmissionDate.Size = new System.Drawing.Size(181, 20);
             this.dtpAdmissionDate.TabIndex = 10;
@@ -189,7 +189,7 @@
             // cmbRoom
             // 
             this.cmbRoom.FormattingEnabled = true;
-            this.cmbRoom.Location = new System.Drawing.Point(317, 33);
+            this.cmbRoom.Location = new System.Drawing.Point(396, 29);
             this.cmbRoom.Name = "cmbRoom";
             this.cmbRoom.Size = new System.Drawing.Size(102, 21);
             this.cmbRoom.TabIndex = 9;
@@ -197,14 +197,14 @@
             // cmbPatientName
             // 
             this.cmbPatientName.FormattingEnabled = true;
-            this.cmbPatientName.Location = new System.Drawing.Point(93, 33);
+            this.cmbPatientName.Location = new System.Drawing.Point(93, 32);
             this.cmbPatientName.Name = "cmbPatientName";
             this.cmbPatientName.Size = new System.Drawing.Size(162, 21);
             this.cmbPatientName.TabIndex = 8;
             // 
             // txtPatientID
             // 
-            this.txtPatientID.Location = new System.Drawing.Point(77, 5);
+            this.txtPatientID.Location = new System.Drawing.Point(93, 5);
             this.txtPatientID.Name = "txtPatientID";
             this.txtPatientID.Size = new System.Drawing.Size(114, 20);
             this.txtPatientID.TabIndex = 7;
@@ -212,7 +212,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(197, 8);
+            this.label9.Location = new System.Drawing.Point(265, 6);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(83, 13);
             this.label9.TabIndex = 5;
@@ -221,7 +221,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(473, 8);
+            this.label7.Location = new System.Drawing.Point(565, 6);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(40, 13);
             this.label7.TabIndex = 3;
@@ -230,7 +230,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(273, 36);
+            this.label6.Location = new System.Drawing.Point(352, 32);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(38, 13);
             this.label6.TabIndex = 2;
@@ -248,7 +248,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(14, 8);
+            this.label4.Location = new System.Drawing.Point(30, 8);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(57, 13);
             this.label4.TabIndex = 0;
@@ -261,7 +261,7 @@
             this.panel3.ForeColor = System.Drawing.Color.White;
             this.panel3.Location = new System.Drawing.Point(-2, 132);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(712, 32);
+            this.panel3.Size = new System.Drawing.Size(765, 32);
             this.panel3.TabIndex = 3;
             // 
             // label10
@@ -279,7 +279,7 @@
             this.dgvAdmission.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvAdmission.Location = new System.Drawing.Point(-2, 160);
             this.dgvAdmission.Name = "dgvAdmission";
-            this.dgvAdmission.Size = new System.Drawing.Size(709, 221);
+            this.dgvAdmission.Size = new System.Drawing.Size(765, 221);
             this.dgvAdmission.TabIndex = 0;
             // 
             // Attendant__Nurse_Dashboard
@@ -287,7 +287,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.ClientSize = new System.Drawing.Size(706, 381);
+            this.ClientSize = new System.Drawing.Size(764, 381);
             this.Controls.Add(this.dgvAdmission);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel3);
