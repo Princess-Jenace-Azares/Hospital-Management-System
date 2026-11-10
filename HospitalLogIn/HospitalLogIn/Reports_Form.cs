@@ -15,6 +15,22 @@ namespace HospitalLogIn
         public Reports_Form()
         {
             InitializeComponent();
+
+            cmbReportType.Items.AddRange(new object[]
+{
+    "Patient Records",
+    "Admission Records",
+    "Billing Records",
+    "Payment Records",
+    "Discharge Records"
+});
+
+            cmbReportType.SelectedIndex = 0;
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }
