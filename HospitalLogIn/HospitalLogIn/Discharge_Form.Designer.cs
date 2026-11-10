@@ -261,7 +261,7 @@
             this.dgvDischargedPatients.Name = "dgvDischargedPatients";
             this.dgvDischargedPatients.Size = new System.Drawing.Size(746, 196);
             this.dgvDischargedPatients.TabIndex = 23;
-            this.dgvDischargedPatients.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+           
             // 
             // Discharge_Form
             // 
@@ -275,7 +275,7 @@
             this.Controls.Add(this.panel2);
             this.Name = "Discharge_Form";
             this.Text = "Discharge_Form";
-            this.Load += new System.EventHandler(this.Discharge_Form_Load);
+
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.panel1.ResumeLayout(false);
