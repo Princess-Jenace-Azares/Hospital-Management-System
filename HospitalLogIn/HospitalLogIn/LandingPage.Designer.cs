@@ -31,14 +31,15 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.lblReports = new System.Windows.Forms.Label();
+            this.lblDischarge = new System.Windows.Forms.Label();
             this.lblPayment = new System.Windows.Forms.Label();
             this.lblBilling = new System.Windows.Forms.Label();
             this.lblPatientServices = new System.Windows.Forms.Label();
             this.lblAdmission = new System.Windows.Forms.Label();
             this.lblPatientManagement = new System.Windows.Forms.Label();
             this.panelContent = new System.Windows.Forms.Panel();
-            this.lblDischarge = new System.Windows.Forms.Label();
-            this.lblReports = new System.Windows.Forms.Label();
+            this.lblLogOut = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -46,10 +47,11 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.panel1.Controls.Add(this.lblLogOut);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(885, 51);
+            this.panel1.Size = new System.Drawing.Size(900, 51);
             this.panel1.TabIndex = 0;
             // 
             // label1
@@ -78,6 +80,27 @@
             this.panel2.Size = new System.Drawing.Size(885, 43);
             this.panel2.TabIndex = 1;
             this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
+            // 
+            // lblReports
+            // 
+            this.lblReports.AutoSize = true;
+            this.lblReports.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblReports.Location = new System.Drawing.Point(772, 19);
+            this.lblReports.Name = "lblReports";
+            this.lblReports.Size = new System.Drawing.Size(50, 15);
+            this.lblReports.TabIndex = 6;
+            this.lblReports.Text = "Reports";
+            // 
+            // lblDischarge
+            // 
+            this.lblDischarge.AutoSize = true;
+            this.lblDischarge.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDischarge.Location = new System.Drawing.Point(667, 19);
+            this.lblDischarge.Name = "lblDischarge";
+            this.lblDischarge.Size = new System.Drawing.Size(63, 15);
+            this.lblDischarge.TabIndex = 5;
+            this.lblDischarge.Text = "Discharge";
+            this.lblDischarge.Click += new System.EventHandler(this.lblDischarge_Click);
             // 
             // lblPayment
             // 
@@ -135,26 +158,16 @@
             this.panelContent.Size = new System.Drawing.Size(722, 420);
             this.panelContent.TabIndex = 2;
             // 
-            // lblDischarge
+            // lblLogOut
             // 
-            this.lblDischarge.AutoSize = true;
-            this.lblDischarge.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDischarge.Location = new System.Drawing.Point(667, 19);
-            this.lblDischarge.Name = "lblDischarge";
-            this.lblDischarge.Size = new System.Drawing.Size(63, 15);
-            this.lblDischarge.TabIndex = 5;
-            this.lblDischarge.Text = "Discharge";
-            this.lblDischarge.Click += new System.EventHandler(this.lblDischarge_Click);
-            // 
-            // lblReports
-            // 
-            this.lblReports.AutoSize = true;
-            this.lblReports.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblReports.Location = new System.Drawing.Point(772, 19);
-            this.lblReports.Name = "lblReports";
-            this.lblReports.Size = new System.Drawing.Size(50, 15);
-            this.lblReports.TabIndex = 6;
-            this.lblReports.Text = "Reports";
+            this.lblLogOut.AutoSize = true;
+            this.lblLogOut.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLogOut.ForeColor = System.Drawing.Color.White;
+            this.lblLogOut.Location = new System.Drawing.Point(759, 16);
+            this.lblLogOut.Name = "lblLogOut";
+            this.lblLogOut.Size = new System.Drawing.Size(53, 15);
+            this.lblLogOut.TabIndex = 2;
+            this.lblLogOut.Text = "LogOut";
             // 
             // LandingPage
             // 
@@ -189,5 +202,6 @@
         private System.Windows.Forms.Panel panelContent;
         private System.Windows.Forms.Label lblDischarge;
         private System.Windows.Forms.Label lblReports;
+        private System.Windows.Forms.Label lblLogOut;
     }
 }

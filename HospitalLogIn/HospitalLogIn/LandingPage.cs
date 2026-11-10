@@ -22,6 +22,7 @@ namespace HospitalLogIn
             lblPayment.Click += lblPayment_Click;
             lblDischarge.Click += lblDischarge_Click;
             lblReports.Click += lblReports_Click;
+            lblLogOut.Click += lblLogOut_Click;
 
             ApplyRolePermissions();
         }
@@ -185,64 +186,90 @@ namespace HospitalLogIn
         private void panel2_Paint(object sender, PaintEventArgs e)
         {
         }
-    }
 
-    public static class RoleAccessHelper
-    {
-        public static void SetViewOnly(Form form)
+
+        private void lblLogOut_Click(object sender, EventArgs e)
         {
-            SetControlsViewOnly(form.Controls);
+            DialogResult result = MessageBox.Show(
+                "Are you sure you want to log out?",
+                "Confirm Logout",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question
+            );
+
+            if (result == DialogResult.Yes)
+            {
+                LogIn login = new LogIn();
+
+                login.FormClosed += (s, args) =>
+                {
+                    this.Close();
+                };
+
+                login.Show();
+                this.Hide();
+            }
         }
 
-        private static void SetControlsViewOnly(
-            Control.ControlCollection controls)
-        {
-            foreach (Control control in controls)
-            {
-                if (control is DataGridView dgv)
-                {
-                    dgv.ReadOnly = true;
-                    dgv.AllowUserToAddRows = false;
-                    dgv.AllowUserToDeleteRows = false;
-                    dgv.SelectionMode =
-                        DataGridViewSelectionMode.FullRowSelect;
-                }
-                else if (control is TextBox txt)
-                {
-                    txt.ReadOnly = true;
-                }
-                else if (control is RichTextBox richText)
-                {
-                    richText.ReadOnly = true;
-                }
-                else if (control is ComboBox ||
-                         control is DateTimePicker ||
-                         control is NumericUpDown ||
-                         control is CheckBox ||
-                         control is RadioButton ||
-                         control is LinkLabel)
-                {
-                    control.Enabled = false;
-                }
-                else if (control is Button btn)
-                {
-                    if (btn.Name.StartsWith(
-                        "btnRefresh",
-                        StringComparison.OrdinalIgnoreCase))
-                    {
-                        btn.Enabled = true;
-                    }
-                    else
-                    {
-                        btn.Enabled = false;
-                    }
-                }
 
-                if (control.HasChildren)
+        public static class RoleAccessHelper
+        {
+            public static void SetViewOnly(Form form)
+            {
+                SetControlsViewOnly(form.Controls);
+            }
+
+            private static void SetControlsViewOnly(
+                Control.ControlCollection controls)
+            {
+                foreach (Control control in controls)
                 {
-                    SetControlsViewOnly(control.Controls);
+                    if (control is DataGridView dgv)
+                    {
+                        dgv.ReadOnly = true;
+                        dgv.AllowUserToAddRows = false;
+                        dgv.AllowUserToDeleteRows = false;
+                        dgv.SelectionMode =
+                            DataGridViewSelectionMode.FullRowSelect;
+                    }
+                    else if (control is TextBox txt)
+                    {
+                        txt.ReadOnly = true;
+                    }
+                    else if (control is RichTextBox richText)
+                    {
+                        richText.ReadOnly = true;
+                    }
+                    else if (control is ComboBox ||
+                             control is DateTimePicker ||
+                             control is NumericUpDown ||
+                             control is CheckBox ||
+                             control is RadioButton ||
+                             control is LinkLabel)
+                    {
+                        control.Enabled = false;
+                    }
+                    else if (control is Button btn)
+                    {
+                        if (btn.Name.StartsWith(
+                            "btnRefresh",
+                            StringComparison.OrdinalIgnoreCase))
+                        {
+                            btn.Enabled = true;
+                        }
+                        else
+                        {
+                            btn.Enabled = false;
+                        }
+                    }
+
+                    if (control.HasChildren)
+                    {
+                        SetControlsViewOnly(control.Controls);
+                    }
                 }
             }
         }
     }
 }
+
