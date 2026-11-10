@@ -8,13 +8,22 @@ namespace HospitalLogIn
 {
     public partial class Patient_Services_Charges : Form
     {
+        private decimal selectedUnitPrice = 0;
+
         public Patient_Services_Charges()
         {
             InitializeComponent();
 
             btnAddService.Click += btnAddService_Click;
             btnClear.Click += btnClear_Click;
-            cmbService.SelectedIndexChanged += cmbService_SelectedIndexChanged;
+
+            cmbService.SelectedIndexChanged +=
+                cmbService_SelectedIndexChanged;
+
+            cmbAdmissionID.SelectedIndexChanged +=
+                cmbAdmissionID_SelectedIndexChanged;
+
+            txtQuantity.TextChanged += txtQuantity_TextChanged;
 
             cmbService.Items.AddRange(new object[]
             {
@@ -29,49 +38,109 @@ namespace HospitalLogIn
             this.Shown += Patient_Services_Charges_Shown;
         }
 
-        private void Patient_Services_Charges_Shown(object sender, EventArgs e)
+        // FORM LOAD
+        private void Patient_Services_Charges_Shown(
+            object sender, EventArgs e)
         {
-            LoadPatientIDs();
+            LoadActiveAdmissions();
             LoadServices();
         }
 
-        private void LoadPatientIDs()
+        // LOAD ACTIVE ADMISSIONS
+        private void LoadActiveAdmissions()
         {
             try
             {
-                using (SqlConnection con = DatabaseConnection.GetConnection())
+                using (SqlConnection con =
+                    DatabaseConnection.GetConnection())
                 {
-                    string query = "SELECT PatientID FROM Patient_Records";
+                    string query = @"
+                        SELECT
+                            a.AdmissionID,
+                            a.PatientID,
+                            p.PatientName,
+                            CAST(a.AdmissionID AS VARCHAR(20))
+                            + ' - ' + p.PatientName AS AdmissionInfo
+                        FROM Admission_Records a
+                        INNER JOIN Patient_Records p
+                            ON a.PatientID = p.PatientID
+                        WHERE a.Status = 'Admitted'
+                        ORDER BY a.AdmissionID DESC";
 
-                    SqlDataAdapter da = new SqlDataAdapter(query, con);
+                    SqlDataAdapter da =
+                        new SqlDataAdapter(query, con);
+
                     DataTable dt = new DataTable();
 
                     da.Fill(dt);
 
-                    cmbPatientId.DataSource = dt;
-                    cmbPatientId.DisplayMember = "PatientID";
-                    cmbPatientId.ValueMember = "PatientID";
-                    cmbPatientId.SelectedIndex = -1;
+                    cmbAdmissionID.DataSource = dt;
+                    cmbAdmissionID.DisplayMember = "AdmissionInfo";
+                    cmbAdmissionID.ValueMember = "AdmissionID";
+                    cmbAdmissionID.SelectedIndex = -1;
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(
-                    "Unable to load Patient IDs.\n" + ex.Message,
+                    "Unable to load active admissions.\n" + ex.Message,
                     "Database Error"
                 );
             }
         }
 
+        // WHEN AN ADMISSION IS SELECTED
+        private void cmbAdmissionID_SelectedIndexChanged(
+            object sender, EventArgs e)
+        {
+            if (cmbAdmissionID.SelectedIndex >= 0)
+            {
+                DataRowView row =
+                    cmbAdmissionID.SelectedItem as DataRowView;
+
+                if (row != null)
+                {
+                    txtPatientID.Text =
+                        row["PatientID"].ToString();
+
+                    txtPatientName.Text =
+                        row["PatientName"].ToString();
+                }
+            }
+            else
+            {
+                txtPatientID.Clear();
+                txtPatientName.Clear();
+            }
+        }
+
+        // LOAD SERVICE RECORDS
         private void LoadServices()
         {
             try
             {
-                using (SqlConnection con = DatabaseConnection.GetConnection())
+                using (SqlConnection con =
+                    DatabaseConnection.GetConnection())
                 {
-                    string query = "SELECT * FROM Services_Charges";
+                    string query = @"
+                        SELECT
+                            S.ServiceID,
+                            S.AdmissionID,
+                            S.PatientID,
+                            P.PatientName,
+                            S.ServiceName,
+                            S.Quantity,
+                            S.UnitPrice,
+                            S.TotalAmount,
+                            S.ServiceDate
+                        FROM Services_Charges S
+                        INNER JOIN Patient_Records P
+                            ON S.PatientID = P.PatientID
+                        ORDER BY S.ServiceID DESC";
 
-                    SqlDataAdapter da = new SqlDataAdapter(query, con);
+                    SqlDataAdapter da =
+                        new SqlDataAdapter(query, con);
+
                     DataTable dt = new DataTable();
 
                     da.Fill(dt);
@@ -88,86 +157,187 @@ namespace HospitalLogIn
             }
         }
 
-        private void cmbService_SelectedIndexChanged(object sender, EventArgs e)
+        // SELECT SERVICE AND GET PRICE
+        private void cmbService_SelectedIndexChanged(
+            object sender, EventArgs e)
         {
-            decimal price = 0;
+            selectedUnitPrice = 0;
 
             switch (cmbService.Text)
             {
                 case "Consultation":
-                    price = 500;
+                    selectedUnitPrice = 500;
                     break;
 
                 case "Laboratory":
-                    price = 1000;
+                    selectedUnitPrice = 1000;
                     break;
 
                 case "X-Ray":
-                    price = 1500;
+                    selectedUnitPrice = 1500;
                     break;
 
                 case "Medical Checkup":
-                    price = 800;
+                    selectedUnitPrice = 800;
                     break;
 
                 case "Medication":
-                    price = 300;
+                    selectedUnitPrice = 300;
                     break;
 
                 case "Room Service":
-                    price = 2000;
+                    selectedUnitPrice = 2000;
                     break;
             }
 
-            txtTotalAmount.Text = price.ToString("0.00");
+            if (cmbService.SelectedIndex >= 0 &&
+                string.IsNullOrWhiteSpace(txtQuantity.Text))
+            {
+                txtQuantity.Text = "1";
+            }
+
+            CalculateTotal();
         }
 
-        private void btnAddService_Click(object sender, EventArgs e)
+        // QUANTITY CHANGED
+        private void txtQuantity_TextChanged(
+            object sender, EventArgs e)
         {
-            if (cmbPatientId.SelectedValue == null ||
+            CalculateTotal();
+        }
+
+        // CALCULATE TOTAL AMOUNT
+        private void CalculateTotal()
+        {
+            if (selectedUnitPrice > 0 &&
+                int.TryParse(txtQuantity.Text, out int quantity) &&
+                quantity > 0)
+            {
+                decimal total = selectedUnitPrice * quantity;
+
+                txtTotalAmount.Text = total.ToString("0.00");
+            }
+            else
+            {
+                txtTotalAmount.Clear();
+            }
+        }
+
+        // ADD SERVICE
+        private void btnAddService_Click(
+            object sender, EventArgs e)
+        {
+            if (cmbAdmissionID.SelectedIndex == -1 ||
                 cmbService.SelectedIndex == -1 ||
+                !int.TryParse(txtPatientID.Text, out int patientID) ||
                 !int.TryParse(txtQuantity.Text, out int quantity) ||
                 quantity <= 0 ||
-                !decimal.TryParse(txtTotalAmount.Text, out decimal price) ||
-                price <= 0)
+                selectedUnitPrice <= 0 ||
+                !decimal.TryParse(txtTotalAmount.Text, out decimal total))
             {
-                MessageBox.Show("Please complete the service information.");
+                MessageBox.Show(
+                    "Please complete all service information correctly.",
+                    "Incomplete Information"
+                );
+
                 return;
             }
 
-            decimal total = price * quantity;
+            DataRowView selectedAdmission =
+                cmbAdmissionID.SelectedItem as DataRowView;
+
+            if (selectedAdmission == null)
+            {
+                MessageBox.Show("Please select a valid admission.");
+                return;
+            }
+
+            int admissionID =
+                Convert.ToInt32(selectedAdmission["AdmissionID"]);
 
             try
             {
-                using (SqlConnection con = DatabaseConnection.GetConnection())
+                using (SqlConnection con =
+                    DatabaseConnection.GetConnection())
                 {
-                    string query = @"INSERT INTO Services_Charges
-                    (PatientID, ServiceName, Quantity, TotalAmount)
-                    VALUES
-                    (@id, @service, @quantity, @amount)";
+                    string query = @"
+                        INSERT INTO Services_Charges
+                        (
+                            AdmissionID,
+                            PatientID,
+                            ServiceName,
+                            Quantity,
+                            UnitPrice,
+                            TotalAmount
+                        )
+                        SELECT
+                            A.AdmissionID,
+                            A.PatientID,
+                            @service,
+                            @quantity,
+                            @unitPrice,
+                            @totalAmount
+                        FROM Admission_Records A
+                        WHERE A.AdmissionID = @admissionID
+                          AND A.PatientID = @patientID
+                          AND A.Status = 'Admitted'";
 
                     SqlCommand cmd = new SqlCommand(query, con);
 
-                    cmd.Parameters.Add("@id", SqlDbType.Int).Value =
-                        Convert.ToInt32(cmbPatientId.SelectedValue);
+                    cmd.Parameters.Add("@admissionID",
+                        SqlDbType.Int).Value = admissionID;
 
-                    cmd.Parameters.Add("@service", SqlDbType.VarChar, 100).Value =
+                    cmd.Parameters.Add("@patientID",
+                        SqlDbType.Int).Value = patientID;
+
+                    cmd.Parameters.Add("@service",
+                        SqlDbType.NVarChar, 150).Value =
                         cmbService.Text;
 
-                    cmd.Parameters.Add("@quantity", SqlDbType.Int).Value =
-                        quantity;
+                    cmd.Parameters.Add("@quantity",
+                        SqlDbType.Int).Value = quantity;
 
-                    cmd.Parameters.Add("@amount", SqlDbType.Decimal).Value = total;
-                    cmd.Parameters["@amount"].Precision = 10;
-                    cmd.Parameters["@amount"].Scale = 2;
+                    SqlParameter unitPriceParameter =
+                        cmd.Parameters.Add("@unitPrice",
+                            SqlDbType.Decimal);
+
+                    unitPriceParameter.Precision = 10;
+                    unitPriceParameter.Scale = 2;
+                    unitPriceParameter.Value = selectedUnitPrice;
+
+                    SqlParameter totalParameter =
+                        cmd.Parameters.Add("@totalAmount",
+                            SqlDbType.Decimal);
+
+                    totalParameter.Precision = 10;
+                    totalParameter.Scale = 2;
+                    totalParameter.Value = total;
 
                     con.Open();
-                    cmd.ExecuteNonQuery();
+
+                    int result = cmd.ExecuteNonQuery();
+
+                    if (result == 0)
+                    {
+                        MessageBox.Show(
+                            "The selected admission is no longer active. " +
+                            "Please refresh and select another admission."
+                        );
+
+                        LoadActiveAdmissions();
+                        return;
+                    }
                 }
 
                 MessageBox.Show(
-                    "Service added successfully!\nTotal Amount: " +
-                    total.ToString("0.00")
+                    "Service added successfully!\n\n" +
+                    "Patient: " + txtPatientName.Text +
+                    "\nService: " + cmbService.Text +
+                    "\nQuantity: " + quantity +
+                    "\nUnit Price: " +
+                    selectedUnitPrice.ToString("0.00") +
+                    "\nTotal Amount: " + total.ToString("0.00"),
+                    "Success"
                 );
 
                 LoadServices();
@@ -176,33 +346,41 @@ namespace HospitalLogIn
             catch (Exception ex)
             {
                 MessageBox.Show(
-                    "Add Service Error: " + ex.Message,
+                    "Add Service Error:\n" + ex.Message,
                     "Database Error"
                 );
             }
         }
 
-        private void btnClear_Click(object sender, EventArgs e)
+        // CLEAR BUTTON
+        private void btnClear_Click(
+            object sender, EventArgs e)
         {
             ClearFields();
         }
 
+        // CLEAR ALL FIELDS
         private void ClearFields()
         {
-            cmbPatientId.SelectedIndex = -1;
+            cmbAdmissionID.SelectedIndex = -1;
             cmbService.SelectedIndex = -1;
+
+            txtPatientID.Clear();
+            txtPatientName.Clear();
             txtQuantity.Clear();
             txtTotalAmount.Clear();
+
+            selectedUnitPrice = 0;
         }
 
-        private void Patient_Services_Charges_Load(object sender, EventArgs e)
+        private void Patient_Services_Charges_Load(
+            object sender, EventArgs e)
         {
-
         }
 
-        private void panel1_Paint(object sender, PaintEventArgs e)
+        private void panel1_Paint(
+            object sender, PaintEventArgs e)
         {
-
         }
     }
 }

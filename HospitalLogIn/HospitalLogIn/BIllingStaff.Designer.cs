@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
-            this.cmbPatientName = new System.Windows.Forms.ComboBox();
             this.dtpPaymentDate = new System.Windows.Forms.DateTimePicker();
             this.btnRefresh = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
@@ -48,6 +47,9 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.dgvBilling = new System.Windows.Forms.DataGridView();
+            this.label2 = new System.Windows.Forms.Label();
+            this.cmbAdmissionID = new System.Windows.Forms.ComboBox();
+            this.txtPatientName = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -56,7 +58,9 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.cmbPatientName);
+            this.panel1.Controls.Add(this.txtPatientName);
+            this.panel1.Controls.Add(this.cmbAdmissionID);
+            this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.dtpPaymentDate);
             this.panel1.Controls.Add(this.btnRefresh);
             this.panel1.Controls.Add(this.btnDelete);
@@ -72,32 +76,24 @@
             this.panel1.Controls.Add(this.label4);
             this.panel1.Location = new System.Drawing.Point(0, 39);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(708, 100);
+            this.panel1.Size = new System.Drawing.Size(791, 100);
             this.panel1.TabIndex = 10;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
-            // cmbPatientName
-            // 
-            this.cmbPatientName.FormattingEnabled = true;
-            this.cmbPatientName.Location = new System.Drawing.Point(92, 34);
-            this.cmbPatientName.Name = "cmbPatientName";
-            this.cmbPatientName.Size = new System.Drawing.Size(200, 21);
-            this.cmbPatientName.TabIndex = 19;
-            // 
             // dtpPaymentDate
             // 
-            this.dtpPaymentDate.Location = new System.Drawing.Point(422, 35);
+            this.dtpPaymentDate.Location = new System.Drawing.Point(335, 35);
             this.dtpPaymentDate.Name = "dtpPaymentDate";
-            this.dtpPaymentDate.Size = new System.Drawing.Size(200, 20);
+            this.dtpPaymentDate.Size = new System.Drawing.Size(187, 20);
             this.dtpPaymentDate.TabIndex = 18;
             // 
             // btnRefresh
             // 
             this.btnRefresh.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.btnRefresh.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRefresh.Location = new System.Drawing.Point(474, 61);
+            this.btnRefresh.Location = new System.Drawing.Point(414, 60);
             this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(100, 33);
+            this.btnRefresh.Size = new System.Drawing.Size(100, 26);
             this.btnRefresh.TabIndex = 17;
             this.btnRefresh.Text = "Refresh";
             this.btnRefresh.UseVisualStyleBackColor = false;
@@ -106,9 +102,9 @@
             // 
             this.btnDelete.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.btnDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDelete.Location = new System.Drawing.Point(341, 61);
+            this.btnDelete.Location = new System.Drawing.Point(284, 58);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(103, 33);
+            this.btnDelete.Size = new System.Drawing.Size(103, 28);
             this.btnDelete.TabIndex = 16;
             this.btnDelete.Text = "Delete";
             this.btnDelete.UseVisualStyleBackColor = false;
@@ -118,9 +114,9 @@
             this.btnUpdate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.btnUpdate.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnUpdate.ForeColor = System.Drawing.Color.Black;
-            this.btnUpdate.Location = new System.Drawing.Point(225, 61);
+            this.btnUpdate.Location = new System.Drawing.Point(167, 58);
             this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(95, 33);
+            this.btnUpdate.Size = new System.Drawing.Size(95, 28);
             this.btnUpdate.TabIndex = 15;
             this.btnUpdate.Text = "Update";
             this.btnUpdate.UseVisualStyleBackColor = false;
@@ -130,11 +126,11 @@
             this.btnAdd.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.btnAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAdd.ForeColor = System.Drawing.Color.White;
-            this.btnAdd.Location = new System.Drawing.Point(92, 61);
+            this.btnAdd.Location = new System.Drawing.Point(41, 60);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(105, 33);
+            this.btnAdd.Size = new System.Drawing.Size(105, 26);
             this.btnAdd.TabIndex = 14;
-            this.btnAdd.Text = "Add Bill";
+            this.btnAdd.Text = "Generate Bill:";
             this.btnAdd.UseVisualStyleBackColor = false;
             // 
             // cmbPaymentStatus
@@ -149,6 +145,7 @@
             // 
             this.txtAmount.Location = new System.Drawing.Point(520, 7);
             this.txtAmount.Name = "txtAmount";
+            this.txtAmount.ReadOnly = true;
             this.txtAmount.Size = new System.Drawing.Size(174, 20);
             this.txtAmount.TabIndex = 9;
             // 
@@ -171,7 +168,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(325, 38);
+            this.label8.Location = new System.Drawing.Point(252, 38);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(77, 13);
             this.label8.TabIndex = 4;
@@ -211,7 +208,7 @@
             this.panel2.ForeColor = System.Drawing.Color.Green;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(708, 33);
+            this.panel2.Size = new System.Drawing.Size(791, 33);
             this.panel2.TabIndex = 20;
             // 
             // label3
@@ -232,7 +229,7 @@
             this.panel3.ForeColor = System.Drawing.Color.Green;
             this.panel3.Location = new System.Drawing.Point(0, 139);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(708, 33);
+            this.panel3.Size = new System.Drawing.Size(791, 33);
             this.panel3.TabIndex = 21;
             // 
             // label1
@@ -249,17 +246,42 @@
             // dgvBilling
             // 
             this.dgvBilling.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvBilling.Location = new System.Drawing.Point(0, 170);
+            this.dgvBilling.Location = new System.Drawing.Point(3, 170);
             this.dgvBilling.Name = "dgvBilling";
-            this.dgvBilling.Size = new System.Drawing.Size(705, 209);
+            this.dgvBilling.Size = new System.Drawing.Size(785, 209);
             this.dgvBilling.TabIndex = 22;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(528, 38);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(71, 13);
+            this.label2.TabIndex = 20;
+            this.label2.Text = "Admission ID:";
+            // 
+            // cmbAdmissionID
+            // 
+            this.cmbAdmissionID.FormattingEnabled = true;
+            this.cmbAdmissionID.Location = new System.Drawing.Point(605, 33);
+            this.cmbAdmissionID.Name = "cmbAdmissionID";
+            this.cmbAdmissionID.Size = new System.Drawing.Size(116, 21);
+            this.cmbAdmissionID.TabIndex = 21;
+            // 
+            // txtPatientName
+            // 
+            this.txtPatientName.Location = new System.Drawing.Point(85, 35);
+            this.txtPatientName.Name = "txtPatientName";
+            this.txtPatientName.ReadOnly = true;
+            this.txtPatientName.Size = new System.Drawing.Size(161, 20);
+            this.txtPatientName.TabIndex = 22;
             // 
             // BIllingStaff
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.ClientSize = new System.Drawing.Size(706, 381);
+            this.ClientSize = new System.Drawing.Size(788, 381);
             this.Controls.Add(this.dgvBilling);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel3);
@@ -281,7 +303,6 @@
         #endregion
 
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.ComboBox cmbPatientName;
         private System.Windows.Forms.DateTimePicker dtpPaymentDate;
         private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.Button btnDelete;
@@ -300,5 +321,8 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridView dgvBilling;
+        private System.Windows.Forms.TextBox txtPatientName;
+        private System.Windows.Forms.ComboBox cmbAdmissionID;
+        private System.Windows.Forms.Label label2;
     }
 }

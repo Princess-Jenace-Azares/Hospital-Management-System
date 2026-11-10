@@ -13,16 +13,20 @@ namespace HospitalLogIn
             InitializeComponent();
 
             txtBillID.ReadOnly = true;
+            txtPatientName.ReadOnly = true;
+            txtAmount.ReadOnly = true;
 
             cmbPaymentStatus.Items.Clear();
             cmbPaymentStatus.Items.Add("Unpaid");
             cmbPaymentStatus.Items.Add("Partially Paid");
             cmbPaymentStatus.Items.Add("Paid");
 
-            btnAdd.Click += btnAdd_Click;
+            btnAdd.Click += btnGenerateBill_Click;
             btnUpdate.Click += btnUpdate_Click;
             btnDelete.Click += btnDelete_Click;
             btnRefresh.Click += btnRefresh_Click;
+
+            cmbAdmissionID.SelectedIndexChanged += cmbAdmissionID_SelectedIndexChanged;
             dgvBilling.CellClick += dgvBilling_CellClick;
 
             this.Shown += BIllingStaff_Shown;
@@ -30,36 +34,66 @@ namespace HospitalLogIn
 
         private void BIllingStaff_Shown(object sender, EventArgs e)
         {
-            LoadPatients();
+            LoadAdmissions();
             LoadBilling();
         }
 
-        private void LoadPatients()
+        private void LoadAdmissions()
         {
             try
             {
                 using (SqlConnection con = DatabaseConnection.GetConnection())
                 {
-                    string query = @"SELECT PatientID, PatientName
-                                     FROM Patient_Records";
+                    string query = @"
+                        SELECT
+                            a.AdmissionID,
+                            a.PatientID,
+                            p.PatientName
+                        FROM Admission_Records a
+                        INNER JOIN Patient_Records p
+                        ON a.PatientID = p.PatientID
+                        WHERE a.Status = 'Active'";
 
                     SqlDataAdapter adapter = new SqlDataAdapter(query, con);
                     DataTable table = new DataTable();
 
                     adapter.Fill(table);
 
-                    cmbPatientName.DataSource = table;
-                    cmbPatientName.DisplayMember = "PatientName";
-                    cmbPatientName.ValueMember = "PatientID";
-                    cmbPatientName.SelectedIndex = -1;
+                    cmbAdmissionID.DataSource = null;
+                    cmbAdmissionID.DataSource = table;
+                    cmbAdmissionID.DisplayMember = "AdmissionID";
+                    cmbAdmissionID.ValueMember = "AdmissionID";
+                    cmbAdmissionID.SelectedIndex = -1;
+
+                    txtPatientName.Clear();
+                    txtAmount.Clear();
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(
-                    "Unable to load patients.\n" + ex.Message,
+                    "Unable to load admissions.\n" + ex.Message,
                     "Database Error"
                 );
+            }
+        }
+
+        private void cmbAdmissionID_SelectedIndexChanged(
+            object sender, EventArgs e)
+        {
+            if (cmbAdmissionID.SelectedIndex == -1 ||
+                cmbAdmissionID.SelectedItem == null)
+                return;
+
+            DataRowView selected =
+                cmbAdmissionID.SelectedItem as DataRowView;
+
+            if (selected != null)
+            {
+                txtPatientName.Text =
+                    Convert.ToString(selected["PatientName"]);
+
+                txtAmount.Clear();
             }
         }
 
@@ -113,70 +147,74 @@ namespace HospitalLogIn
             }
         }
 
-        private void btnAdd_Click(object sender, EventArgs e)
+        private void btnGenerateBill_Click(object sender, EventArgs e)
         {
-            if (cmbPatientName.SelectedValue == null ||
-                string.IsNullOrWhiteSpace(txtAmount.Text) ||
-                cmbPaymentStatus.SelectedIndex == -1)
+            if (cmbAdmissionID.SelectedValue == null ||
+                string.IsNullOrWhiteSpace(txtPatientName.Text))
             {
-                MessageBox.Show("Please complete all billing fields.");
+                MessageBox.Show("Please select an active admission.");
                 return;
             }
 
-            if (!decimal.TryParse(txtAmount.Text, out decimal amount) ||
-                amount <= 0)
-            {
-                MessageBox.Show("Please enter a valid amount.");
-                return;
-            }
+            GenerateBill();
+        }
 
+        private void GenerateBill()
+        {
             try
             {
-                int patientID =
-                    Convert.ToInt32(cmbPatientName.SelectedValue);
-
                 using (SqlConnection con = DatabaseConnection.GetConnection())
+                using (SqlCommand cmd = new SqlCommand(
+                    "GenerateBillFromAdmission", con))
                 {
-                    string query = @"
-                        INSERT INTO Bill_Records
-                        (PatientID, TotalAmount, AmountPaid, BillStatus)
-                        VALUES
-                        (@PatientID, @Amount, 0, @Status);
+                    cmd.CommandType = CommandType.StoredProcedure;
 
-                        SELECT CAST(SCOPE_IDENTITY() AS INT);";
-
-                    SqlCommand cmd = new SqlCommand(query, con);
-
-                    cmd.Parameters.Add("@PatientID", SqlDbType.Int).Value =
-                        patientID;
-
-                    SqlParameter amountParam =
-                        cmd.Parameters.Add("@Amount", SqlDbType.Decimal);
-
-                    amountParam.Precision = 10;
-                    amountParam.Scale = 2;
-                    amountParam.Value = amount;
-
-                    cmd.Parameters.Add("@Status", SqlDbType.VarChar, 30).Value =
-                        cmbPaymentStatus.Text;
+                    cmd.Parameters.Add("@AdmissionID", SqlDbType.Int).Value =
+                        Convert.ToInt32(cmbAdmissionID.SelectedValue);
 
                     con.Open();
 
-                    int billID = Convert.ToInt32(cmd.ExecuteScalar());
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            txtBillID.Text =
+                                reader["BillNo"].ToString();
 
-                    txtBillID.Text = billID.ToString();
+                            txtAmount.Text =
+                                Convert.ToDecimal(reader["TotalAmount"])
+                                .ToString("0.00");
+                        }
+                        else
+                        {
+                            MessageBox.Show(
+                                "No bill was generated. Please check the admission."
+                            );
+                            return;
+                        }
+                    }
                 }
 
-                MessageBox.Show("Billing record added successfully!");
+                MessageBox.Show("Bill generated successfully!");
 
                 LoadBilling();
+                LoadAdmissions();
                 ClearFields();
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(
+                    ex.Message,
+                    "Billing Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
             }
             catch (Exception ex)
             {
                 MessageBox.Show(
-                    "Add Billing Error:\n" + ex.Message,
-                    "Database Error"
+                    "Billing Error: " + ex.Message,
+                    "Error"
                 );
             }
         }
@@ -189,40 +227,22 @@ namespace HospitalLogIn
                 return;
             }
 
-            if (cmbPatientName.SelectedValue == null ||
-                !decimal.TryParse(txtAmount.Text, out decimal amount) ||
-                amount <= 0 ||
-                cmbPaymentStatus.SelectedIndex == -1)
+            if (cmbPaymentStatus.SelectedIndex == -1)
             {
-                MessageBox.Show("Please enter valid billing information.");
+                MessageBox.Show("Please select a payment status.");
                 return;
             }
 
             try
             {
-                int patientID =
-                    Convert.ToInt32(cmbPatientName.SelectedValue);
-
                 using (SqlConnection con = DatabaseConnection.GetConnection())
                 {
                     string query = @"
                         UPDATE Bill_Records
-                        SET PatientID = @PatientID,
-                            TotalAmount = @Amount,
-                            BillStatus = @Status
+                        SET BillStatus = @Status
                         WHERE BillNo = @BillID";
 
                     SqlCommand cmd = new SqlCommand(query, con);
-
-                    cmd.Parameters.Add("@PatientID", SqlDbType.Int).Value =
-                        patientID;
-
-                    SqlParameter amountParam =
-                        cmd.Parameters.Add("@Amount", SqlDbType.Decimal);
-
-                    amountParam.Precision = 10;
-                    amountParam.Scale = 2;
-                    amountParam.Value = amount;
 
                     cmd.Parameters.Add("@Status", SqlDbType.VarChar, 30).Value =
                         cmbPaymentStatus.Text;
@@ -235,9 +255,15 @@ namespace HospitalLogIn
                     int result = cmd.ExecuteNonQuery();
 
                     if (result > 0)
-                        MessageBox.Show("Billing record updated successfully!");
+                    {
+                        MessageBox.Show(
+                            "Payment status updated successfully!"
+                        );
+                    }
                     else
+                    {
                         MessageBox.Show("Billing record not found.");
+                    }
                 }
 
                 LoadBilling();
@@ -287,9 +313,15 @@ namespace HospitalLogIn
                     int deleted = cmd.ExecuteNonQuery();
 
                     if (deleted > 0)
-                        MessageBox.Show("Billing record deleted successfully!");
+                    {
+                        MessageBox.Show(
+                            "Billing record deleted successfully!"
+                        );
+                    }
                     else
+                    {
                         MessageBox.Show("Billing record not found.");
+                    }
                 }
 
                 LoadBilling();
@@ -314,14 +346,13 @@ namespace HospitalLogIn
 
         private void btnRefresh_Click(object sender, EventArgs e)
         {
-            LoadPatients();
+            LoadAdmissions();
             LoadBilling();
             ClearFields();
         }
 
         private void dgvBilling_CellClick(
-            object sender,
-            DataGridViewCellEventArgs e)
+            object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0)
                 return;
@@ -331,11 +362,12 @@ namespace HospitalLogIn
             txtBillID.Text =
                 Convert.ToString(row.Cells["BillID"].Value);
 
-            cmbPatientName.SelectedValue =
-                Convert.ToInt32(row.Cells["PatientID"].Value);
+            txtPatientName.Text =
+                Convert.ToString(row.Cells["PatientName"].Value);
 
             txtAmount.Text =
-                Convert.ToDecimal(row.Cells["Amount"].Value).ToString("0.00");
+                Convert.ToDecimal(row.Cells["Amount"].Value)
+                .ToString("0.00");
 
             cmbPaymentStatus.Text =
                 Convert.ToString(row.Cells["PaymentStatus"].Value);
@@ -344,19 +376,19 @@ namespace HospitalLogIn
         private void ClearFields()
         {
             txtBillID.Clear();
-            cmbPatientName.SelectedIndex = -1;
+            txtPatientName.Clear();
             txtAmount.Clear();
+
+            cmbAdmissionID.SelectedIndex = -1;
             cmbPaymentStatus.SelectedIndex = -1;
         }
 
         private void BIllingStaff_Load(object sender, EventArgs e)
         {
-
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
-
         }
     }
 }

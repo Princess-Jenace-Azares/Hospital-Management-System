@@ -8,15 +8,21 @@ namespace HospitalLogIn
 {
     public partial class Attendant__Nurse_Dashboard : Form
     {
+
         public Attendant__Nurse_Dashboard()
         {
             InitializeComponent();
+
+            cmbPatientName.SelectedIndexChanged +=
+    cmbPatientName_SelectedIndexChanged;
 
             btnAdd.Click += btnAdd_Click;
             btnUpdate.Click += btnUpdate_Click;
             btnDelete.Click += btnDelete_Click;
             btnRefresh.Click += btnRefresh_Click;
             dgvAdmission.CellClick += dgvAdmissions_CellClick;
+
+          
 
             this.Shown += Attendant__Nurse_Dashboard_Shown;
         }
@@ -27,30 +33,31 @@ namespace HospitalLogIn
             LoadAdmissions();
         }
 
+
         private void LoadPatientNames()
         {
             try
             {
                 using (SqlConnection con = DatabaseConnection.GetConnection())
                 {
-                    string query = "SELECT PatientName FROM Patient_Records";
+                    string query = @"
+                SELECT PatientID, PatientName
+                FROM Patient_Records
+                ORDER BY PatientName";
 
                     SqlDataAdapter da = new SqlDataAdapter(query, con);
                     DataTable dt = new DataTable();
-
                     da.Fill(dt);
 
                     cmbPatientName.DataSource = dt;
                     cmbPatientName.DisplayMember = "PatientName";
-                    cmbPatientName.ValueMember = "PatientName";
+                    cmbPatientName.ValueMember = "PatientID";
+                    cmbPatientName.SelectedIndex = -1;
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(
-                    "Unable to load patient names.\n" + ex.Message,
-                    "Database Error"
-                );
+                MessageBox.Show("Unable to load patients: " + ex.Message);
             }
         }
 
@@ -79,15 +86,13 @@ namespace HospitalLogIn
             }
         }
 
+
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            if (!int.TryParse(txtPatientID.Text, out int id))
-            {
-                MessageBox.Show("Enter a valid Patient ID.");
-                return;
-            }
-
-            if (cmbPatientName.SelectedIndex == -1 ||
+            if (cmbPatientName.SelectedValue == null ||
+                !int.TryParse(
+                    Convert.ToString(cmbPatientName.SelectedValue),
+                    out int patientID) ||
                 string.IsNullOrWhiteSpace(cmbRoom.Text) ||
                 string.IsNullOrWhiteSpace(cmbStatus.Text))
             {
@@ -95,35 +100,68 @@ namespace HospitalLogIn
                 return;
             }
 
+            if (dtpAdmissionDate.Value.Date > DateTime.Today)
+            {
+                MessageBox.Show("Admission date cannot be in the future.");
+                return;
+            }
+
             try
             {
                 using (SqlConnection con = DatabaseConnection.GetConnection())
                 {
-                    string query = @"INSERT INTO Admission_Records
-                    (PatientID, AdmissionDate, PatientName, Room, Status)
-                    VALUES
-                    (@id, @date, @name, @room, @status)";
-
-                    SqlCommand cmd = new SqlCommand(query, con);
-
-                    cmd.Parameters.Add("@id", SqlDbType.Int).Value = id;
-                    cmd.Parameters.Add("@date", SqlDbType.Date).Value = dtpAdmissionDate.Value.Date;
-                    cmd.Parameters.Add("@name", SqlDbType.VarChar, 100).Value = cmbPatientName.Text;
-                    cmd.Parameters.Add("@room", SqlDbType.VarChar, 50).Value = cmbRoom.Text;
-                    cmd.Parameters.Add("@status", SqlDbType.VarChar, 30).Value = cmbStatus.Text;
+                    string check = @"
+                SELECT COUNT(*)
+                FROM Admission_Records
+                WHERE PatientID = @id
+                  AND Status = 'Admitted'";
 
                     con.Open();
-                    cmd.ExecuteNonQuery();
+
+                    using (SqlCommand checkCmd = new SqlCommand(check, con))
+                    {
+                        checkCmd.Parameters.Add("@id", SqlDbType.Int).Value = patientID;
+
+                        if ((int)checkCmd.ExecuteScalar() > 0)
+                        {
+                            MessageBox.Show(
+                                "This patient already has an active admission.");
+                            return;
+                        }
+                    }
+
+                    string query = @"
+                INSERT INTO Admission_Records
+                (PatientID, AdmissionDate, PatientName, Room, Status)
+                SELECT @id, @date, PatientName, @room, 'Admitted'
+                FROM Patient_Records
+                WHERE PatientID = @id";
+
+                    using (SqlCommand cmd = new SqlCommand(query, con))
+                    {
+                        cmd.Parameters.Add("@id", SqlDbType.Int).Value = patientID;
+                        cmd.Parameters.Add("@date", SqlDbType.Date).Value =
+                            dtpAdmissionDate.Value.Date;
+                        cmd.Parameters.Add("@room", SqlDbType.VarChar, 50).Value =
+                            cmbRoom.Text;
+
+                        int result = cmd.ExecuteNonQuery();
+
+                        if (result == 0)
+                        {
+                            MessageBox.Show("Patient record not found.");
+                            return;
+                        }
+                    }
                 }
 
                 MessageBox.Show("Admission added successfully!");
-
                 LoadAdmissions();
                 ClearFields();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Add Admission Error: " + ex.Message);
+                MessageBox.Show("Admission Error: " + ex.Message);
             }
         }
 
@@ -255,7 +293,21 @@ namespace HospitalLogIn
             dtpAdmissionDate.Value = DateTime.Now;
         }
 
+        private void cmbPatientName_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbPatientName.SelectedIndex >= 0 &&
+                cmbPatientName.SelectedValue != null)
+            {
+                txtPatientID.Text = cmbPatientName.SelectedValue.ToString();
+            }
+        }
+
         private void Attendant__Nurse_Dashboard_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel2_Paint(object sender, PaintEventArgs e)
         {
 
         }

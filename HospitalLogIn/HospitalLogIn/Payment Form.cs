@@ -12,10 +12,17 @@ namespace HospitalLogIn
         {
             InitializeComponent();
 
+            txtPatientName.ReadOnly = true;
+            txtTotalBill.ReadOnly = true;
+            txtAlreadyPaid.ReadOnly = true;
+            txtBalance.ReadOnly = true;
+
+            btnCheckBill.Click += btnCheckBill_Click;
             btnProcessPayment.Click += btnProcessPayment_Click;
             btnUpdate.Click += btnUpdate_Click;
             btnDelete.Click += btnDelete_Click;
             btnRefresh.Click += btnRefresh_Click;
+
             dgvPayments.CellClick += dgvPayments_CellClick;
 
             cmbPaymentMethod.Items.Clear();
@@ -79,6 +86,86 @@ namespace HospitalLogIn
             }
         }
 
+        private void btnCheckBill_Click(object sender, EventArgs e)
+        {
+            CheckBill();
+        }
+
+        private void CheckBill()
+        {
+            if (!int.TryParse(txtBillNo.Text, out int billNo))
+            {
+                MessageBox.Show("Enter a valid Bill Number.");
+                return;
+            }
+
+            try
+            {
+                using (SqlConnection con = DatabaseConnection.GetConnection())
+                {
+                    string query = @"
+                        SELECT
+                            p.PatientName,
+                            b.TotalAmount,
+                            b.AmountPaid,
+                            b.Balance
+                        FROM Bill_Records b
+                        INNER JOIN Patient_Records p
+                            ON b.PatientID = p.PatientID
+                        WHERE b.BillNo = @bill";
+
+                    SqlCommand cmd = new SqlCommand(query, con);
+
+                    cmd.Parameters.Add("@bill", SqlDbType.Int).Value =
+                        billNo;
+
+                    con.Open();
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (!reader.Read())
+                        {
+                            MessageBox.Show("Bill number not found.");
+                            ClearBillInformation();
+                            return;
+                        }
+
+                        decimal total =
+                            Convert.ToDecimal(reader["TotalAmount"]);
+
+                        decimal paid =
+                            reader["AmountPaid"] == DBNull.Value
+                            ? 0
+                            : Convert.ToDecimal(reader["AmountPaid"]);
+
+                        decimal balance =
+                            reader["Balance"] == DBNull.Value
+                            ? total - paid
+                            : Convert.ToDecimal(reader["Balance"]);
+
+                        txtPatientName.Text =
+                            Convert.ToString(reader["PatientName"]);
+
+                        txtTotalBill.Text =
+                            total.ToString("0.00");
+
+                        txtAlreadyPaid.Text =
+                            paid.ToString("0.00");
+
+                        txtBalance.Text =
+                            balance.ToString("0.00");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    "Unable to retrieve bill:\n" + ex.Message,
+                    "Database Error"
+                );
+            }
+        }
+
         private void btnProcessPayment_Click(object sender, EventArgs e)
         {
             if (!int.TryParse(txtBillNo.Text, out int billNo) ||
@@ -124,7 +211,9 @@ namespace HospitalLogIn
                                     }
 
                                     total = reader.GetDecimal(0);
-                                    paid = reader.GetDecimal(1);
+                                    paid = reader.IsDBNull(1)
+                                        ? 0
+                                        : reader.GetDecimal(1);
                                 }
                             }
 
@@ -132,14 +221,17 @@ namespace HospitalLogIn
 
                             if (balance <= 0)
                             {
-                                throw new Exception("This bill is already fully paid.");
+                                throw new Exception(
+                                    "This bill is already fully paid."
+                                );
                             }
 
                             if (amount > balance)
                             {
                                 throw new Exception(
                                     "Payment exceeds the remaining balance.\n" +
-                                    "Remaining Balance: " + balance.ToString("0.00")
+                                    "Remaining Balance: " +
+                                    balance.ToString("0.00")
                                 );
                             }
 
@@ -152,8 +244,8 @@ namespace HospitalLogIn
                             using (SqlCommand insert = new SqlCommand(
                                 insertQuery, con, transaction))
                             {
-                                insert.Parameters.Add("@bill", SqlDbType.Int).Value =
-                                    billNo;
+                                insert.Parameters.Add(
+                                    "@bill", SqlDbType.Int).Value = billNo;
 
                                 SqlParameter amountParam =
                                     insert.Parameters.Add(
@@ -174,6 +266,7 @@ namespace HospitalLogIn
                                 UPDATE Bill_Records
                                 SET
                                     AmountPaid = AmountPaid + @amount,
+                                    Balance = TotalAmount - (AmountPaid + @amount),
                                     BillStatus = CASE
                                         WHEN AmountPaid + @amount >= TotalAmount
                                             THEN 'Paid'
@@ -184,14 +277,16 @@ namespace HospitalLogIn
                             using (SqlCommand update = new SqlCommand(
                                 updateQuery, con, transaction))
                             {
-                                update.Parameters.Add("@amount", SqlDbType.Decimal).Value =
-                                    amount;
+                                SqlParameter amountParam =
+                                    update.Parameters.Add(
+                                        "@amount", SqlDbType.Decimal);
 
-                                update.Parameters["@amount"].Precision = 10;
-                                update.Parameters["@amount"].Scale = 2;
+                                amountParam.Precision = 10;
+                                amountParam.Scale = 2;
+                                amountParam.Value = amount;
 
-                                update.Parameters.Add("@bill", SqlDbType.Int).Value =
-                                    billNo;
+                                update.Parameters.Add(
+                                    "@bill", SqlDbType.Int).Value = billNo;
 
                                 update.ExecuteNonQuery();
                             }
@@ -216,7 +311,9 @@ namespace HospitalLogIn
                 }
 
                 LoadPayments();
-                ClearFields();
+                CheckBill();
+                txtAmountPaid.Clear();
+                cmbPaymentMethod.SelectedIndex = -1;
             }
             catch (Exception ex)
             {
@@ -262,24 +359,37 @@ namespace HospitalLogIn
             txtBillNo.Text =
                 Convert.ToString(row.Cells["BillNo"].Value);
 
-            txtAmountPaid.Text =
-                Convert.ToDecimal(row.Cells["AmountPaid"].Value)
-                .ToString("0.00");
+            txtAmountPaid.Clear();
 
-            cmbPaymentMethod.Text =
-                Convert.ToString(row.Cells["PaymentMethod"].Value);
+            cmbPaymentMethod.SelectedIndex = -1;
+
+            CheckBill();
+        }
+
+        private void ClearBillInformation()
+        {
+            txtPatientName.Clear();
+            txtTotalBill.Clear();
+            txtAlreadyPaid.Clear();
+            txtBalance.Clear();
         }
 
         private void ClearFields()
         {
             txtBillNo.Clear();
             txtAmountPaid.Clear();
+
             cmbPaymentMethod.SelectedIndex = -1;
+
+            ClearBillInformation();
         }
 
         private void Payment_Form_Load(object sender, EventArgs e)
         {
+        }
 
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
         }
     }
 }
