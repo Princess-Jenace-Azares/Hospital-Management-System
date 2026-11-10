@@ -22,7 +22,6 @@ namespace HospitalLogIn
             lblPayment.Click += lblPayment_Click;
             lblDischarge.Click += lblDischarge_Click;
             lblReports.Click += lblReports_Click;
-           
 
             ApplyRolePermissions();
         }
@@ -36,13 +35,19 @@ namespace HospitalLogIn
             lblPayment.Visible = true;
             lblDischarge.Visible = true;
             lblReports.Visible = true;
-           
         }
 
-        private bool HasAccess(string requiredRole)
+        private bool HasAccess(params string[] requiredRoles)
         {
-            return NormalizeRole(userRole) ==
-                   NormalizeRole(requiredRole);
+            string currentRole = NormalizeRole(userRole);
+
+            foreach (string role in requiredRoles)
+            {
+                if (currentRole == NormalizeRole(role))
+                    return true;
+            }
+
+            return false;
         }
 
         private string NormalizeRole(string role)
@@ -50,15 +55,23 @@ namespace HospitalLogIn
             if (string.IsNullOrWhiteSpace(role))
                 return "";
 
-            return role.Replace(" ", "")
-                       .Replace("_", "")
-                       .Trim()
-                       .ToLowerInvariant();
+            string normalized = role.Replace(" ", "")
+                                    .Replace("_", "")
+                                    .Trim()
+                                    .ToLowerInvariant();
+
+            if (normalized == "billingstaff")
+                return "billing";
+
+            if (normalized == "administrator")
+                return "admin";
+
+            return normalized;
         }
 
         private void OpenFormInPanel(
             Form childForm,
-            string requiredRole = null)
+            params string[] requiredRoles)
         {
             try
             {
@@ -70,8 +83,8 @@ namespace HospitalLogIn
                     activeChildForm = null;
                 }
 
-                bool viewOnly = string.IsNullOrEmpty(requiredRole)
-                    || !HasAccess(requiredRole);
+                bool viewOnly = requiredRoles.Length == 0 ||
+                                !HasAccess(requiredRoles);
 
                 if (viewOnly)
                 {
@@ -150,7 +163,8 @@ namespace HospitalLogIn
         {
             OpenFormInPanel(
                 new Discharge_Form(),
-                "Admin"
+                "Admin",
+                "Cashier"
             );
         }
 
@@ -158,11 +172,12 @@ namespace HospitalLogIn
             object sender, EventArgs e)
         {
             OpenFormInPanel(
-                new Reports_Form()
+                new Reports_Form(),
+                "Admin",
+                "Cashier"
             );
         }
 
-      
         private void LandingPage_Load(object sender, EventArgs e)
         {
         }
@@ -211,7 +226,9 @@ namespace HospitalLogIn
                 }
                 else if (control is Button btn)
                 {
-                    if (btn.Name == "btnRefresh")
+                    if (btn.Name.StartsWith(
+                        "btnRefresh",
+                        StringComparison.OrdinalIgnoreCase))
                     {
                         btn.Enabled = true;
                     }
