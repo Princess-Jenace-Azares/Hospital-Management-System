@@ -108,6 +108,12 @@
     <Compile Include="Receipt_Form.Designer.cs">
       <DependentUpon>Receipt_Form.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reports_Form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports_Form.Designer.cs">
+      <DependentUpon>Reports_Form.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Admission.resx">
       <DependentUpon>Admission.cs</DependentUpon>
     </EmbeddedResource>
@@ -143,6 +149,9 @@
     </Compile>
     <EmbeddedResource Include="Receipt_Form.resx">
       <DependentUpon>Receipt_Form.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports_Form.resx">
+      <DependentUpon>Reports_Form.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

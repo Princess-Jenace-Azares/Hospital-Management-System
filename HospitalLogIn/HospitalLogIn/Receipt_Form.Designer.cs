@@ -169,7 +169,7 @@
             this.Controls.Add(this.panel2);
             this.Name = "Receipt_Form";
             this.Text = "Receipt_Form";
-            this.Load += new System.EventHandler(this.Receipt_Form_Load);
+        
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.ResumeLayout(false);
