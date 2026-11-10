@@ -13,6 +13,23 @@ namespace HospitalLogIn
         {
             InitializeComponent();
 
+            cmbRoom.Items.Clear();
+            cmbRoom.Items.AddRange(new object[]
+            {
+    "Room 101",
+    "Room 102",
+    "Room 103",
+    "Room 104",
+    "Room 105"
+            });
+
+            cmbStatus.Items.Clear();
+            cmbStatus.Items.AddRange(new object[]
+            {
+    "Admitted",
+    "Discharged"
+            });
+
             cmbPatientName.SelectedIndexChanged +=
     cmbPatientName_SelectedIndexChanged;
 

@@ -29,13 +29,21 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnCheckBill = new System.Windows.Forms.Button();
+            this.txtBalance = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.txtAlreadyPaid = new System.Windows.Forms.TextBox();
+            this.txtTotalBill = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.txtPatientName = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.cmbPaymentMethod = new System.Windows.Forms.ComboBox();
             this.btnRefresh = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnUpdate = new System.Windows.Forms.Button();
             this.btnProcessPayment = new System.Windows.Forms.Button();
             this.txtAmountPaid = new System.Windows.Forms.TextBox();
-            this.txtBillNo = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -44,15 +52,7 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.dgvPayments = new System.Windows.Forms.DataGridView();
-            this.label2 = new System.Windows.Forms.Label();
-            this.txtPatientName = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.txtTotalBill = new System.Windows.Forms.TextBox();
-            this.txtAlreadyPaid = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.txtBalance = new System.Windows.Forms.TextBox();
-            this.btnCheckBill = new System.Windows.Forms.Button();
+            this.cmbBillNo = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -61,6 +61,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.cmbBillNo);
             this.panel1.Controls.Add(this.btnCheckBill);
             this.panel1.Controls.Add(this.txtBalance);
             this.panel1.Controls.Add(this.label9);
@@ -76,7 +77,6 @@
             this.panel1.Controls.Add(this.btnUpdate);
             this.panel1.Controls.Add(this.btnProcessPayment);
             this.panel1.Controls.Add(this.txtAmountPaid);
-            this.panel1.Controls.Add(this.txtBillNo);
             this.panel1.Controls.Add(this.label6);
             this.panel1.Controls.Add(this.label5);
             this.panel1.Controls.Add(this.label4);
@@ -85,6 +85,86 @@
             this.panel1.Size = new System.Drawing.Size(758, 114);
             this.panel1.TabIndex = 11;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
+            // btnCheckBill
+            // 
+            this.btnCheckBill.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.btnCheckBill.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCheckBill.ForeColor = System.Drawing.Color.White;
+            this.btnCheckBill.Location = new System.Drawing.Point(181, 70);
+            this.btnCheckBill.Name = "btnCheckBill";
+            this.btnCheckBill.Size = new System.Drawing.Size(105, 40);
+            this.btnCheckBill.TabIndex = 28;
+            this.btnCheckBill.Text = "Check Bill";
+            this.btnCheckBill.UseVisualStyleBackColor = false;
+            // 
+            // txtBalance
+            // 
+            this.txtBalance.Location = new System.Drawing.Point(643, 5);
+            this.txtBalance.Name = "txtBalance";
+            this.txtBalance.ReadOnly = true;
+            this.txtBalance.Size = new System.Drawing.Size(108, 20);
+            this.txtBalance.TabIndex = 27;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(588, 8);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(49, 13);
+            this.label9.TabIndex = 26;
+            this.label9.Text = "Balance:";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(449, 40);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(69, 13);
+            this.label8.TabIndex = 25;
+            this.label8.Text = "Already Paid:";
+            // 
+            // txtAlreadyPaid
+            // 
+            this.txtAlreadyPaid.Location = new System.Drawing.Point(524, 37);
+            this.txtAlreadyPaid.Name = "txtAlreadyPaid";
+            this.txtAlreadyPaid.ReadOnly = true;
+            this.txtAlreadyPaid.Size = new System.Drawing.Size(139, 20);
+            this.txtAlreadyPaid.TabIndex = 24;
+            // 
+            // txtTotalBill
+            // 
+            this.txtTotalBill.Location = new System.Drawing.Point(304, 39);
+            this.txtTotalBill.Name = "txtTotalBill";
+            this.txtTotalBill.ReadOnly = true;
+            this.txtTotalBill.Size = new System.Drawing.Size(139, 20);
+            this.txtTotalBill.TabIndex = 23;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(248, 43);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(50, 13);
+            this.label7.TabIndex = 22;
+            this.label7.Text = "Total Bill:";
+            // 
+            // txtPatientName
+            // 
+            this.txtPatientName.Location = new System.Drawing.Point(89, 5);
+            this.txtPatientName.Name = "txtPatientName";
+            this.txtPatientName.ReadOnly = true;
+            this.txtPatientName.Size = new System.Drawing.Size(139, 20);
+            this.txtPatientName.TabIndex = 21;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(9, 8);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(74, 13);
+            this.label2.TabIndex = 20;
+            this.label2.Text = "Patient Name:";
             // 
             // cmbPaymentMethod
             // 
@@ -146,13 +226,6 @@
             this.txtAmountPaid.Name = "txtAmountPaid";
             this.txtAmountPaid.Size = new System.Drawing.Size(108, 20);
             this.txtAmountPaid.TabIndex = 9;
-            // 
-            // txtBillNo
-            // 
-            this.txtBillNo.Location = new System.Drawing.Point(292, 5);
-            this.txtBillNo.Name = "txtBillNo";
-            this.txtBillNo.Size = new System.Drawing.Size(100, 20);
-            this.txtBillNo.TabIndex = 7;
             // 
             // label6
             // 
@@ -231,85 +304,13 @@
             this.dgvPayments.Size = new System.Drawing.Size(755, 190);
             this.dgvPayments.TabIndex = 23;
             // 
-            // label2
+            // cmbBillNo
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(9, 8);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(74, 13);
-            this.label2.TabIndex = 20;
-            this.label2.Text = "Patient Name:";
-            // 
-            // txtPatientName
-            // 
-            this.txtPatientName.Location = new System.Drawing.Point(89, 5);
-            this.txtPatientName.Name = "txtPatientName";
-            this.txtPatientName.ReadOnly = true;
-            this.txtPatientName.Size = new System.Drawing.Size(139, 20);
-            this.txtPatientName.TabIndex = 21;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(248, 43);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(50, 13);
-            this.label7.TabIndex = 22;
-            this.label7.Text = "Total Bill:";
-            // 
-            // txtTotalBill
-            // 
-            this.txtTotalBill.Location = new System.Drawing.Point(304, 39);
-            this.txtTotalBill.Name = "txtTotalBill";
-            this.txtTotalBill.ReadOnly = true;
-            this.txtTotalBill.Size = new System.Drawing.Size(139, 20);
-            this.txtTotalBill.TabIndex = 23;
-            // 
-            // txtAlreadyPaid
-            // 
-            this.txtAlreadyPaid.Location = new System.Drawing.Point(524, 37);
-            this.txtAlreadyPaid.Name = "txtAlreadyPaid";
-            this.txtAlreadyPaid.ReadOnly = true;
-            this.txtAlreadyPaid.Size = new System.Drawing.Size(139, 20);
-            this.txtAlreadyPaid.TabIndex = 24;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(449, 40);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(69, 13);
-            this.label8.TabIndex = 25;
-            this.label8.Text = "Already Paid:";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(588, 8);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(49, 13);
-            this.label9.TabIndex = 26;
-            this.label9.Text = "Balance:";
-            // 
-            // txtBalance
-            // 
-            this.txtBalance.Location = new System.Drawing.Point(643, 5);
-            this.txtBalance.Name = "txtBalance";
-            this.txtBalance.ReadOnly = true;
-            this.txtBalance.Size = new System.Drawing.Size(108, 20);
-            this.txtBalance.TabIndex = 27;
-            // 
-            // btnCheckBill
-            // 
-            this.btnCheckBill.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.btnCheckBill.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCheckBill.ForeColor = System.Drawing.Color.White;
-            this.btnCheckBill.Location = new System.Drawing.Point(181, 70);
-            this.btnCheckBill.Name = "btnCheckBill";
-            this.btnCheckBill.Size = new System.Drawing.Size(105, 40);
-            this.btnCheckBill.TabIndex = 28;
-            this.btnCheckBill.Text = "Check Bill:";
-            this.btnCheckBill.UseVisualStyleBackColor = false;
+            this.cmbBillNo.FormattingEnabled = true;
+            this.cmbBillNo.Location = new System.Drawing.Point(287, 5);
+            this.cmbBillNo.Name = "cmbBillNo";
+            this.cmbBillNo.Size = new System.Drawing.Size(105, 21);
+            this.cmbBillNo.TabIndex = 29;
             // 
             // Payment_Form
             // 
@@ -344,7 +345,6 @@
         private System.Windows.Forms.Button btnUpdate;
         private System.Windows.Forms.Button btnProcessPayment;
         private System.Windows.Forms.TextBox txtAmountPaid;
-        private System.Windows.Forms.TextBox txtBillNo;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
@@ -362,5 +362,6 @@
         private System.Windows.Forms.Button btnCheckBill;
         private System.Windows.Forms.TextBox txtBalance;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.ComboBox cmbBillNo;
     }
 }

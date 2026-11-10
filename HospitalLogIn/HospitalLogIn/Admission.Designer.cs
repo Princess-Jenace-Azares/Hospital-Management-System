@@ -32,6 +32,8 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.txtAdmissionID = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.btnRefresh = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnUpdate = new System.Windows.Forms.Button();
@@ -49,8 +51,6 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.label10 = new System.Windows.Forms.Label();
             this.dgvAdmission = new System.Windows.Forms.DataGridView();
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtAdmissionID = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -109,6 +109,22 @@
             this.panel2.Size = new System.Drawing.Size(712, 94);
             this.panel2.TabIndex = 3;
             this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
+            // 
+            // txtAdmissionID
+            // 
+            this.txtAdmissionID.Location = new System.Drawing.Point(519, 33);
+            this.txtAdmissionID.Name = "txtAdmissionID";
+            this.txtAdmissionID.Size = new System.Drawing.Size(114, 20);
+            this.txtAdmissionID.TabIndex = 18;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(436, 36);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(77, 13);
+            this.label1.TabIndex = 17;
+            this.label1.Text = "Admission No.:";
             // 
             // btnRefresh
             // 
@@ -265,23 +281,6 @@
             this.dgvAdmission.Name = "dgvAdmission";
             this.dgvAdmission.Size = new System.Drawing.Size(709, 221);
             this.dgvAdmission.TabIndex = 0;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(436, 36);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(77, 13);
-            this.label1.TabIndex = 17;
-            this.label1.Text = "Admission No.:";
-            // 
-            // txtAdmissionID
-            // 
-            this.txtAdmissionID.Location = new System.Drawing.Point(519, 33);
-            this.txtAdmissionID.Name = "txtAdmissionID";
-            this.txtAdmissionID.ReadOnly = true;
-            this.txtAdmissionID.Size = new System.Drawing.Size(114, 20);
-            this.txtAdmissionID.TabIndex = 18;
             // 
             // Attendant__Nurse_Dashboard
             // 

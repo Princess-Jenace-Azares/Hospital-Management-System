@@ -28,7 +28,7 @@ namespace HospitalLogIn
         }
 
         private void ApplyRolePermissions()
-        {
+        { 
             lblPatientManagement.Visible = true;
             lblAdmission.Visible = true;
             lblPatientServices.Visible = true;

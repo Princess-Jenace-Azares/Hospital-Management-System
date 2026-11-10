@@ -29,6 +29,9 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.txtPatientName = new System.Windows.Forms.TextBox();
+            this.cmbAdmissionID = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.dtpPaymentDate = new System.Windows.Forms.DateTimePicker();
             this.btnRefresh = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
@@ -47,9 +50,6 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.dgvBilling = new System.Windows.Forms.DataGridView();
-            this.label2 = new System.Windows.Forms.Label();
-            this.cmbAdmissionID = new System.Windows.Forms.ComboBox();
-            this.txtPatientName = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -79,6 +79,30 @@
             this.panel1.Size = new System.Drawing.Size(791, 100);
             this.panel1.TabIndex = 10;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
+            // txtPatientName
+            // 
+            this.txtPatientName.Location = new System.Drawing.Point(85, 35);
+            this.txtPatientName.Name = "txtPatientName";
+            this.txtPatientName.Size = new System.Drawing.Size(161, 20);
+            this.txtPatientName.TabIndex = 22;
+            // 
+            // cmbAdmissionID
+            // 
+            this.cmbAdmissionID.FormattingEnabled = true;
+            this.cmbAdmissionID.Location = new System.Drawing.Point(605, 33);
+            this.cmbAdmissionID.Name = "cmbAdmissionID";
+            this.cmbAdmissionID.Size = new System.Drawing.Size(116, 21);
+            this.cmbAdmissionID.TabIndex = 21;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(528, 38);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(71, 13);
+            this.label2.TabIndex = 20;
+            this.label2.Text = "Admission ID:";
             // 
             // dtpPaymentDate
             // 
@@ -130,7 +154,7 @@
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(105, 26);
             this.btnAdd.TabIndex = 14;
-            this.btnAdd.Text = "Generate Bill:";
+            this.btnAdd.Text = "Generate Bill";
             this.btnAdd.UseVisualStyleBackColor = false;
             // 
             // cmbPaymentStatus
@@ -145,7 +169,6 @@
             // 
             this.txtAmount.Location = new System.Drawing.Point(520, 7);
             this.txtAmount.Name = "txtAmount";
-            this.txtAmount.ReadOnly = true;
             this.txtAmount.Size = new System.Drawing.Size(174, 20);
             this.txtAmount.TabIndex = 9;
             // 
@@ -250,31 +273,6 @@
             this.dgvBilling.Name = "dgvBilling";
             this.dgvBilling.Size = new System.Drawing.Size(785, 209);
             this.dgvBilling.TabIndex = 22;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(528, 38);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(71, 13);
-            this.label2.TabIndex = 20;
-            this.label2.Text = "Admission ID:";
-            // 
-            // cmbAdmissionID
-            // 
-            this.cmbAdmissionID.FormattingEnabled = true;
-            this.cmbAdmissionID.Location = new System.Drawing.Point(605, 33);
-            this.cmbAdmissionID.Name = "cmbAdmissionID";
-            this.cmbAdmissionID.Size = new System.Drawing.Size(116, 21);
-            this.cmbAdmissionID.TabIndex = 21;
-            // 
-            // txtPatientName
-            // 
-            this.txtPatientName.Location = new System.Drawing.Point(85, 35);
-            this.txtPatientName.Name = "txtPatientName";
-            this.txtPatientName.ReadOnly = true;
-            this.txtPatientName.Size = new System.Drawing.Size(161, 20);
-            this.txtPatientName.TabIndex = 22;
             // 
             // BIllingStaff
             // 

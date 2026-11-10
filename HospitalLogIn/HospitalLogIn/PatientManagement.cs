@@ -12,6 +12,20 @@ namespace HospitalLogIn
         {
             InitializeComponent();
 
+            cmbGender.Items.Clear();
+            cmbGender.Items.AddRange(new object[]
+            {
+    "Male",
+    "Female"
+            });
+
+            cmbStatus.Items.Clear();
+            cmbStatus.Items.AddRange(new object[]
+            {
+    "Active",
+    "Inactive"
+            });
+
             btnAdd.Click += btnAdd_Click;
             btnUpdate.Click += btnUpdate_Click;
             btnDelete.Click += btnDelete_Click;

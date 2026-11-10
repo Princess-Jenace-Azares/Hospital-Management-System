@@ -37,7 +37,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.btnRefresh = new System.Windows.Forms.Button();
             this.btnDischarge = new System.Windows.Forms.Button();
-            this.btnCheckBill = new System.Windows.Forms.Button();
             this.cmbAdmissionID = new System.Windows.Forms.ComboBox();
             this.txtBalance = new System.Windows.Forms.TextBox();
             this.txtPatientID = new System.Windows.Forms.TextBox();
@@ -84,7 +83,6 @@
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.btnRefresh);
             this.panel1.Controls.Add(this.btnDischarge);
-            this.panel1.Controls.Add(this.btnCheckBill);
             this.panel1.Controls.Add(this.cmbAdmissionID);
             this.panel1.Controls.Add(this.txtBalance);
             this.panel1.Controls.Add(this.txtPatientID);
@@ -97,6 +95,7 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(746, 100);
             this.panel1.TabIndex = 11;
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // dtpDischargeDate
             // 
@@ -134,36 +133,24 @@
             // 
             this.btnRefresh.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.btnRefresh.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRefresh.Location = new System.Drawing.Point(414, 60);
+            this.btnRefresh.Location = new System.Drawing.Point(354, 59);
             this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(100, 26);
+            this.btnRefresh.Size = new System.Drawing.Size(100, 28);
             this.btnRefresh.TabIndex = 17;
             this.btnRefresh.Text = "Refresh";
             this.btnRefresh.UseVisualStyleBackColor = false;
             // 
             // btnDischarge
             // 
-            this.btnDischarge.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.btnDischarge.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDischarge.ForeColor = System.Drawing.Color.Black;
-            this.btnDischarge.Location = new System.Drawing.Point(255, 59);
+            this.btnDischarge.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.btnDischarge.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDischarge.ForeColor = System.Drawing.Color.White;
+            this.btnDischarge.Location = new System.Drawing.Point(198, 59);
             this.btnDischarge.Name = "btnDischarge";
             this.btnDischarge.Size = new System.Drawing.Size(95, 28);
             this.btnDischarge.TabIndex = 15;
             this.btnDischarge.Text = "Discharge";
             this.btnDischarge.UseVisualStyleBackColor = false;
-            // 
-            // btnCheckBill
-            // 
-            this.btnCheckBill.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.btnCheckBill.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCheckBill.ForeColor = System.Drawing.Color.White;
-            this.btnCheckBill.Location = new System.Drawing.Point(111, 60);
-            this.btnCheckBill.Name = "btnCheckBill";
-            this.btnCheckBill.Size = new System.Drawing.Size(105, 26);
-            this.btnCheckBill.TabIndex = 14;
-            this.btnCheckBill.Text = "Check Bill";
-            this.btnCheckBill.UseVisualStyleBackColor = false;
             // 
             // cmbAdmissionID
             // 
@@ -261,7 +248,7 @@
             this.dgvDischargedPatients.Name = "dgvDischargedPatients";
             this.dgvDischargedPatients.Size = new System.Drawing.Size(746, 196);
             this.dgvDischargedPatients.TabIndex = 23;
-           
+            this.dgvDischargedPatients.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDischargedPatients_CellContentClick);
             // 
             // Discharge_Form
             // 
@@ -275,7 +262,7 @@
             this.Controls.Add(this.panel2);
             this.Name = "Discharge_Form";
             this.Text = "Discharge_Form";
-
+            this.Load += new System.EventHandler(this.Discharge_Form_Load);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.panel1.ResumeLayout(false);
@@ -298,7 +285,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.Button btnDischarge;
-        private System.Windows.Forms.Button btnCheckBill;
         private System.Windows.Forms.ComboBox cmbAdmissionID;
         private System.Windows.Forms.TextBox txtBalance;
         private System.Windows.Forms.TextBox txtPatientID;

@@ -8,25 +8,41 @@ namespace HospitalLogIn
 {
     public partial class BIllingStaff : Form
     {
+        private int selectedAdmissionID = 0;
+
         public BIllingStaff()
         {
             InitializeComponent();
 
             txtBillID.ReadOnly = true;
             txtPatientName.ReadOnly = true;
-            txtAmount.ReadOnly = true;
+
+            // Amount must be editable
+            txtAmount.ReadOnly = false;
+
+            cmbAdmissionID.DropDownStyle = ComboBoxStyle.DropDownList;
 
             cmbPaymentStatus.Items.Clear();
             cmbPaymentStatus.Items.Add("Unpaid");
             cmbPaymentStatus.Items.Add("Partially Paid");
             cmbPaymentStatus.Items.Add("Paid");
 
+            btnAdd.Click -= btnGenerateBill_Click;
             btnAdd.Click += btnGenerateBill_Click;
+
+            btnUpdate.Click -= btnUpdate_Click;
             btnUpdate.Click += btnUpdate_Click;
+
+            btnDelete.Click -= btnDelete_Click;
             btnDelete.Click += btnDelete_Click;
+
+            btnRefresh.Click -= btnRefresh_Click;
             btnRefresh.Click += btnRefresh_Click;
 
+            cmbAdmissionID.SelectedIndexChanged -= cmbAdmissionID_SelectedIndexChanged;
             cmbAdmissionID.SelectedIndexChanged += cmbAdmissionID_SelectedIndexChanged;
+
+            dgvBilling.CellClick -= dgvBilling_CellClick;
             dgvBilling.CellClick += dgvBilling_CellClick;
 
             this.Shown += BIllingStaff_Shown;
@@ -38,6 +54,7 @@ namespace HospitalLogIn
             LoadBilling();
         }
 
+        // LOAD ADMISSION IDS
         private void LoadAdmissions()
         {
             try
@@ -51,8 +68,9 @@ namespace HospitalLogIn
                             p.PatientName
                         FROM Admission_Records a
                         INNER JOIN Patient_Records p
-                        ON a.PatientID = p.PatientID
-                        WHERE a.Status = 'Active'";
+                            ON a.PatientID = p.PatientID
+                        WHERE a.Status IN ('Admitted', 'Active')
+                        ORDER BY a.AdmissionID DESC";
 
                     SqlDataAdapter adapter = new SqlDataAdapter(query, con);
                     DataTable table = new DataTable();
@@ -60,43 +78,113 @@ namespace HospitalLogIn
                     adapter.Fill(table);
 
                     cmbAdmissionID.DataSource = null;
-                    cmbAdmissionID.DataSource = table;
                     cmbAdmissionID.DisplayMember = "AdmissionID";
                     cmbAdmissionID.ValueMember = "AdmissionID";
+                    cmbAdmissionID.DataSource = table;
                     cmbAdmissionID.SelectedIndex = -1;
 
                     txtPatientName.Clear();
+                    txtBillID.Clear();
                     txtAmount.Clear();
+
+                    selectedAdmissionID = 0;
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(
-                    "Unable to load admissions.\n" + ex.Message,
+                    "Unable to load Admission IDs:\n" + ex.Message,
                     "Database Error"
                 );
             }
         }
 
+        // WHEN ADMISSION ID IS SELECTED
         private void cmbAdmissionID_SelectedIndexChanged(
             object sender, EventArgs e)
         {
-            if (cmbAdmissionID.SelectedIndex == -1 ||
-                cmbAdmissionID.SelectedItem == null)
+            if (cmbAdmissionID.SelectedIndex == -1)
                 return;
 
             DataRowView selected =
                 cmbAdmissionID.SelectedItem as DataRowView;
 
-            if (selected != null)
-            {
-                txtPatientName.Text =
-                    Convert.ToString(selected["PatientName"]);
+            if (selected == null)
+                return;
 
-                txtAmount.Clear();
+            selectedAdmissionID =
+                Convert.ToInt32(selected["AdmissionID"]);
+
+            txtPatientName.Text =
+                Convert.ToString(selected["PatientName"]);
+
+            LoadSelectedAdmissionBilling(selectedAdmissionID);
+        }
+
+        // LOAD PATIENT, EXISTING BILL NUMBER AND SERVICE TOTAL
+        private void LoadSelectedAdmissionBilling(int admissionID)
+        {
+            try
+            {
+                using (SqlConnection con = DatabaseConnection.GetConnection())
+                {
+                    string query = @"
+                        SELECT
+                            ISNULL(SUM(s.TotalAmount), 0) AS ServiceTotal,
+                            MAX(b.BillNo) AS BillNo,
+                            MAX(b.TotalAmount) AS ExistingAmount
+                        FROM Admission_Records a
+                        LEFT JOIN Services_Charges s
+                            ON a.AdmissionID = s.AdmissionID
+                        LEFT JOIN Bill_Records b
+                            ON a.AdmissionID = b.AdmissionID
+                        WHERE a.AdmissionID = @AdmissionID";
+
+                    using (SqlCommand cmd = new SqlCommand(query, con))
+                    {
+                        cmd.Parameters.Add("@AdmissionID", SqlDbType.Int)
+                            .Value = admissionID;
+
+                        con.Open();
+
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                if (reader["BillNo"] != DBNull.Value)
+                                {
+                                    txtBillID.Text =
+                                        reader["BillNo"].ToString();
+
+                                    txtAmount.Text =
+                                        Convert.ToDecimal(reader["ExistingAmount"])
+                                        .ToString("0.00");
+                                }
+                                else
+                                {
+                                    // New bill: show calculated service charges.
+                                    // The actual BillNo is assigned when Generate Bill is clicked.
+                                    txtBillID.Clear();
+
+                                    txtAmount.Text =
+                                        Convert.ToDecimal(reader["ServiceTotal"])
+                                        .ToString("0.00");
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    "Unable to load billing information:\n" + ex.Message,
+                    "Database Error"
+                );
             }
         }
 
+        // LOAD BILLING RECORDS
         private void LoadBilling()
         {
             try
@@ -106,6 +194,7 @@ namespace HospitalLogIn
                     string query = @"
                         SELECT
                             b.BillNo AS BillID,
+                            b.AdmissionID,
                             b.PatientID,
                             p.PatientName,
                             b.TotalAmount AS Amount,
@@ -114,7 +203,8 @@ namespace HospitalLogIn
                             b.BillStatus AS PaymentStatus
                         FROM Bill_Records b
                         INNER JOIN Patient_Records p
-                        ON b.PatientID = p.PatientID";
+                            ON b.PatientID = p.PatientID
+                        ORDER BY b.BillNo DESC";
 
                     SqlDataAdapter adapter = new SqlDataAdapter(query, con);
                     DataTable table = new DataTable();
@@ -122,108 +212,185 @@ namespace HospitalLogIn
                     adapter.Fill(table);
 
                     dgvBilling.DataSource = table;
-
                     dgvBilling.AutoSizeColumnsMode =
                         DataGridViewAutoSizeColumnsMode.Fill;
 
                     dgvBilling.SelectionMode =
                         DataGridViewSelectionMode.FullRowSelect;
 
+                    dgvBilling.MultiSelect = false;
                     dgvBilling.ReadOnly = true;
                     dgvBilling.AllowUserToAddRows = false;
 
                     if (dgvBilling.Columns["PatientID"] != null)
-                    {
                         dgvBilling.Columns["PatientID"].Visible = false;
-                    }
+
+                    if (dgvBilling.Columns["AdmissionID"] != null)
+                        dgvBilling.Columns["AdmissionID"].Visible = false;
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(
-                    "Unable to load billing records.\n" + ex.Message,
+                    "Unable to load billing records:\n" + ex.Message,
                     "Database Error"
                 );
             }
         }
 
+        // GENERATE BILL
         private void btnGenerateBill_Click(object sender, EventArgs e)
         {
-            if (cmbAdmissionID.SelectedValue == null ||
-                string.IsNullOrWhiteSpace(txtPatientName.Text))
+            if (selectedAdmissionID == 0)
             {
-                MessageBox.Show("Please select an active admission.");
+                MessageBox.Show("Please select an Admission ID.");
                 return;
             }
 
-            GenerateBill();
-        }
+            if (!decimal.TryParse(txtAmount.Text, out decimal amount))
+            {
+                MessageBox.Show("Please enter a valid bill amount.");
+                txtAmount.Focus();
+                return;
+            }
 
-        private void GenerateBill()
-        {
+            if (amount < 0)
+            {
+                MessageBox.Show("Amount cannot be negative.");
+                return;
+            }
+
             try
             {
                 using (SqlConnection con = DatabaseConnection.GetConnection())
-                using (SqlCommand cmd = new SqlCommand(
-                    "GenerateBillFromAdmission", con))
                 {
-                    cmd.CommandType = CommandType.StoredProcedure;
-
-                    cmd.Parameters.Add("@AdmissionID", SqlDbType.Int).Value =
-                        Convert.ToInt32(cmbAdmissionID.SelectedValue);
-
                     con.Open();
 
-                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    using (SqlTransaction transaction = con.BeginTransaction())
                     {
-                        if (reader.Read())
+                        try
                         {
-                            txtBillID.Text =
-                                reader["BillNo"].ToString();
+                            string query = @"
+                                DECLARE @PatientID INT;
+                                DECLARE @BillNo INT;
 
-                            txtAmount.Text =
-                                Convert.ToDecimal(reader["TotalAmount"])
-                                .ToString("0.00");
-                        }
-                        else
-                        {
+                                SELECT @PatientID = PatientID
+                                FROM Admission_Records
+                                WHERE AdmissionID = @AdmissionID
+                                  AND Status IN ('Admitted', 'Active');
+
+                                IF @PatientID IS NULL
+                                    THROW 50001, 'Admission not found or is not active.', 1;
+
+                                IF EXISTS (
+                                    SELECT 1
+                                    FROM Bill_Records
+                                    WHERE AdmissionID = @AdmissionID
+                                )
+                                BEGIN
+                                    SELECT @BillNo = BillNo
+                                    FROM Bill_Records
+                                    WHERE AdmissionID = @AdmissionID;
+
+                                    UPDATE Bill_Records
+                                    SET TotalAmount = @Amount,
+                                        Balance = @Amount - AmountPaid,
+                                        BillStatus =
+                                            CASE
+                                                WHEN AmountPaid >= @Amount THEN 'Paid'
+                                                WHEN AmountPaid > 0 THEN 'Partially Paid'
+                                                ELSE 'Unpaid'
+                                            END
+                                    WHERE BillNo = @BillNo;
+                                END
+                                ELSE
+                                BEGIN
+                                    INSERT INTO Bill_Records
+                                    (
+                                        AdmissionID,
+                                        PatientID,
+                                        TotalAmount,
+                                        AmountPaid,
+                                        Balance,
+                                        BillStatus
+                                    )
+                                    VALUES
+                                    (
+                                        @AdmissionID,
+                                        @PatientID,
+                                        @Amount,
+                                        0,
+                                        @Amount,
+                                        'Unpaid'
+                                    );
+
+                                    SET @BillNo = SCOPE_IDENTITY();
+                                END;
+
+                                SELECT @BillNo AS BillNo;";
+
+                            using (SqlCommand cmd =
+                                new SqlCommand(query, con, transaction))
+                            {
+                                cmd.Parameters.Add("@AdmissionID", SqlDbType.Int)
+                                    .Value = selectedAdmissionID;
+
+                                cmd.Parameters.Add("@Amount", SqlDbType.Decimal)
+                                    .Value = amount;
+
+                                cmd.Parameters["@Amount"].Precision = 10;
+                                cmd.Parameters["@Amount"].Scale = 2;
+
+                                int billNo =
+                                    Convert.ToInt32(cmd.ExecuteScalar());
+
+                                txtBillID.Text = billNo.ToString();
+                            }
+
+                            transaction.Commit();
+
                             MessageBox.Show(
-                                "No bill was generated. Please check the admission."
+                                "Bill generated successfully!\nBill No: " +
+                                txtBillID.Text,
+                                "Success",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Information
                             );
-                            return;
+
+                            LoadBilling();
+                        }
+                        catch
+                        {
+                            transaction.Rollback();
+                            throw;
                         }
                     }
                 }
-
-                MessageBox.Show("Bill generated successfully!");
-
-                LoadBilling();
-                LoadAdmissions();
-                ClearFields();
-            }
-            catch (SqlException ex)
-            {
-                MessageBox.Show(
-                    ex.Message,
-                    "Billing Error",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning
-                );
             }
             catch (Exception ex)
             {
                 MessageBox.Show(
-                    "Billing Error: " + ex.Message,
-                    "Error"
+                    "Unable to generate bill:\n\n" + ex.Message,
+                    "Billing Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
                 );
             }
         }
 
+        // UPDATE BILL AMOUNT AND PAYMENT STATUS
         private void btnUpdate_Click(object sender, EventArgs e)
         {
             if (!int.TryParse(txtBillID.Text, out int billID))
             {
-                MessageBox.Show("Please select a billing record.");
+                MessageBox.Show("Please select or generate a bill first.");
+                return;
+            }
+
+            if (!decimal.TryParse(txtAmount.Text, out decimal amount) ||
+                amount < 0)
+            {
+                MessageBox.Show("Please enter a valid amount.");
                 return;
             }
 
@@ -239,45 +406,54 @@ namespace HospitalLogIn
                 {
                     string query = @"
                         UPDATE Bill_Records
-                        SET BillStatus = @Status
-                        WHERE BillNo = @BillID";
+                        SET TotalAmount = @Amount,
+                            Balance = @Amount - AmountPaid,
+                            BillStatus = @Status
+                        WHERE BillNo = @BillNo
+                          AND @Amount >= AmountPaid";
 
-                    SqlCommand cmd = new SqlCommand(query, con);
-
-                    cmd.Parameters.Add("@Status", SqlDbType.VarChar, 30).Value =
-                        cmbPaymentStatus.Text;
-
-                    cmd.Parameters.Add("@BillID", SqlDbType.Int).Value =
-                        billID;
-
-                    con.Open();
-
-                    int result = cmd.ExecuteNonQuery();
-
-                    if (result > 0)
+                    using (SqlCommand cmd = new SqlCommand(query, con))
                     {
-                        MessageBox.Show(
-                            "Payment status updated successfully!"
-                        );
-                    }
-                    else
-                    {
-                        MessageBox.Show("Billing record not found.");
+                        cmd.Parameters.Add("@Amount", SqlDbType.Decimal)
+                            .Value = amount;
+
+                        cmd.Parameters["@Amount"].Precision = 10;
+                        cmd.Parameters["@Amount"].Scale = 2;
+
+                        cmd.Parameters.Add("@Status", SqlDbType.VarChar, 30)
+                            .Value = cmbPaymentStatus.Text;
+
+                        cmd.Parameters.Add("@BillNo", SqlDbType.Int)
+                            .Value = billID;
+
+                        con.Open();
+
+                        int result = cmd.ExecuteNonQuery();
+
+                        if (result > 0)
+                        {
+                            MessageBox.Show("Billing record updated successfully!");
+                            LoadBilling();
+                        }
+                        else
+                        {
+                            MessageBox.Show(
+                                "Update failed. The amount cannot be less than the amount already paid."
+                            );
+                        }
                     }
                 }
-
-                LoadBilling();
-                ClearFields();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(
-                    "Update Billing Error:\n" + ex.Message,
+                    "Update Error:\n" + ex.Message,
                     "Database Error"
                 );
             }
         }
 
+        // DELETE BILL
         private void btnDelete_Click(object sender, EventArgs e)
         {
             if (!int.TryParse(txtBillID.Text, out int billID))
@@ -301,56 +477,41 @@ namespace HospitalLogIn
                 using (SqlConnection con = DatabaseConnection.GetConnection())
                 {
                     string query =
-                        "DELETE FROM Bill_Records WHERE BillNo = @BillID";
+                        "DELETE FROM Bill_Records WHERE BillNo = @BillNo";
 
-                    SqlCommand cmd = new SqlCommand(query, con);
-
-                    cmd.Parameters.Add("@BillID", SqlDbType.Int).Value =
-                        billID;
-
-                    con.Open();
-
-                    int deleted = cmd.ExecuteNonQuery();
-
-                    if (deleted > 0)
+                    using (SqlCommand cmd = new SqlCommand(query, con))
                     {
-                        MessageBox.Show(
-                            "Billing record deleted successfully!"
-                        );
-                    }
-                    else
-                    {
-                        MessageBox.Show("Billing record not found.");
+                        cmd.Parameters.Add("@BillNo", SqlDbType.Int)
+                            .Value = billID;
+
+                        con.Open();
+                        cmd.ExecuteNonQuery();
                     }
                 }
 
-                LoadBilling();
+                MessageBox.Show("Billing record deleted successfully!");
+
                 ClearFields();
-            }
-            catch (SqlException ex)
-            {
-                MessageBox.Show(
-                    "This bill cannot be deleted because it may have existing payment records.\n\n"
-                    + ex.Message,
-                    "Delete Error"
-                );
+                LoadBilling();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(
-                    "Delete Billing Error:\n" + ex.Message,
-                    "Database Error"
+                    "Unable to delete bill. It may have payment records.\n\n" +
+                    ex.Message,
+                    "Delete Error"
                 );
             }
         }
 
+        // REFRESH
         private void btnRefresh_Click(object sender, EventArgs e)
         {
             LoadAdmissions();
             LoadBilling();
-            ClearFields();
         }
 
+        // SELECT BILL FROM DATAGRIDVIEW
         private void dgvBilling_CellClick(
             object sender, DataGridViewCellEventArgs e)
         {
@@ -371,8 +532,14 @@ namespace HospitalLogIn
 
             cmbPaymentStatus.Text =
                 Convert.ToString(row.Cells["PaymentStatus"].Value);
+
+            selectedAdmissionID =
+                Convert.ToInt32(row.Cells["AdmissionID"].Value);
+
+            cmbAdmissionID.SelectedValue = selectedAdmissionID;
         }
 
+        // CLEAR FIELDS
         private void ClearFields()
         {
             txtBillID.Clear();
@@ -381,6 +548,8 @@ namespace HospitalLogIn
 
             cmbAdmissionID.SelectedIndex = -1;
             cmbPaymentStatus.SelectedIndex = -1;
+
+            selectedAdmissionID = 0;
         }
 
         private void BIllingStaff_Load(object sender, EventArgs e)
