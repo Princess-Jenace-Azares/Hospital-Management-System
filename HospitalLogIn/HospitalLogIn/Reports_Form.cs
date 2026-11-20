@@ -21,13 +21,14 @@ namespace HospitalLogIn
             cmbReportType.Items.Clear();
 
             cmbReportType.Items.AddRange(new object[]
-            {
-                "Patient Records",
-                "Admission Records",
-                "Billing Records",
-                "Payment Records",
-                "Discharge Records"
-            });
+ {
+    "Patient Records",
+    "Admission Records",
+    "Services & Charges",
+    "Billing Records",
+    "Payment Records",
+    "Discharge Records"
+ });
 
             cmbReportType.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbReportType.SelectedIndex = 0;
@@ -115,6 +116,14 @@ namespace HospitalLogIn
                     dateColumns = new string[]
                     {
                         "DischargeDate"
+                    };
+                    break;
+
+                case "Services & Charges":
+                    tableName = "Services_Charges";
+                    dateColumns = new string[]
+                    {
+        "ServiceDate"
                     };
                     break;
 

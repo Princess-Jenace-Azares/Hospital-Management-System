@@ -185,6 +185,7 @@ namespace HospitalLogIn
         }
 
         // LOAD BILLING RECORDS
+
         private void LoadBilling()
         {
             try
@@ -192,51 +193,52 @@ namespace HospitalLogIn
                 using (SqlConnection con = DatabaseConnection.GetConnection())
                 {
                     string query = @"
-                        SELECT
-                            b.BillNo AS BillID,
-                            b.AdmissionID,
-                            b.PatientID,
-                            p.PatientName,
-                            b.TotalAmount AS Amount,
-                            b.AmountPaid,
-                            b.Balance,
-                            b.BillStatus AS PaymentStatus
-                        FROM Bill_Records b
-                        INNER JOIN Patient_Records p
-                            ON b.PatientID = p.PatientID
-                        ORDER BY b.BillNo DESC";
+                SELECT
+                    b.BillNo AS BillID,
+                    b.AdmissionID,
+                    b.PatientID,
+                    p.PatientName,
+                    b.TotalAmount AS Amount,
+                    b.AmountPaid,
+                    b.Balance,
+                    b.BillStatus AS PaymentStatus
+                FROM Bill_Records b
+                LEFT JOIN Patient_Records p
+                    ON b.PatientID = p.PatientID
+                ORDER BY b.BillNo DESC";
 
-                    SqlDataAdapter adapter = new SqlDataAdapter(query, con);
-                    DataTable table = new DataTable();
+                    SqlDataAdapter da = new SqlDataAdapter(query, con);
+                    DataTable dt = new DataTable();
 
-                    adapter.Fill(table);
+                    da.Fill(dt);
 
-                    dgvBilling.DataSource = table;
+                    dgvBilling.DataSource = null;
+                    dgvBilling.AutoGenerateColumns = true;
+                    dgvBilling.DataSource = dt;
+
                     dgvBilling.AutoSizeColumnsMode =
                         DataGridViewAutoSizeColumnsMode.Fill;
 
                     dgvBilling.SelectionMode =
                         DataGridViewSelectionMode.FullRowSelect;
 
-                    dgvBilling.MultiSelect = false;
                     dgvBilling.ReadOnly = true;
                     dgvBilling.AllowUserToAddRows = false;
+                    dgvBilling.MultiSelect = false;
 
-                    if (dgvBilling.Columns["PatientID"] != null)
+                    if (dgvBilling.Columns.Contains("PatientID"))
                         dgvBilling.Columns["PatientID"].Visible = false;
 
-                    if (dgvBilling.Columns["AdmissionID"] != null)
+                    if (dgvBilling.Columns.Contains("AdmissionID"))
                         dgvBilling.Columns["AdmissionID"].Visible = false;
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(
-                    "Unable to load billing records:\n" + ex.Message,
-                    "Database Error"
-                );
+                MessageBox.Show("Unable to load billing records:\n" + ex.Message);
             }
         }
+
 
         // GENERATE BILL
         private void btnGenerateBill_Click(object sender, EventArgs e)

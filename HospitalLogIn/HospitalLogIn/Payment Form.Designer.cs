@@ -30,7 +30,6 @@
         {
             this.panel1 = new System.Windows.Forms.Panel();
             this.cmbBillNo = new System.Windows.Forms.ComboBox();
-            this.btnCheckBill = new System.Windows.Forms.Button();
             this.txtBalance = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
@@ -62,7 +61,6 @@
             // panel1
             // 
             this.panel1.Controls.Add(this.cmbBillNo);
-            this.panel1.Controls.Add(this.btnCheckBill);
             this.panel1.Controls.Add(this.txtBalance);
             this.panel1.Controls.Add(this.label9);
             this.panel1.Controls.Add(this.label8);
@@ -93,18 +91,6 @@
             this.cmbBillNo.Name = "cmbBillNo";
             this.cmbBillNo.Size = new System.Drawing.Size(161, 21);
             this.cmbBillNo.TabIndex = 29;
-            // 
-            // btnCheckBill
-            // 
-            this.btnCheckBill.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.btnCheckBill.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCheckBill.ForeColor = System.Drawing.Color.White;
-            this.btnCheckBill.Location = new System.Drawing.Point(412, 69);
-            this.btnCheckBill.Name = "btnCheckBill";
-            this.btnCheckBill.Size = new System.Drawing.Size(105, 40);
-            this.btnCheckBill.TabIndex = 28;
-            this.btnCheckBill.Text = "Check Bill";
-            this.btnCheckBill.UseVisualStyleBackColor = false;
             // 
             // txtBalance
             // 
@@ -221,7 +207,7 @@
             this.btnProcessPayment.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.btnProcessPayment.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnProcessPayment.ForeColor = System.Drawing.Color.White;
-            this.btnProcessPayment.Location = new System.Drawing.Point(243, 68);
+            this.btnProcessPayment.Location = new System.Drawing.Point(377, 68);
             this.btnProcessPayment.Name = "btnProcessPayment";
             this.btnProcessPayment.Size = new System.Drawing.Size(105, 40);
             this.btnProcessPayment.TabIndex = 14;
@@ -359,7 +345,6 @@
         private System.Windows.Forms.TextBox txtPatientName;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox txtAlreadyPaid;
-        private System.Windows.Forms.Button btnCheckBill;
         private System.Windows.Forms.TextBox txtBalance;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.ComboBox cmbBillNo;

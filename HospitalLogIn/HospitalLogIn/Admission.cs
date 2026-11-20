@@ -91,7 +91,13 @@ namespace HospitalLogIn
 
                     da.Fill(dt);
 
+                    dgvAdmission.DataSource = null;
+                    dgvAdmission.AutoGenerateColumns = true;
                     dgvAdmission.DataSource = dt;
+                    dgvAdmission.AutoSizeColumnsMode =
+                        DataGridViewAutoSizeColumnsMode.Fill;
+                    dgvAdmission.ReadOnly = true;
+                    dgvAdmission.AllowUserToAddRows = false;
                 }
             }
             catch (Exception ex)

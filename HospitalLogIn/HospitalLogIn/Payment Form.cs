@@ -21,7 +21,7 @@ namespace HospitalLogIn
 
             cmbBillNo.DropDownStyle = ComboBoxStyle.DropDownList;
 
-            btnCheckBill.Click += btnCheckBill_Click;
+            
             btnProcessPayment.Click += btnProcessPayment_Click;
             btnUpdate.Click += btnUpdate_Click;
             btnDelete.Click += btnDelete_Click;

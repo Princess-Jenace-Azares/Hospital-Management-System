@@ -53,7 +53,14 @@ namespace HospitalLogIn
 
                     da.Fill(dt);
 
+                  
+                    dgvPatients.DataSource = null;
+                    dgvPatients.AutoGenerateColumns = true;
                     dgvPatients.DataSource = dt;
+                    dgvPatients.AutoSizeColumnsMode =
+                        DataGridViewAutoSizeColumnsMode.Fill;
+                    dgvPatients.ReadOnly = true;
+                    dgvPatients.AllowUserToAddRows = false;
                 }
             }
             catch (Exception ex)
