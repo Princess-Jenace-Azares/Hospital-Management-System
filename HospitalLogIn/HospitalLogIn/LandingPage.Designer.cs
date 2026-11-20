@@ -51,7 +51,7 @@
             this.panel1.Controls.Add(this.label1);
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(900, 51);
+            this.panel1.Size = new System.Drawing.Size(1351, 51);
             this.panel1.TabIndex = 0;
             // 
             // lblLogOut
@@ -59,7 +59,7 @@
             this.lblLogOut.AutoSize = true;
             this.lblLogOut.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblLogOut.ForeColor = System.Drawing.Color.White;
-            this.lblLogOut.Location = new System.Drawing.Point(759, 16);
+            this.lblLogOut.Location = new System.Drawing.Point(1285, 19);
             this.lblLogOut.Name = "lblLogOut";
             this.lblLogOut.Size = new System.Drawing.Size(53, 15);
             this.lblLogOut.TabIndex = 2;
@@ -88,7 +88,7 @@
             this.panel2.Controls.Add(this.lblPatientManagement);
             this.panel2.Location = new System.Drawing.Point(0, 48);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(900, 43);
+            this.panel2.Size = new System.Drawing.Size(1351, 43);
             this.panel2.TabIndex = 1;
             this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
             // 
@@ -96,7 +96,7 @@
             // 
             this.lblReports.AutoSize = true;
             this.lblReports.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblReports.Location = new System.Drawing.Point(772, 19);
+            this.lblReports.Location = new System.Drawing.Point(1261, 17);
             this.lblReports.Name = "lblReports";
             this.lblReports.Size = new System.Drawing.Size(50, 15);
             this.lblReports.TabIndex = 6;
@@ -106,7 +106,7 @@
             // 
             this.lblDischarge.AutoSize = true;
             this.lblDischarge.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDischarge.Location = new System.Drawing.Point(667, 19);
+            this.lblDischarge.Location = new System.Drawing.Point(1064, 17);
             this.lblDischarge.Name = "lblDischarge";
             this.lblDischarge.Size = new System.Drawing.Size(63, 15);
             this.lblDischarge.TabIndex = 5;
@@ -117,7 +117,7 @@
             // 
             this.lblPayment.AutoSize = true;
             this.lblPayment.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPayment.Location = new System.Drawing.Point(571, 19);
+            this.lblPayment.Location = new System.Drawing.Point(848, 19);
             this.lblPayment.Name = "lblPayment";
             this.lblPayment.Size = new System.Drawing.Size(55, 15);
             this.lblPayment.TabIndex = 4;
@@ -127,7 +127,7 @@
             // 
             this.lblBilling.AutoSize = true;
             this.lblBilling.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBilling.Location = new System.Drawing.Point(470, 19);
+            this.lblBilling.Location = new System.Drawing.Point(641, 17);
             this.lblBilling.Name = "lblBilling";
             this.lblBilling.Size = new System.Drawing.Size(41, 15);
             this.lblBilling.TabIndex = 3;
@@ -137,7 +137,7 @@
             // 
             this.lblPatientServices.AutoSize = true;
             this.lblPatientServices.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPatientServices.Location = new System.Drawing.Point(274, 19);
+            this.lblPatientServices.Location = new System.Drawing.Point(372, 17);
             this.lblPatientServices.Name = "lblPatientServices";
             this.lblPatientServices.Size = new System.Drawing.Size(149, 15);
             this.lblPatientServices.TabIndex = 2;
@@ -146,7 +146,7 @@
             // lblAdmission
             // 
             this.lblAdmission.AutoSize = true;
-            this.lblAdmission.Location = new System.Drawing.Point(174, 19);
+            this.lblAdmission.Location = new System.Drawing.Point(210, 19);
             this.lblAdmission.Name = "lblAdmission";
             this.lblAdmission.Size = new System.Drawing.Size(54, 13);
             this.lblAdmission.TabIndex = 1;
@@ -164,9 +164,9 @@
             // 
             // panelContent
             // 
-            this.panelContent.Location = new System.Drawing.Point(0, 97);
+            this.panelContent.Location = new System.Drawing.Point(12, 97);
             this.panelContent.Name = "panelContent";
-            this.panelContent.Size = new System.Drawing.Size(780, 420);
+            this.panelContent.Size = new System.Drawing.Size(1326, 620);
             this.panelContent.TabIndex = 2;
             // 
             // LandingPage
@@ -174,7 +174,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.ClientSize = new System.Drawing.Size(897, 516);
+            this.ClientSize = new System.Drawing.Size(1350, 729);
             this.Controls.Add(this.panelContent);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);

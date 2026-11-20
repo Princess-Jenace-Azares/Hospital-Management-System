@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.cmbBillNo = new System.Windows.Forms.ComboBox();
             this.btnCheckBill = new System.Windows.Forms.Button();
             this.txtBalance = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
@@ -52,7 +53,6 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.dgvPayments = new System.Windows.Forms.DataGridView();
-            this.cmbBillNo = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -82,16 +82,24 @@
             this.panel1.Controls.Add(this.label4);
             this.panel1.Location = new System.Drawing.Point(3, 43);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(758, 114);
+            this.panel1.Size = new System.Drawing.Size(1313, 114);
             this.panel1.TabIndex = 11;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
+            // cmbBillNo
+            // 
+            this.cmbBillNo.FormattingEnabled = true;
+            this.cmbBillNo.Location = new System.Drawing.Point(412, 8);
+            this.cmbBillNo.Name = "cmbBillNo";
+            this.cmbBillNo.Size = new System.Drawing.Size(161, 21);
+            this.cmbBillNo.TabIndex = 29;
             // 
             // btnCheckBill
             // 
             this.btnCheckBill.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.btnCheckBill.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCheckBill.ForeColor = System.Drawing.Color.White;
-            this.btnCheckBill.Location = new System.Drawing.Point(181, 70);
+            this.btnCheckBill.Location = new System.Drawing.Point(412, 69);
             this.btnCheckBill.Name = "btnCheckBill";
             this.btnCheckBill.Size = new System.Drawing.Size(105, 40);
             this.btnCheckBill.TabIndex = 28;
@@ -100,16 +108,16 @@
             // 
             // txtBalance
             // 
-            this.txtBalance.Location = new System.Drawing.Point(643, 5);
+            this.txtBalance.Location = new System.Drawing.Point(1088, 8);
             this.txtBalance.Name = "txtBalance";
             this.txtBalance.ReadOnly = true;
-            this.txtBalance.Size = new System.Drawing.Size(108, 20);
+            this.txtBalance.Size = new System.Drawing.Size(175, 20);
             this.txtBalance.TabIndex = 27;
             // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(588, 8);
+            this.label9.Location = new System.Drawing.Point(1014, 15);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(49, 13);
             this.label9.TabIndex = 26;
@@ -118,7 +126,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(449, 40);
+            this.label8.Location = new System.Drawing.Point(994, 50);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(69, 13);
             this.label8.TabIndex = 25;
@@ -126,24 +134,24 @@
             // 
             // txtAlreadyPaid
             // 
-            this.txtAlreadyPaid.Location = new System.Drawing.Point(524, 37);
+            this.txtAlreadyPaid.Location = new System.Drawing.Point(1088, 43);
             this.txtAlreadyPaid.Name = "txtAlreadyPaid";
             this.txtAlreadyPaid.ReadOnly = true;
-            this.txtAlreadyPaid.Size = new System.Drawing.Size(139, 20);
+            this.txtAlreadyPaid.Size = new System.Drawing.Size(175, 20);
             this.txtAlreadyPaid.TabIndex = 24;
             // 
             // txtTotalBill
             // 
-            this.txtTotalBill.Location = new System.Drawing.Point(304, 39);
+            this.txtTotalBill.Location = new System.Drawing.Point(726, 43);
             this.txtTotalBill.Name = "txtTotalBill";
             this.txtTotalBill.ReadOnly = true;
-            this.txtTotalBill.Size = new System.Drawing.Size(139, 20);
+            this.txtTotalBill.Size = new System.Drawing.Size(211, 20);
             this.txtTotalBill.TabIndex = 23;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(248, 43);
+            this.label7.Location = new System.Drawing.Point(641, 46);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(50, 13);
             this.label7.TabIndex = 22;
@@ -151,10 +159,10 @@
             // 
             // txtPatientName
             // 
-            this.txtPatientName.Location = new System.Drawing.Point(89, 5);
+            this.txtPatientName.Location = new System.Drawing.Point(105, 5);
             this.txtPatientName.Name = "txtPatientName";
             this.txtPatientName.ReadOnly = true;
-            this.txtPatientName.Size = new System.Drawing.Size(139, 20);
+            this.txtPatientName.Size = new System.Drawing.Size(211, 20);
             this.txtPatientName.TabIndex = 21;
             // 
             // label2
@@ -171,14 +179,14 @@
             this.cmbPaymentMethod.FormattingEnabled = true;
             this.cmbPaymentMethod.Location = new System.Drawing.Point(105, 38);
             this.cmbPaymentMethod.Name = "cmbPaymentMethod";
-            this.cmbPaymentMethod.Size = new System.Drawing.Size(131, 21);
+            this.cmbPaymentMethod.Size = new System.Drawing.Size(211, 21);
             this.cmbPaymentMethod.TabIndex = 19;
             // 
             // btnRefresh
             // 
             this.btnRefresh.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.btnRefresh.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRefresh.Location = new System.Drawing.Point(591, 70);
+            this.btnRefresh.Location = new System.Drawing.Point(919, 69);
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(100, 40);
             this.btnRefresh.TabIndex = 17;
@@ -189,7 +197,7 @@
             // 
             this.btnDelete.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.btnDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDelete.Location = new System.Drawing.Point(439, 70);
+            this.btnDelete.Location = new System.Drawing.Point(747, 69);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(103, 40);
             this.btnDelete.TabIndex = 16;
@@ -201,7 +209,7 @@
             this.btnUpdate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.btnUpdate.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnUpdate.ForeColor = System.Drawing.Color.Black;
-            this.btnUpdate.Location = new System.Drawing.Point(314, 70);
+            this.btnUpdate.Location = new System.Drawing.Point(585, 69);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(95, 40);
             this.btnUpdate.TabIndex = 15;
@@ -213,7 +221,7 @@
             this.btnProcessPayment.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.btnProcessPayment.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnProcessPayment.ForeColor = System.Drawing.Color.White;
-            this.btnProcessPayment.Location = new System.Drawing.Point(49, 70);
+            this.btnProcessPayment.Location = new System.Drawing.Point(243, 68);
             this.btnProcessPayment.Name = "btnProcessPayment";
             this.btnProcessPayment.Size = new System.Drawing.Size(105, 40);
             this.btnProcessPayment.TabIndex = 14;
@@ -222,15 +230,15 @@
             // 
             // txtAmountPaid
             // 
-            this.txtAmountPaid.Location = new System.Drawing.Point(474, 5);
+            this.txtAmountPaid.Location = new System.Drawing.Point(726, 8);
             this.txtAmountPaid.Name = "txtAmountPaid";
-            this.txtAmountPaid.Size = new System.Drawing.Size(108, 20);
+            this.txtAmountPaid.Size = new System.Drawing.Size(211, 20);
             this.txtAmountPaid.TabIndex = 9;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(398, 8);
+            this.label6.Location = new System.Drawing.Point(621, 15);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(70, 13);
             this.label6.TabIndex = 2;
@@ -248,7 +256,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(243, 8);
+            this.label4.Location = new System.Drawing.Point(355, 15);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(43, 13);
             this.label4.TabIndex = 0;
@@ -261,7 +269,7 @@
             this.panel2.ForeColor = System.Drawing.Color.Green;
             this.panel2.Location = new System.Drawing.Point(-3, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(764, 38);
+            this.panel2.Size = new System.Drawing.Size(1319, 38);
             this.panel2.TabIndex = 21;
             // 
             // label3
@@ -282,7 +290,7 @@
             this.panel3.ForeColor = System.Drawing.Color.Green;
             this.panel3.Location = new System.Drawing.Point(3, 159);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(758, 34);
+            this.panel3.Size = new System.Drawing.Size(1313, 34);
             this.panel3.TabIndex = 22;
             // 
             // label1
@@ -299,25 +307,17 @@
             // dgvPayments
             // 
             this.dgvPayments.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvPayments.Location = new System.Drawing.Point(3, 190);
+            this.dgvPayments.Location = new System.Drawing.Point(12, 190);
             this.dgvPayments.Name = "dgvPayments";
-            this.dgvPayments.Size = new System.Drawing.Size(758, 190);
+            this.dgvPayments.Size = new System.Drawing.Size(1286, 379);
             this.dgvPayments.TabIndex = 23;
-            // 
-            // cmbBillNo
-            // 
-            this.cmbBillNo.FormattingEnabled = true;
-            this.cmbBillNo.Location = new System.Drawing.Point(287, 5);
-            this.cmbBillNo.Name = "cmbBillNo";
-            this.cmbBillNo.Size = new System.Drawing.Size(105, 21);
-            this.cmbBillNo.TabIndex = 29;
             // 
             // Payment_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.ClientSize = new System.Drawing.Size(764, 381);
+            this.ClientSize = new System.Drawing.Size(1310, 581);
             this.Controls.Add(this.dgvPayments);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel3);

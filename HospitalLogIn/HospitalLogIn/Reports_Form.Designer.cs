@@ -31,6 +31,7 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnRefresh = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.dtpEndDate = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
@@ -42,7 +43,6 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.label5 = new System.Windows.Forms.Label();
             this.dgvReports = new System.Windows.Forms.DataGridView();
-            this.btnRefresh = new System.Windows.Forms.Button();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -56,7 +56,7 @@
             this.panel2.ForeColor = System.Drawing.Color.Green;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(764, 33);
+            this.panel2.Size = new System.Drawing.Size(1307, 33);
             this.panel2.TabIndex = 23;
             // 
             // label3
@@ -83,14 +83,25 @@
             this.panel1.Controls.Add(this.label4);
             this.panel1.Location = new System.Drawing.Point(0, 39);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(764, 108);
+            this.panel1.Size = new System.Drawing.Size(1307, 108);
             this.panel1.TabIndex = 10;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
+            // btnRefresh
+            // 
+            this.btnRefresh.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.btnRefresh.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRefresh.Location = new System.Drawing.Point(708, 64);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(100, 34);
+            this.btnRefresh.TabIndex = 22;
+            this.btnRefresh.Text = "Refresh";
+            this.btnRefresh.UseVisualStyleBackColor = false;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(240, 40);
+            this.label2.Location = new System.Drawing.Point(824, 46);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(55, 13);
             this.label2.TabIndex = 21;
@@ -98,15 +109,15 @@
             // 
             // dtpEndDate
             // 
-            this.dtpEndDate.Location = new System.Drawing.Point(301, 34);
+            this.dtpEndDate.Location = new System.Drawing.Point(914, 40);
             this.dtpEndDate.Name = "dtpEndDate";
-            this.dtpEndDate.Size = new System.Drawing.Size(200, 20);
+            this.dtpEndDate.Size = new System.Drawing.Size(224, 20);
             this.dtpEndDate.TabIndex = 20;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(467, 13);
+            this.label1.Location = new System.Drawing.Point(821, 14);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(58, 13);
             this.label1.TabIndex = 19;
@@ -114,18 +125,18 @@
             // 
             // dtpStartDate
             // 
-            this.dtpStartDate.Location = new System.Drawing.Point(537, 7);
+            this.dtpStartDate.Location = new System.Drawing.Point(914, 8);
             this.dtpStartDate.Name = "dtpStartDate";
-            this.dtpStartDate.Size = new System.Drawing.Size(200, 20);
+            this.dtpStartDate.Size = new System.Drawing.Size(224, 20);
             this.dtpStartDate.TabIndex = 18;
             // 
             // btnPrintReport
             // 
             this.btnPrintReport.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.btnPrintReport.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPrintReport.Location = new System.Drawing.Point(284, 65);
+            this.btnPrintReport.Location = new System.Drawing.Point(503, 64);
             this.btnPrintReport.Name = "btnPrintReport";
-            this.btnPrintReport.Size = new System.Drawing.Size(100, 29);
+            this.btnPrintReport.Size = new System.Drawing.Size(100, 33);
             this.btnPrintReport.TabIndex = 17;
             this.btnPrintReport.Text = "Print Report";
             this.btnPrintReport.UseVisualStyleBackColor = false;
@@ -135,9 +146,9 @@
             this.btnLoadReport.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.btnLoadReport.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLoadReport.ForeColor = System.Drawing.Color.White;
-            this.btnLoadReport.Location = new System.Drawing.Point(125, 62);
+            this.btnLoadReport.Location = new System.Drawing.Point(289, 65);
             this.btnLoadReport.Name = "btnLoadReport";
-            this.btnLoadReport.Size = new System.Drawing.Size(105, 32);
+            this.btnLoadReport.Size = new System.Drawing.Size(105, 33);
             this.btnLoadReport.TabIndex = 14;
             this.btnLoadReport.Text = "Load Report";
             this.btnLoadReport.UseVisualStyleBackColor = false;
@@ -145,15 +156,15 @@
             // cmbReportType
             // 
             this.cmbReportType.FormattingEnabled = true;
-            this.cmbReportType.Location = new System.Drawing.Point(89, 6);
+            this.cmbReportType.Location = new System.Drawing.Point(218, 11);
             this.cmbReportType.Name = "cmbReportType";
-            this.cmbReportType.Size = new System.Drawing.Size(181, 21);
+            this.cmbReportType.Size = new System.Drawing.Size(292, 21);
             this.cmbReportType.TabIndex = 10;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(14, 14);
+            this.label4.Location = new System.Drawing.Point(111, 14);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(69, 13);
             this.label4.TabIndex = 0;
@@ -166,7 +177,7 @@
             this.panel3.ForeColor = System.Drawing.Color.Green;
             this.panel3.Location = new System.Drawing.Point(0, 153);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(764, 33);
+            this.panel3.Size = new System.Drawing.Size(1307, 33);
             this.panel3.TabIndex = 24;
             // 
             // label5
@@ -183,28 +194,17 @@
             // dgvReports
             // 
             this.dgvReports.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvReports.Location = new System.Drawing.Point(0, 184);
+            this.dgvReports.Location = new System.Drawing.Point(12, 184);
             this.dgvReports.Name = "dgvReports";
-            this.dgvReports.Size = new System.Drawing.Size(764, 198);
+            this.dgvReports.Size = new System.Drawing.Size(1278, 396);
             this.dgvReports.TabIndex = 25;
-            // 
-            // btnRefresh
-            // 
-            this.btnRefresh.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.btnRefresh.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRefresh.Location = new System.Drawing.Point(425, 65);
-            this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(100, 29);
-            this.btnRefresh.TabIndex = 22;
-            this.btnRefresh.Text = "Refresh";
-            this.btnRefresh.UseVisualStyleBackColor = false;
             // 
             // Reports_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.ClientSize = new System.Drawing.Size(764, 381);
+            this.ClientSize = new System.Drawing.Size(1302, 592);
             this.Controls.Add(this.dgvReports);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel1);

@@ -51,7 +51,7 @@
             this.panel2.ForeColor = System.Drawing.Color.Green;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(763, 33);
+            this.panel2.Size = new System.Drawing.Size(1312, 33);
             this.panel2.TabIndex = 22;
             // 
             // label3
@@ -77,7 +77,7 @@
             // lblBillNo
             // 
             this.lblBillNo.AutoSize = true;
-            this.lblBillNo.Location = new System.Drawing.Point(13, 65);
+            this.lblBillNo.Location = new System.Drawing.Point(12, 92);
             this.lblBillNo.Name = "lblBillNo";
             this.lblBillNo.Size = new System.Drawing.Size(40, 13);
             this.lblBillNo.TabIndex = 24;
@@ -86,7 +86,7 @@
             // lblPatientName
             // 
             this.lblPatientName.AutoSize = true;
-            this.lblPatientName.Location = new System.Drawing.Point(13, 91);
+            this.lblPatientName.Location = new System.Drawing.Point(12, 139);
             this.lblPatientName.Name = "lblPatientName";
             this.lblPatientName.Size = new System.Drawing.Size(74, 13);
             this.lblPatientName.TabIndex = 25;
@@ -95,7 +95,7 @@
             // lblPaymentDate
             // 
             this.lblPaymentDate.AutoSize = true;
-            this.lblPaymentDate.Location = new System.Drawing.Point(13, 118);
+            this.lblPaymentDate.Location = new System.Drawing.Point(13, 188);
             this.lblPaymentDate.Name = "lblPaymentDate";
             this.lblPaymentDate.Size = new System.Drawing.Size(77, 13);
             this.lblPaymentDate.TabIndex = 26;
@@ -104,7 +104,7 @@
             // lblPaymentMethod
             // 
             this.lblPaymentMethod.AutoSize = true;
-            this.lblPaymentMethod.Location = new System.Drawing.Point(310, 40);
+            this.lblPaymentMethod.Location = new System.Drawing.Point(636, 40);
             this.lblPaymentMethod.Name = "lblPaymentMethod";
             this.lblPaymentMethod.Size = new System.Drawing.Size(90, 13);
             this.lblPaymentMethod.TabIndex = 27;
@@ -113,7 +113,7 @@
             // lblAmountPaid
             // 
             this.lblAmountPaid.AutoSize = true;
-            this.lblAmountPaid.Location = new System.Drawing.Point(310, 65);
+            this.lblAmountPaid.Location = new System.Drawing.Point(636, 92);
             this.lblAmountPaid.Name = "lblAmountPaid";
             this.lblAmountPaid.Size = new System.Drawing.Size(70, 13);
             this.lblAmountPaid.TabIndex = 28;
@@ -124,9 +124,9 @@
             this.btnPrint.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.btnPrint.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnPrint.ForeColor = System.Drawing.Color.White;
-            this.btnPrint.Location = new System.Drawing.Point(178, 150);
+            this.btnPrint.Location = new System.Drawing.Point(247, 239);
             this.btnPrint.Name = "btnPrint";
-            this.btnPrint.Size = new System.Drawing.Size(105, 29);
+            this.btnPrint.Size = new System.Drawing.Size(105, 38);
             this.btnPrint.TabIndex = 29;
             this.btnPrint.Text = "Print";
             this.btnPrint.UseVisualStyleBackColor = false;
@@ -135,9 +135,9 @@
             // 
             this.btnClose.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.btnClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClose.Location = new System.Drawing.Point(330, 150);
+            this.btnClose.Location = new System.Drawing.Point(585, 239);
             this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(103, 29);
+            this.btnClose.Size = new System.Drawing.Size(103, 38);
             this.btnClose.TabIndex = 30;
             this.btnClose.Text = "Close";
             this.btnClose.UseVisualStyleBackColor = false;
@@ -157,7 +157,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.ClientSize = new System.Drawing.Size(764, 381);
+            this.ClientSize = new System.Drawing.Size(1310, 581);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.btnPrint);
             this.Controls.Add(this.lblAmountPaid);
