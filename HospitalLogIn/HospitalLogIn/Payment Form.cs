@@ -421,14 +421,113 @@ namespace HospitalLogIn
             );
         }
 
+
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(
-                "Payments cannot be deleted directly. " +
-                "Use a controlled reversal process instead.",
-                "Payment Information"
+            if (dgvPayments.CurrentRow == null)
+            {
+                MessageBox.Show("Please select a payment record first.");
+                return;
+            }
+
+            int paymentID = Convert.ToInt32(
+                dgvPayments.CurrentRow.Cells["PaymentID"].Value
             );
+
+            int billNo = Convert.ToInt32(
+                dgvPayments.CurrentRow.Cells["BillNo"].Value
+            );
+
+            DialogResult confirm = MessageBox.Show(
+                "Permanently delete this payment record?",
+                "Confirm Delete",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning
+            );
+
+            if (confirm != DialogResult.Yes)
+                return;
+
+            try
+            {
+                using (SqlConnection con = DatabaseConnection.GetConnection())
+                {
+                    con.Open();
+
+                    using (SqlTransaction transaction = con.BeginTransaction())
+                    {
+                        try
+                        {
+                            // DELETE PAYMENT
+                            string deleteQuery = @"
+                        DELETE FROM Payment_Records
+                        WHERE PaymentID = @PaymentID";
+
+                            using (SqlCommand cmd = new SqlCommand(
+                                deleteQuery, con, transaction))
+                            {
+                                cmd.Parameters.Add("@PaymentID", SqlDbType.Int)
+                                    .Value = paymentID;
+
+                                int result = cmd.ExecuteNonQuery();
+
+                                if (result == 0)
+                                    throw new Exception("Payment record not found.");
+                            }
+
+                            // RECALCULATE BILL AMOUNT AND BALANCE
+                            string updateBill = @"
+                        DECLARE @Paid DECIMAL(18,2);
+
+                        SELECT @Paid = ISNULL(SUM(AmountPaid), 0)
+                        FROM Payment_Records
+                        WHERE BillNo = @BillNo;
+
+                        UPDATE Bill_Records
+                        SET AmountPaid = @Paid,
+                            Balance = TotalAmount - @Paid
+                        WHERE BillNo = @BillNo;";
+
+                            using (SqlCommand cmd = new SqlCommand(
+                                updateBill, con, transaction))
+                            {
+                                cmd.Parameters.Add("@BillNo", SqlDbType.Int)
+                                    .Value = billNo;
+
+                                cmd.ExecuteNonQuery();
+                            }
+
+                            transaction.Commit();
+                        }
+                        catch
+                        {
+                            transaction.Rollback();
+                            throw;
+                        }
+                    }
+                }
+
+                MessageBox.Show(
+                    "Payment permanently deleted!\nBill balance successfully updated.",
+                    "Success",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information
+                );
+
+                LoadPayments();
+                ClearFields();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    "Delete Payment Error:\n\n" + ex.Message,
+                    "Delete Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
+            }
         }
+
 
         private void btnRefresh_Click(object sender, EventArgs e)
         {

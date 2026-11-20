@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Data;
 using System.Data.SqlClient;
 using System.Windows.Forms;
@@ -27,8 +26,10 @@ namespace HospitalLogIn
             cmbStatus.Items.AddRange(new object[]
             {
     "Admitted",
-    "Discharged"
+    "Discharged",
+    "Cancelled"
             });
+        
 
             cmbPatientName.SelectedIndexChanged +=
     cmbPatientName_SelectedIndexChanged;
@@ -234,19 +235,23 @@ namespace HospitalLogIn
             }
         }
 
+
+
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if (!int.TryParse(txtPatientID.Text, out int id))
+            if (!int.TryParse(txtAdmissionID.Text, out int admissionID))
             {
-                MessageBox.Show("Enter a valid Patient ID.");
+                MessageBox.Show("Please select an admission record first.");
                 return;
             }
 
             DialogResult confirm = MessageBox.Show(
-                "Are you sure you want to delete this admission?",
-                "Confirm Delete",
+                "WARNING: This will permanently delete the admission " +
+                "and ALL related services, bills, payments, and discharge records.\n\n" +
+                "Are you sure you want to continue?",
+                "Confirm Permanent Deletion",
                 MessageBoxButtons.YesNo,
-                MessageBoxIcon.Question
+                MessageBoxIcon.Warning
             );
 
             if (confirm != DialogResult.Yes)
@@ -256,29 +261,108 @@ namespace HospitalLogIn
             {
                 using (SqlConnection con = DatabaseConnection.GetConnection())
                 {
-                    string query = "DELETE FROM Admission_Records WHERE PatientID = @id";
-
-                    SqlCommand cmd = new SqlCommand(query, con);
-                    cmd.Parameters.Add("@id", SqlDbType.Int).Value = id;
-
                     con.Open();
 
-                    int result = cmd.ExecuteNonQuery();
+                    using (SqlTransaction tx = con.BeginTransaction())
+                    {
+                        try
+                        {
+                            // 1. Delete payments connected to bills
+                            string deletePayments = @"
+                        DELETE FROM Payment_Records
+                        WHERE BillNo IN
+                        (
+                            SELECT BillNo
+                            FROM Bill_Records
+                            WHERE AdmissionID = @id
+                        )";
 
-                    if (result > 0)
-                        MessageBox.Show("Admission deleted successfully!");
-                    else
-                        MessageBox.Show("No admission record found.");
+                            using (SqlCommand cmd = new SqlCommand(deletePayments, con, tx))
+                            {
+                                cmd.Parameters.Add("@id", SqlDbType.Int).Value = admissionID;
+                                cmd.ExecuteNonQuery();
+                            }
+
+                            // 2. Delete billing records
+                            string deleteBills = @"
+                        DELETE FROM Bill_Records
+                        WHERE AdmissionID = @id";
+
+                            using (SqlCommand cmd = new SqlCommand(deleteBills, con, tx))
+                            {
+                                cmd.Parameters.Add("@id", SqlDbType.Int).Value = admissionID;
+                                cmd.ExecuteNonQuery();
+                            }
+
+                            // 3. Delete services and charges
+                            string deleteServices = @"
+                        DELETE FROM Services_Charges
+                        WHERE AdmissionID = @id";
+
+                            using (SqlCommand cmd = new SqlCommand(deleteServices, con, tx))
+                            {
+                                cmd.Parameters.Add("@id", SqlDbType.Int).Value = admissionID;
+                                cmd.ExecuteNonQuery();
+                            }
+
+                            // 4. Delete discharge records
+                            string deleteDischarge = @"
+                        DELETE FROM Discharge_Records
+                        WHERE AdmissionID = @id";
+
+                            using (SqlCommand cmd = new SqlCommand(deleteDischarge, con, tx))
+                            {
+                                cmd.Parameters.Add("@id", SqlDbType.Int).Value = admissionID;
+                                cmd.ExecuteNonQuery();
+                            }
+
+                            // 5. Delete admission record
+                            string deleteAdmission = @"
+                        DELETE FROM Admission_Records
+                        WHERE AdmissionID = @id";
+
+                            using (SqlCommand cmd = new SqlCommand(deleteAdmission, con, tx))
+                            {
+                                cmd.Parameters.Add("@id", SqlDbType.Int).Value = admissionID;
+
+                                int result = cmd.ExecuteNonQuery();
+
+                                if (result == 0)
+                                    throw new Exception("Admission record was not found.");
+                            }
+
+                            tx.Commit();
+                        }
+                        catch
+                        {
+                            tx.Rollback();
+                            throw;
+                        }
+                    }
                 }
 
+                MessageBox.Show(
+                    "Admission and all its related records were permanently deleted!",
+                    "Deletion Successful",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information
+                );
+
                 LoadAdmissions();
+                LoadPatientNames();
                 ClearFields();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Delete Admission Error: " + ex.Message);
+                MessageBox.Show(
+                    "Unable to delete admission:\n\n" + ex.Message,
+                    "Delete Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
             }
         }
+
 
         private void btnRefresh_Click(object sender, EventArgs e)
         {
@@ -287,14 +371,20 @@ namespace HospitalLogIn
             ClearFields();
         }
 
-        private void dgvAdmissions_CellClick(object sender, DataGridViewCellEventArgs e)
+
+        private void dgvAdmissions_CellClick(
+            object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0)
                 return;
 
             DataGridViewRow row = dgvAdmission.Rows[e.RowIndex];
 
-            txtPatientID.Text = Convert.ToString(row.Cells["PatientID"].Value);
+            txtAdmissionID.Text =
+                Convert.ToString(row.Cells["AdmissionID"].Value);
+
+            txtPatientID.Text =
+                Convert.ToString(row.Cells["PatientID"].Value);
 
             if (row.Cells["AdmissionDate"].Value != DBNull.Value)
             {
@@ -302,9 +392,14 @@ namespace HospitalLogIn
                     Convert.ToDateTime(row.Cells["AdmissionDate"].Value);
             }
 
-            cmbPatientName.Text = Convert.ToString(row.Cells["PatientName"].Value);
-            cmbRoom.Text = Convert.ToString(row.Cells["Room"].Value);
-            cmbStatus.Text = Convert.ToString(row.Cells["Status"].Value);
+            cmbPatientName.Text =
+                Convert.ToString(row.Cells["PatientName"].Value);
+
+            cmbRoom.Text =
+                Convert.ToString(row.Cells["Room"].Value);
+
+            cmbStatus.Text =
+                Convert.ToString(row.Cells["Status"].Value);
         }
 
         private void ClearFields()

@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Data;
 using System.Data.SqlClient;
 using System.Windows.Forms;
@@ -161,19 +160,25 @@ namespace HospitalLogIn
             }
         }
 
+
+
+
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if (!int.TryParse(txtPatientID.Text, out int id))
+            if (!int.TryParse(txtPatientID.Text, out int patientID))
             {
-                MessageBox.Show("Please select a valid patient.");
+                MessageBox.Show("Please select a patient first.");
                 return;
             }
 
             DialogResult confirm = MessageBox.Show(
-                "Are you sure you want to delete this patient?",
-                "Confirm Delete",
+                "WARNING: This will permanently delete this patient " +
+                "and ALL related hospital records, including admissions, " +
+                "services, bills, payments, and discharge records.\n\n" +
+                "Are you sure you want to continue?",
+                "Confirm Permanent Deletion",
                 MessageBoxButtons.YesNo,
-                MessageBoxIcon.Question
+                MessageBoxIcon.Warning
             );
 
             if (confirm != DialogResult.Yes)
@@ -183,29 +188,118 @@ namespace HospitalLogIn
             {
                 using (SqlConnection con = DatabaseConnection.GetConnection())
                 {
-                    string query = "DELETE FROM Patient_Records WHERE PatientID = @id";
-
-                    SqlCommand cmd = new SqlCommand(query, con);
-                    cmd.Parameters.AddWithValue("@id", id);
-
                     con.Open();
 
-                    int result = cmd.ExecuteNonQuery();
+                    using (SqlTransaction tx = con.BeginTransaction())
+                    {
+                        try
+                        {
+                            // 1. Delete payments connected to this patient's bills
+                            string deletePayments = @"
+                        DELETE FROM Payment_Records
+                        WHERE BillNo IN
+                        (
+                            SELECT BillNo
+                            FROM Bill_Records
+                            WHERE PatientID = @id
+                        )";
 
-                    if (result > 0)
-                        MessageBox.Show("Patient deleted successfully!");
-                    else
-                        MessageBox.Show("Patient ID not found.");
+                            using (SqlCommand cmd = new SqlCommand(deletePayments, con, tx))
+                            {
+                                cmd.Parameters.Add("@id", SqlDbType.Int).Value = patientID;
+                                cmd.ExecuteNonQuery();
+                            }
+
+                            // 2. Delete all billing records
+                            string deleteBills = @"
+                        DELETE FROM Bill_Records
+                        WHERE PatientID = @id";
+
+                            using (SqlCommand cmd = new SqlCommand(deleteBills, con, tx))
+                            {
+                                cmd.Parameters.Add("@id", SqlDbType.Int).Value = patientID;
+                                cmd.ExecuteNonQuery();
+                            }
+
+                            // 3. Delete all services and charges
+                            string deleteServices = @"
+                        DELETE FROM Services_Charges
+                        WHERE PatientID = @id";
+
+                            using (SqlCommand cmd = new SqlCommand(deleteServices, con, tx))
+                            {
+                                cmd.Parameters.Add("@id", SqlDbType.Int).Value = patientID;
+                                cmd.ExecuteNonQuery();
+                            }
+
+                            // 4. Delete discharge records
+                            string deleteDischarge = @"
+                        DELETE FROM Discharge_Records
+                        WHERE PatientID = @id";
+
+                            using (SqlCommand cmd = new SqlCommand(deleteDischarge, con, tx))
+                            {
+                                cmd.Parameters.Add("@id", SqlDbType.Int).Value = patientID;
+                                cmd.ExecuteNonQuery();
+                            }
+
+                            // 5. Delete all admission records
+                            string deleteAdmissions = @"
+                        DELETE FROM Admission_Records
+                        WHERE PatientID = @id";
+
+                            using (SqlCommand cmd = new SqlCommand(deleteAdmissions, con, tx))
+                            {
+                                cmd.Parameters.Add("@id", SqlDbType.Int).Value = patientID;
+                                cmd.ExecuteNonQuery();
+                            }
+
+                            // 6. Permanently delete patient
+                            string deletePatient = @"
+                        DELETE FROM Patient_Records
+                        WHERE PatientID = @id";
+
+                            using (SqlCommand cmd = new SqlCommand(deletePatient, con, tx))
+                            {
+                                cmd.Parameters.Add("@id", SqlDbType.Int).Value = patientID;
+
+                                int result = cmd.ExecuteNonQuery();
+
+                                if (result == 0)
+                                    throw new Exception("Patient record was not found.");
+                            }
+
+                            tx.Commit();
+                        }
+                        catch
+                        {
+                            tx.Rollback();
+                            throw;
+                        }
+                    }
                 }
+
+                MessageBox.Show(
+                    "Patient and all related hospital records were permanently deleted!",
+                    "Deletion Successful",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information
+                );
 
                 LoadPatients();
                 ClearFields();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Delete Error: " + ex.Message);
+                MessageBox.Show(
+                    "Unable to delete patient:\n\n" + ex.Message,
+                    "Delete Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
             }
         }
+
 
         private void btnRefresh_Click(object sender, EventArgs e)
         {

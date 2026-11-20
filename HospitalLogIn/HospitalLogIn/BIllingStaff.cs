@@ -455,58 +455,98 @@ namespace HospitalLogIn
             }
         }
 
-        // DELETE BILL
+
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if (!int.TryParse(txtBillID.Text, out int billID))
+            if (!int.TryParse(txtBillID.Text, out int billNo))
             {
-                MessageBox.Show("Please select a billing record.");
+                MessageBox.Show("Please select a bill first.");
                 return;
             }
 
-            DialogResult result = MessageBox.Show(
-                "Are you sure you want to delete this billing record?",
+            DialogResult confirm = MessageBox.Show(
+                "Permanently delete this bill and all its payment records?\n\n" +
+                "This action cannot be undone.",
                 "Confirm Delete",
                 MessageBoxButtons.YesNo,
-                MessageBoxIcon.Question
+                MessageBoxIcon.Warning
             );
 
-            if (result != DialogResult.Yes)
+            if (confirm != DialogResult.Yes)
                 return;
 
             try
             {
                 using (SqlConnection con = DatabaseConnection.GetConnection())
                 {
-                    string query =
-                        "DELETE FROM Bill_Records WHERE BillNo = @BillNo";
+                    con.Open();
 
-                    using (SqlCommand cmd = new SqlCommand(query, con))
+                    using (SqlTransaction transaction = con.BeginTransaction())
                     {
-                        cmd.Parameters.Add("@BillNo", SqlDbType.Int)
-                            .Value = billID;
+                        try
+                        {
+                            // 1. Delete payments linked to this bill
+                            string deletePayments = @"
+                        DELETE FROM Payment_Records
+                        WHERE BillNo = @BillNo";
 
-                        con.Open();
-                        cmd.ExecuteNonQuery();
+                            using (SqlCommand cmd = new SqlCommand(
+                                deletePayments, con, transaction))
+                            {
+                                cmd.Parameters.Add("@BillNo", SqlDbType.Int)
+                                    .Value = billNo;
+
+                                cmd.ExecuteNonQuery();
+                            }
+
+                            // 2. Delete the bill
+                            string deleteBill = @"
+                        DELETE FROM Bill_Records
+                        WHERE BillNo = @BillNo";
+
+                            using (SqlCommand cmd = new SqlCommand(
+                                deleteBill, con, transaction))
+                            {
+                                cmd.Parameters.Add("@BillNo", SqlDbType.Int)
+                                    .Value = billNo;
+
+                                int result = cmd.ExecuteNonQuery();
+
+                                if (result == 0)
+                                    throw new Exception("Bill record not found.");
+                            }
+
+                            transaction.Commit();
+                        }
+                        catch
+                        {
+                            transaction.Rollback();
+                            throw;
+                        }
                     }
                 }
 
-                MessageBox.Show("Billing record deleted successfully!");
+                MessageBox.Show(
+                    "Bill and its payment records permanently deleted!",
+                    "Success",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information
+                );
 
-                ClearFields();
                 LoadBilling();
+                ClearFields();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(
-                    "Unable to delete bill. It may have payment records.\n\n" +
-                    ex.Message,
-                    "Delete Error"
+                    "Delete Billing Error:\n\n" + ex.Message,
+                    "Delete Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
                 );
             }
         }
 
-        // REFRESH
         private void btnRefresh_Click(object sender, EventArgs e)
         {
             LoadAdmissions();
