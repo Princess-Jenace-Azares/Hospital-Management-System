@@ -16,7 +16,7 @@ namespace HospitalLogIn
 
             cmbAdmissionID.DropDownStyle = ComboBoxStyle.DropDownList;
 
-           
+
             btnDischarge.Click += btnDischarge_Click;
             btnRefresh.Click += btnRefresh_Click;
 
