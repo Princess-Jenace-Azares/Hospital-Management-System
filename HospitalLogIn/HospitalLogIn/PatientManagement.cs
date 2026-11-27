@@ -1,35 +1,4 @@
-﻿using System;
-using System.Data;
-using System.Data.SqlClient;
-using System.Windows.Forms;
-
-namespace HospitalLogIn
-{
-    public partial class Admin_Dashboard : Form
-    {
-        public Admin_Dashboard()
-        {
-            InitializeComponent();
-
-            cmbGender.Items.Clear();
-            cmbGender.Items.AddRange(new object[]
-            {
-    "Male",
-    "Female"
-            });
-
-            cmbStatus.Items.Clear();
-            cmbStatus.Items.AddRange(new object[]
-            {
-    "Active",
-    "Inactive"
-            });
-
-            btnAdd.Click += btnAdd_Click;
-            btnUpdate.Click += btnUpdate_Click;
-            btnDelete.Click += btnDelete_Click;
-            btnRefresh.Click += btnRefresh_Click;
-            dgvPatients.CellClick += dgvPatients_CellClick;
+﻿
 
             this.Shown += Admin_Dashboard_Shown;
         }
