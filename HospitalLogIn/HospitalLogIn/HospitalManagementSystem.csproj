@@ -50,9 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Admission.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Admission.cs" />
     <Compile Include="Admission.Designer.cs">
       <DependentUpon>Admission.cs</DependentUpon>
     </Compile>
