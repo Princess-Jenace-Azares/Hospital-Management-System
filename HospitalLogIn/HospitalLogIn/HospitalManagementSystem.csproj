@@ -62,13 +62,13 @@
     <Compile Include="BIllingStaff.Designer.cs">
       <DependentUpon>BIllingStaff.cs</DependentUpon>
     </Compile>
-    <Compile Include="Discharge_Form.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Discharge_Form.cs" />
     <Compile Include="Discharge_Form.Designer.cs">
       <DependentUpon>Discharge_Form.cs</DependentUpon>
     </Compile>
-    <Compile Include="Patient Services&amp;Charges.cs" />
+    <Compile Include="Patient Services&amp;Charges.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Patient Services&amp;Charges.Designer.cs">
       <DependentUpon>Patient Services&amp;Charges.cs</DependentUpon>
     </Compile>
