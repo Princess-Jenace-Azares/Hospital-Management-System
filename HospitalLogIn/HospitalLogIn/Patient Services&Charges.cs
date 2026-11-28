@@ -171,7 +171,7 @@ namespace HospitalLogIn
             object sender, EventArgs e)
         {
             selectedUnitPrice = 0;
-
+             
             switch (cmbService.Text)
             {
                 case "Consultation":
